@@ -62,7 +62,7 @@
 
 		.banner {
 			/* background-image: url('img/2geda.jpeg'); */
-			background-color: #5d5c6b;
+			background-color: #666572;
 			margin: 25px;
 			padding: 60px;
 		}
@@ -76,7 +76,7 @@
 		/* Tablet view */
 		@media (max-width: 1024px) {
 			.banner {
-				background-color: #5d5c6b;
+				background-color: #666572;
 				margin: 15px;
 				padding: 40px;
 			}
@@ -85,12 +85,16 @@
 		/* Mobile view */
 		@media (max-width: 768px) {
 			.banner {
-				background-color: #5d5c6b;
+				background-color: #666572;
 				margin: 10px;
 				padding: 30px;
 			}
 		}
 
+
+		body.locked {
+			overflow: hidden;
+		}
 
 
 		.rotating-text {
@@ -104,6 +108,202 @@
 			opacity: 1;
 			visibility: visible;
 			position: relative;
+		}
+
+		#authOverlay {
+			position: fixed;
+			inset: 0;
+			background: #191539;
+			/* FULLY SOLID */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 99999;
+		}
+
+
+		.auth-box {
+			background: #0b0b0b;
+			padding: 80px;
+			height: 80%;
+			width: 40%;
+			border-radius: 12px;
+			box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+		}
+
+
+		.auth-box h2 {
+			margin-bottom: 20px;
+		}
+
+		.auth-box input {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 12px;
+			border-radius: 5px;
+			border: none;
+		}
+
+		.auth-box button {
+			width: 100%;
+			padding: 10px;
+			background: gold;
+			border: none;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		#loginError {
+			color: red;
+			margin-top: 10px;
+		}
+
+		.auth-box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.auth-logo {
+			margin-bottom: 30px;
+		}
+
+		.auth-logo img {
+			height: 100px;
+			display: block;
+		}
+
+
+		/* Tablet view */
+		@media (max-width: 1024px) {
+			#authOverlay {
+				position: fixed;
+				inset: 0;
+				background: #191539;
+				/* FULLY SOLID */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 99999;
+			}
+
+
+			.auth-box {
+				background: #0b0b0b;
+				padding: 70px;
+				height: 70%;
+				width: 40%;
+				border-radius: 10px;
+				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+			}
+
+
+			.auth-box h2 {
+				margin-bottom: 20px;
+			}
+
+			.auth-box input {
+				width: 100%;
+				padding: 10px;
+				margin-bottom: 12px;
+				border-radius: 5px;
+				border: none;
+			}
+
+			.auth-box button {
+				width: 100%;
+				padding: 10px;
+				background: gold;
+				border: none;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			#loginError {
+				color: red;
+				margin-top: 10px;
+			}
+
+			.auth-box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.auth-logo {
+				margin-bottom: 30px;
+			}
+
+			.auth-logo img {
+				height: 100px;
+				display: block;
+			}
+		}
+
+		/* Mobile view */
+		@media (max-width: 768px) {
+			#authOverlay {
+				position: fixed;
+				inset: 0;
+				background: #191539;
+				/* FULLY SOLID */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 99999;
+			}
+
+
+			.auth-box {
+				background: #0b0b0b;
+				padding: 70px;
+				height: 60%;
+				width: 55%;
+				border-radius: 8px;
+				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+			}
+
+
+			.auth-box h2 {
+				margin-bottom: 10px;
+			}
+
+			.auth-box input {
+				width: 100%;
+				padding: 10px;
+				margin-bottom: 12px;
+				border-radius: 5px;
+				border: none;
+			}
+
+			.auth-box button {
+				width: 100%;
+				padding: 10px;
+				background: gold;
+				border: none;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			#loginError {
+				color: red;
+				margin-top: 5px;
+			}
+
+			.auth-box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.auth-logo {
+				margin-bottom: 20px;
+			}
+
+			.auth-logo img {
+				height: 80px;
+				display: block;
+			}
 		}
 	</style>
 
@@ -157,7 +357,30 @@
 
 <body oncontextmenu="return false">
 
-	<div class="page-wrapper">
+	<!-- LOGIN OVERLAY -->
+	<div id="authOverlay">
+		<div class="auth-box">
+			<div class="auth-logo">
+				<img src="img/citadel.jpg" alt="citadel">
+			</div>
+
+			<h2><strong>LOGIN</strong></h2>
+
+			<input type="text" id="loginUser" placeholder="Username or Email">
+			<input type="password" id="loginPass" placeholder="Password">
+
+			<button onclick="login()">Login</button>
+			<p id="loginError"></p>
+		</div>
+	</div>
+
+	<!-- MAIN WEBSITE CONTENT -->
+	<div id="siteContent" style="display:none;">
+		<!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
+
+
+
+
 
 		<!-- Main Header-->
 		<header class="main-header style-three">
@@ -282,7 +505,7 @@
 						<div class="outer-box">
 							<!-- Search Btn -->
 
-							<button class="theme-btn btn-style-one" onclick="openWallet()">
+							<button class="theme-btn btn-style-two" onclick="openWallet()">
 								<strong>ADD FUNDS</strong>
 							</button>
 
@@ -406,7 +629,7 @@
 
 		<!-- <div class="banner" style="height: 550px; background-image: url(img/2geda.jpeg);">
 
-		</div> -->
+		 -->
 
 		<!-- Hero Section -->
 		<div class="banner">
@@ -448,157 +671,158 @@
 
 			</div>
 		</div>
-	</div>
-	</div>
 
 
 
-	<!-- CTA Section Start -->
 
 
-	<div class="auto-container">
-
-		<div class="sec-title">
-			<h2><span>Portfolio</span> Performance</h2>
-		</div>
-
-		<canvas id="portfolioChart" height="100"></canvas>
-	</div>
-
-	<!-- CTA Section End -->
+		<!-- CTA Section Start -->
 
 
-
-	<!-- Services Section -->
-	<div class=" ">
-
-
-		<BR></BR>
 		<div class="auto-container">
+
 			<div class="sec-title">
-
-				<h2><span>Best Solutions</span> For Your Business</h2>
+				<h2><span>Portfolio</span> Performance</h2>
 			</div>
-			<div class="inner-container">
-				<div class="row g-0">
 
-					<!-- Service Block -->
-					<div class="service-block col-lg-3 col-md-6 col-sm-12">
-						<div class="inner-box">
-							<div class="icon-box">
-								<span class="icon ti-shield"></span>
-							</div>
-							<h5><a>Secure Transactions</a></h5>
-							<div class="text">Very secured and supervised means to save, invest and transfer
-								your
-								funds at full guarantee.</div>
-						</div>
-					</div>
+			<canvas id="portfolioChart" height="100"></canvas>
+		</div>
 
-					<!-- Service Block -->
-					<div class="service-block col-lg-3 col-md-6 col-sm-12">
-						<div class="inner-box">
-							<div class="icon-box">
-								<span class="icon ti-home"></span>
-							</div>
-							<h5><a>Real Estate</a></h5>
-							<div class="text">Invest in the Real Estate Industry, the Fastest and largest income
-								generator. Citadel Credit Union gives you this superior and
-								unique
-								edge.</div>
-						</div>
-					</div>
+		<!-- CTA Section End -->
 
-					<!-- Service Block -->
-					<div class="service-block col-lg-3 col-md-6 col-sm-12">
-						<div class="inner-box">
-							<div class="icon-box">
-								<span class="fab fa-bitcoin"></span>
-							</div>
-							<h5><a>Digital Assets</a></h5>
-							<div class="text">Digital assets, like bitcoin, are an emerging asset class for
-								investors.Our digital asset fund offers investors exposure to bitcoin and other
-								assets.</div>
-						</div>
-					</div>
 
-					<!-- Service Block -->
-					<div class="service-block col-lg-3 col-md-6 col-sm-12">
-						<div class="inner-box">
-							<div class="icon-box">
-								<span class="icon ti-money"></span>
+
+		<!-- Services Section -->
+		<div class=" ">
+
+
+			<BR></BR>
+			<div class="auto-container">
+				<div class="sec-title">
+
+					<h2><span>Best Solutions</span> For Your Business</h2>
+				</div>
+				<div class="inner-container">
+					<div class="row g-0">
+
+						<!-- Service Block -->
+						<div class="service-block col-lg-3 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<span class="icon ti-shield"></span>
+								</div>
+								<h5><a>Secure Transactions</a></h5>
+								<div class="text">Very secured and supervised means to save, invest and transfer
+									your
+									funds at full guarantee.</div>
 							</div>
-							<h5><a> Quick Loans</a></h5>
-							<div class="text">We have great loan offers to help meet your needs with very low
-								interest rates. Also available to every one regardless of your status.</div>
 						</div>
+
+						<!-- Service Block -->
+						<div class="service-block col-lg-3 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<span class="icon ti-home"></span>
+								</div>
+								<h5><a>Real Estate</a></h5>
+								<div class="text">Invest in the Real Estate Industry, the Fastest and largest income
+									generator. Citadel Credit Union gives you this superior and
+									unique
+									edge.</div>
+							</div>
+						</div>
+
+						<!-- Service Block -->
+						<div class="service-block col-lg-3 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<span class="fab fa-bitcoin"></span>
+								</div>
+								<h5><a>Digital Assets</a></h5>
+								<div class="text">Digital assets, like bitcoin, are an emerging asset class for
+									investors.Our digital asset fund offers investors exposure to bitcoin and other
+									assets.</div>
+							</div>
+						</div>
+
+						<!-- Service Block -->
+						<div class="service-block col-lg-3 col-md-6 col-sm-12">
+							<div class="inner-box">
+								<div class="icon-box">
+									<span class="icon ti-money"></span>
+								</div>
+								<h5><a> Quick Loans</a></h5>
+								<div class="text">We have great loan offers to help meet your needs with very low
+									interest rates. Also available to every one regardless of your status.</div>
+							</div>
+						</div>
+
 					</div>
 
 				</div>
-
 			</div>
+
+
 		</div>
+		<!-- End Services Section -->
 
 
-	</div>
-	<!-- End Services Section -->
-
-
-	<!-- About Section -->
-	<div class="about-section">
-		<div class="auto-container">
-			<div class="inner-container">
-				<div class="row align-items-center clearfix">
-					<!-- Image Column -->
-					<div class="image-column col-lg-6">
-						<div class="about-image">
-							<div class="about-inner-image">
-								<img src="img/iStock-1211951067-global-business-comm-network-913x512.jpeg" alt="about">
+		<!-- About Section -->
+		<div class="about-section">
+			<div class="auto-container">
+				<div class="inner-container">
+					<div class="row align-items-center clearfix">
+						<!-- Image Column -->
+						<div class="image-column col-lg-6">
+							<div class="about-image">
+								<div class="about-inner-image">
+									<img src="img/iStock-1211951067-global-business-comm-network-913x512.jpeg"
+										alt="about">
+								</div>
 							</div>
 						</div>
+
+						<!-- Content Column -->
+						<div class="content-column col-lg-6 col-md-12 col-sm-12 mb-0">
+							<div class="about-column">
+								<div class="sec-title">
+									<div class="title">about us</div>
+									<h2> <span>Citadel Credit Union</span> <br></h2>
+								</div>
+								<div class="text">
+									<p>
+										Citadel Credit Union continues to serve the financial
+										needs of
+										individuals, farmers, businesses, and industries by offering the traditional
+										banking products, as well as online, mobile and telephone banking products.
+									</p>
+								</div>
+								<div class="signature">billionaire</div>
+							</div>
+						</div>
+
 					</div>
 
-					<!-- Content Column -->
-					<div class="content-column col-lg-6 col-md-12 col-sm-12 mb-0">
-						<div class="about-column">
-							<div class="sec-title">
-								<div class="title">about us</div>
-								<h2> <span>Citadel Credit Union</span> <br></h2>
-							</div>
-							<div class="text">
-								<p>
-									Citadel Credit Union continues to serve the financial
-									needs of
-									individuals, farmers, businesses, and industries by offering the traditional
-									banking products, as well as online, mobile and telephone banking products.
-								</p>
-							</div>
-							<div class="signature">billionaire</div>
-						</div>
-					</div>
 
 				</div>
-
-
 			</div>
 		</div>
-	</div>
-	<!-- End About Section -->
+		<!-- End About Section -->
 
-	<!-- ASSETS ALLOCATION (CRYPTO, REAL ESTATE) -->
+		<!-- ASSETS ALLOCATION (CRYPTO, REAL ESTATE) -->
 
-	<!-- <div class="auto-container">
-		<div class="sec-title">
+		<!-- <div class="auto-container">
+		    <div class="sec-title">
 			<h2><span>Asset</span> Allocation</h2>
-		</div>
+		    </div>
 
-		<canvas id="allocationChart" height="120"></canvas>
-	</div> -->
+		    <canvas id="allocationChart" height="120"></canvas>
+	        </div> -->
 
 
-	<!-- CRYPTO UPDATES -->
+		<!-- CRYPTO UPDATES -->
 
-	<!-- <div class="auto-container">
+		<!-- <div class="auto-container">
 						<div class="sec-title">
 							<h2><span>Live</span> Market Prices</h2>
 						</div>
@@ -618,9 +842,9 @@
 
 
 
-	<!-- REAL ESTATE UPDATE -->
+		<!-- REAL ESTATE UPDATE -->
 
-	<!-- <div class="auto-container">
+		<!-- <div class="auto-container">
 			<div class="sec-title centered">
 				<h2><span>Real Estate</span> Investment Opportunities</h2>
 				<p>Invest in premium properties and earn rental income.</p>
@@ -686,11 +910,11 @@
 				</div>
 
 			</div>
-		</div> -->
+		   </div> -->
 
-	<!-- TRANSACTION HISTORY -->
+		<!-- TRANSACTION HISTORY -->
 
-	<!-- <div class="auto-container">
+		<!-- <div class="auto-container">
 			<div class="sec-title">
 				<h2><span>Transaction</span> History</h2>
 			</div>
@@ -707,443 +931,97 @@
 				</thead>
 				<tbody id="txTable"></tbody>
 			</table>
-		</div> -->
+		    </div> -->
 
 
 
-	<!-- Project Section -->
-	<div class="project-section">
-		<div class="auto-container">
+		<!-- Project Section -->
+		<div class="project-section">
+			<div class="auto-container">
 
-			<!-- Sec Title -->
-			<div class="sec-title">
-				<div class="clearfix">
-					<div class="pull-left">
-						<h2>See Our <span>Successful Strategies</span></h2>
+				<!-- Sec Title -->
+				<div class="sec-title">
+					<div class="clearfix">
+						<div class="pull-left">
+							<h2>See Our <span>Successful Strategies</span></h2>
+						</div>
 					</div>
 				</div>
+
 			</div>
+			<div class="outer-container">
+				<div class="row clearfix">
 
-		</div>
-		<div class="outer-container">
-			<div class="row clearfix">
+					<!-- Column -->
+					<div class="column col-lg-6 col-md-12 col-sm-12">
+						<div class="row clearfix">
 
-				<!-- Column -->
-				<div class="column col-lg-6 col-md-12 col-sm-12">
-					<div class="row clearfix">
-
-						<!-- Inner Column -->
-						<div class="inner-column col-lg-6 col-md-6 col-sm-12">
-							<div class="gallery-block">
-								<div class="inner-box">
-									<div class="image">
-										<img src="https://creditunionfincorp.com/front/images/gallery/2.jpg" alt="">
-										<div class="overlay-box">
-											<div class="overlay-inner">
-												<h3><a>Citadel Credit Union</a></h3>
-												<div class="designation">Banking &amp; Financial
+							<!-- Inner Column -->
+							<div class="inner-column col-lg-6 col-md-6 col-sm-12">
+								<div class="gallery-block">
+									<div class="inner-box">
+										<div class="image">
+											<img src="https://creditunionfincorp.com/front/images/gallery/2.jpg" alt="">
+											<div class="overlay-box">
+												<div class="overlay-inner">
+													<h3><a>Citadel Credit Union</a></h3>
+													<div class="designation">Banking &amp; Financial
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<!-- Inner Column -->
-						<div class="inner-column col-lg-6 col-md-6 col-sm-12">
-							<div class="gallery-block">
-								<div class="inner-box">
-									<div class="image">
-										<img src="https://creditunionfincorp.com/front/images/gallery/3.jpg" alt="">
-										<div class="overlay-box">
-											<div class="overlay-inner">
-												<h3><a>Citadel Credit Union</a></h3>
-												<div class="designation">Business Consultation</div>
+							<!-- Inner Column -->
+							<div class="inner-column col-lg-6 col-md-6 col-sm-12">
+								<div class="gallery-block">
+									<div class="inner-box">
+										<div class="image">
+											<img src="https://creditunionfincorp.com/front/images/gallery/3.jpg" alt="">
+											<div class="overlay-box">
+												<div class="overlay-inner">
+													<h3><a>Citadel Credit Union</a></h3>
+													<div class="designation">Business Consultation</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
 
-						<!-- Inner Column -->
-						<div class="inner-column col-lg-12 col-md-12 col-sm-12">
-							<div class="gallery-block">
-								<div class="inner-box">
-									<div class="image">
-										<img src="https://creditunionfincorp.com/front/images/gallery/4.jpg" alt="">
-										<div class="overlay-box">
-											<div class="overlay-inner">
-												<h3><a>Citadel Credit Union</a></h3>
-												<div class="designation">Saving &amp; Strategy</div>
+							<!-- Inner Column -->
+							<div class="inner-column col-lg-12 col-md-12 col-sm-12">
+								<div class="gallery-block">
+									<div class="inner-box">
+										<div class="image">
+											<img src="https://creditunionfincorp.com/front/images/gallery/4.jpg" alt="">
+											<div class="overlay-box">
+												<div class="overlay-inner">
+													<h3><a>Citadel Credit Union</a></h3>
+													<div class="designation">Saving &amp; Strategy</div>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Column -->
-				<div class="column col-lg-6 col-md-12 col-sm-12">
-					<div class="gallery-block">
-						<div class="inner-box">
-							<div class="image">
-								<img src="https://creditunionfincorp.com/front/images/gallery/1.jpg" alt="">
-								<div class="overlay-box">
-									<div class="overlay-inner">
-										<h3><a>Citadel Credit Union</a></h3>
-										<div class="designation">Home &amp; Business Loan</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- End Project Section -->
-
-
-
-	<!-- Sponsors Section -->
-	<div class="sponsors-section">
-		<div class="auto-container">
-
-			<div class="carousel-outer">
-				<!--Sponsors Slider-->
-				<ul class="sponsors-carousel owl-carousel owl-theme owl-loaded owl-drag">
-
-
-
-
-
-
-					<div class="owl-stage-outer">
-						<div class="owl-stage"
-							style="transform: translate3d(-1532px, 0px, 0px); transition: 0.5s; width: 3066px;">
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/2.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/4.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/5.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/1.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/2.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/1.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/2.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/4.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item active" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/5.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item active" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/1.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item active" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/2.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned active" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/1.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned active" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/2.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/4.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/5.png"
-												alt=""></a></div>
-								</li>
-							</div>
-							<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
-								<li>
-									<div class="image-box"><a href="#"><img
-												src="https://creditunionfincorp.com/front/images/clients/1.png"
-												alt=""></a></div>
-								</li>
-							</div>
-						</div>
-					</div>
-					<div class="owl-nav">
-						<div class="owl-prev"><span class="ti-angle-left"></span></div>
-						<div class="owl-next"><span class="ti-angle-right"></span></div>
-					</div>
-					<div class="owl-dots">
-						<div class="owl-dot active"><span></span></div>
-						<div class="owl-dot"><span></span></div>
-					</div>
-				</ul>
-			</div>
-
-		</div>
-	</div> <!--End Sponsors Section-->
-
-	<!-- Reputation Section Two -->
-	<div class="reputation-section-two style-two">
-		<div class="auto-container">
-			<div class="row clearfix">
-
-				<!-- Form Column -->
-				<div class="form-column col-lg-5 col-md-12 col-sm-12">
-					<div class="inner-column">
-						<div class="form-boxed">
-							<!-- <h5>Our Values</h5> -->
-							<div class="text">The mission of Citadel Credit Union is to
-								contribute
-								to
-								the sustainable development of the international banking sector by
-								providing. Below are our core values</div>
-
-							<div class="consult-form">
-								<div class="sidebar-widget categories-blog">
-									<div class="sidebar-title">
-										<h4>Our Values</h4>
-									</div>
-									<ul>
-										<li><a>Integrity and honesty </a></li>
-										<li><a>Loyalty </a></li>
-										<li><a>Teamwork</a></li>
-										<li><a>Community </a></li>
-										<li><a>Accountability </a></li>
-										<li><a>Excellence </a></li>
-										<li><a>Confidentiality </a></li>
-										<li><a>Relationship </a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Content Column -->
-				<div class="content-column col-lg-7 col-md-12 col-sm-12">
-					<div class="inner-column">
-						<div class="sec-title">
-							<div class="title">why choose us</div>
-							<h2><span>Your Success </span>Means<br> a lot To Us</h2>
-						</div>
-						<div class="blocks-outer">
-
-							<!-- Reputation Block -->
-							<div class="reputation-block">
-								<div class="inner-box">
-									<h5>Our Vision</h5>
-									<div class="text">To be a leading bank in the World, supporting
-										the
-										development
-										of small businesses and financial inclusion around the
-										world.</div>
-								</div>
-							</div>
-
-							<!-- Reputation Block -->
-							<div class="reputation-block">
-								<div class="inner-box">
-									<h5>Our Mission</h5>
-									<div class="text">The mission of Citadel Credit Union is
-										to
-										contribute to the sustainable development of the
-										international banking
-										sector by
-										providing responsible financial services and solutions to
-										households and
-										micro, small and medium enterprises, using internationally
-										recognized best banking practices. We are committed to
-										delivering value
-										for
-										our clients, shareholders, employees, and society at large.
-										The mission is based on our values: integrity and openness,
-										professionalism,
-										commitment to customers, team work, and social and
-										environmental responsibility.</div>
-								</div>
-							</div>
-
-
 
 						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- End Reputation Section -->
-
-
-
-	<!-- Blog Section -->
-	<div class="blog-section">
-		<div class="auto-container">
-			<!-- Sec Title -->
-
-			<div class="inner-container">
-				<div class="clearfix row g-0">
-					<!-- Column -->
-					<div class="column col-lg-8 col-md-12 col-sm-12">
-
-						<!-- News Block -->
-						<div class="news-block">
-							<div class="inner-box">
-								<div class="clearfix">
-									<!-- Image Column -->
-									<div class="image-column col-lg-6 col-md-6 col-sm-12">
-										<div class="inner-column">
-											<div class="image">
-												<a><img src="https://creditunionfincorp.com/front/images/resource/news-1.jpg"
-														alt=""></a>
-											</div>
-										</div>
-									</div>
-									<!-- Content Column -->
-									<div class="content-column col-lg-6 col-md-6 col-sm-12">
-										<div class="inner-column">
-											<div class="arrow-one"></div>
-											<div class="title">Home Mortgage Loans</div>
-											<h4><a>The keys to your dream home are within reach —
-													and we can
-													help
-													you get them with affordable and flexible
-													rates.</a></h4>
-											<div class="post-date">December 14th, 2020 by
-												<span>Admin</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<!-- News Block -->
-						<div class="news-block">
-							<div class="inner-box">
-								<div class="clearfix row g-0">
-									<!-- Content Column -->
-									<div class="content-column col-lg-6 col-md-6 col-sm-12 order-lg-1 order-2">
-										<div class="inner-column">
-											<div class="arrow-two"></div>
-											<div class="title">Personal Needs</div>
-											<h4><a>Whether it's a sudden expense or just vacation to
-													get away
-													from
-													everything, Citadel Credit Union can make
-													it
-													happen.</a></h4>
-											<div class="post-date">June 6th, 2003 by
-												<span>Admin</span>
-											</div>
-										</div>
-									</div>
-									<!-- Image Column -->
-									<div class="image-column col-lg-6 col-md-6 col-sm-12 order-lg-2 order-1">
-										<div class="inner-column">
-											<div class="image">
-												<a><img src="https://creditunionfincorp.com/front/images/resource/news-2.jpg"
-														alt=""></a>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
 					</div>
 
 					<!-- Column -->
-					<div class="column col-lg-4 col-md-12 col-sm-12">
-						<!-- News Block Two -->
-						<div class="news-block-two">
+					<div class="column col-lg-6 col-md-12 col-sm-12">
+						<div class="gallery-block">
 							<div class="inner-box">
 								<div class="image">
-									<a><img src="https://creditunionfincorp.com/front/images/resource/news-3.jpg"
-											alt=""></a>
-									<div class="arrow"></div>
-								</div>
-								<div class="lower-content">
-									<div class="title">HSA</div>
-									<h4><a>An HSA (Health Saving Account) helps employees save in
-											advance for
-											future
-											medical expenses.</a></h4>
-									<div class="post-date">May 13th, 2013 by <span>Admin</span>
+									<img src="https://creditunionfincorp.com/front/images/gallery/1.jpg" alt="">
+									<div class="overlay-box">
+										<div class="overlay-inner">
+											<h3><a>Citadel Credit Union</a></h3>
+											<div class="designation">Home &amp; Business Loan</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1153,99 +1031,445 @@
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- End Blog Section -->
+		<!-- End Project Section -->
 
 
 
-	<!-- Map Section -->
-	<!-- <div class="map-section">
+		<!-- Sponsors Section -->
+		<div class="sponsors-section">
+			<div class="auto-container">
+
+				<div class="carousel-outer">
+					<!--Sponsors Slider-->
+					<ul class="sponsors-carousel owl-carousel owl-theme owl-loaded owl-drag">
+
+
+
+
+
+
+						<div class="owl-stage-outer">
+							<div class="owl-stage"
+								style="transform: translate3d(-1532px, 0px, 0px); transition: 0.5s; width: 3066px;">
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/2.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/4.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/5.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/1.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/2.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/1.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/2.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/4.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item active" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/5.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item active" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/1.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item active" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/2.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned active" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/1.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned active" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/2.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/4.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/5.png"
+													alt=""></a></div>
+									</li>
+								</div>
+								<div class="owl-item cloned" style="width: 161.6px; margin-right: 30px;">
+									<li>
+										<div class="image-box"><a href="#"><img
+													src="https://creditunionfincorp.com/front/images/clients/1.png"
+													alt=""></a></div>
+									</li>
+								</div>
+							</div>
+						</div>
+						<div class="owl-nav">
+							<div class="owl-prev"><span class="ti-angle-left"></span></div>
+							<div class="owl-next"><span class="ti-angle-right"></span></div>
+						</div>
+						<div class="owl-dots">
+							<div class="owl-dot active"><span></span></div>
+							<div class="owl-dot"><span></span></div>
+						</div>
+					</ul>
+				</div>
+
+			</div>
+		</div> <!--End Sponsors Section-->
+
+		<!-- Reputation Section Two -->
+		<div class="reputation-section-two style-two">
+			<div class="auto-container">
+				<div class="row clearfix">
+
+					<!-- Form Column -->
+					<div class="form-column col-lg-5 col-md-12 col-sm-12">
+						<div class="inner-column">
+							<div class="form-boxed">
+								<!-- <h5>Our Values</h5> -->
+								<div class="text">The mission of Citadel Credit Union is to
+									contribute
+									to
+									the sustainable development of the international banking sector by
+									providing. Below are our core values</div>
+
+								<div class="consult-form">
+									<div class="sidebar-widget categories-blog">
+										<div class="sidebar-title">
+											<h4>Our Values</h4>
+										</div>
+										<ul>
+											<li><a>Integrity and honesty </a></li>
+											<li><a>Loyalty </a></li>
+											<li><a>Teamwork</a></li>
+											<li><a>Community </a></li>
+											<li><a>Accountability </a></li>
+											<li><a>Excellence </a></li>
+											<li><a>Confidentiality </a></li>
+											<li><a>Relationship </a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+					<!-- Content Column -->
+					<div class="content-column col-lg-7 col-md-12 col-sm-12">
+						<div class="inner-column">
+							<div class="sec-title">
+								<div class="title">why choose us</div>
+								<h2><span>Your Success </span>Means<br> a lot To Us</h2>
+							</div>
+							<div class="blocks-outer">
+
+								<!-- Reputation Block -->
+								<div class="reputation-block">
+									<div class="inner-box">
+										<h5>Our Vision</h5>
+										<div class="text">To be a leading bank in the World, supporting
+											the
+											development
+											of small businesses and financial inclusion around the
+											world.</div>
+									</div>
+								</div>
+
+								<!-- Reputation Block -->
+								<div class="reputation-block">
+									<div class="inner-box">
+										<h5>Our Mission</h5>
+										<div class="text">The mission of Citadel Credit Union is
+											to
+											contribute to the sustainable development of the
+											international banking
+											sector by
+											providing responsible financial services and solutions to
+											households and
+											micro, small and medium enterprises, using internationally
+											recognized best banking practices. We are committed to
+											delivering value
+											for
+											our clients, shareholders, employees, and society at large.
+											The mission is based on our values: integrity and openness,
+											professionalism,
+											commitment to customers, team work, and social and
+											environmental responsibility.</div>
+									</div>
+								</div>
+
+
+
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- End Reputation Section -->
+
+
+
+		<!-- Blog Section -->
+		<div class="blog-section">
+			<div class="auto-container">
+				<!-- Sec Title -->
+
+				<div class="inner-container">
+					<div class="clearfix row g-0">
+						<!-- Column -->
+						<div class="column col-lg-8 col-md-12 col-sm-12">
+
+							<!-- News Block -->
+							<div class="news-block">
+								<div class="inner-box">
+									<div class="clearfix">
+										<!-- Image Column -->
+										<div class="image-column col-lg-6 col-md-6 col-sm-12">
+											<div class="inner-column">
+												<div class="image">
+													<a><img src="https://creditunionfincorp.com/front/images/resource/news-1.jpg"
+															alt=""></a>
+												</div>
+											</div>
+										</div>
+										<!-- Content Column -->
+										<div class="content-column col-lg-6 col-md-6 col-sm-12">
+											<div class="inner-column">
+												<div class="arrow-one"></div>
+												<div class="title">Home Mortgage Loans</div>
+												<h4><a>The keys to your dream home are within reach —
+														and we can
+														help
+														you get them with affordable and flexible
+														rates.</a></h4>
+												<div class="post-date">December 14th, 2020 by
+													<span>Admin</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!-- News Block -->
+							<div class="news-block">
+								<div class="inner-box">
+									<div class="clearfix row g-0">
+										<!-- Content Column -->
+										<div class="content-column col-lg-6 col-md-6 col-sm-12 order-lg-1 order-2">
+											<div class="inner-column">
+												<div class="arrow-two"></div>
+												<div class="title">Personal Needs</div>
+												<h4><a>Whether it's a sudden expense or just vacation to
+														get away
+														from
+														everything, Citadel Credit Union can make
+														it
+														happen.</a></h4>
+												<div class="post-date">June 6th, 2003 by
+													<span>Admin</span>
+												</div>
+											</div>
+										</div>
+										<!-- Image Column -->
+										<div class="image-column col-lg-6 col-md-6 col-sm-12 order-lg-2 order-1">
+											<div class="inner-column">
+												<div class="image">
+													<a><img src="https://creditunionfincorp.com/front/images/resource/news-2.jpg"
+															alt=""></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Column -->
+						<div class="column col-lg-4 col-md-12 col-sm-12">
+							<!-- News Block Two -->
+							<div class="news-block-two">
+								<div class="inner-box">
+									<div class="image">
+										<a><img src="https://creditunionfincorp.com/front/images/resource/news-3.jpg"
+												alt=""></a>
+										<div class="arrow"></div>
+									</div>
+									<div class="lower-content">
+										<div class="title">HSA</div>
+										<h4><a>An HSA (Health Saving Account) helps employees save in
+												advance for
+												future
+												medical expenses.</a></h4>
+										<div class="post-date">May 13th, 2013 by <span>Admin</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Blog Section -->
+
+
+
+		<!-- Map Section -->
+		<!-- <div class="map-section">
 			<div class="contact-map-area">
 				<iframe class="contact-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2689.961936781822!2d-122.34013238480624!3d47.60742979591455!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x54906ab3cbba9c83%3A0x548849e16a192f92!2s1301%202nd%20Ave%20%232600%2C%20Seattle%2C%20WA%2098101%2C%20USA!5e0!3m2!1sen!2sng!4v1626796438815!5m2!1sen!2sng" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 			</div>
-		</div> -->
-	<!-- End Map Section -->
-	<!-- Main Footer -->
-	<style>
-		.footer-widget * {
-			color: white !important;
-		}
+		   </div> -->
+		<!-- End Map Section -->
+		<!-- Main Footer -->
+		<style>
+			.footer-widget * {
+				color: white !important;
+			}
 
-		.main-footer {
-			background-color: #1F1B44;
-		}
-	</style>
-	<footer class="main-footer">
-		<div class="auto-container">
-			<!--Widgets Section-->
-			<div class="widgets-section">
-				<div class="row clearfix">
-					<!-- Column -->
-					<div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
-						<div class="row clearfix">
-							<!-- Footer Column -->
-							<div class="footer-column col-lg-6 col-md-6 col-sm-12">
-								<div class="footer-widget logo-widget">
+			.main-footer {
+				background-color: #1F1B44;
+			}
+		</style>
+		<footer class="main-footer">
+			<div class="auto-container">
+				<!--Widgets Section-->
+				<div class="widgets-section">
+					<div class="row clearfix">
+						<!-- Column -->
+						<div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+							<div class="row clearfix">
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget logo-widget">
 
-									<div class="call">
-										Call us directly
-										<a class="phone" href="#">+19189173462</a>
-										<a class="email"
-											href="mailto:info@citadelcreditunion.com">info@citadelcreditunion.com</a>
+										<div class="call">
+											Call us directly
+											<a class="phone" href="#">+19189173462</a>
+											<a class="email"
+												href="mailto:info@citadelcreditunion.com">info@citadelcreditunion.com</a>
+										</div>
+
+										<div id="google_translate_element" style="height:0px!important;">
+										</div>
+
+
 									</div>
-
-									<div id="google_translate_element" style="height:0px!important;">
-									</div>
-
 
 								</div>
 
-							</div>
 
-
-							<!-- Footer Column -->
-							<div class="footer-column col-lg-6 col-md-6 col-sm-12">
-								<div class="footer-widget links-widget">
-									<h5>Services</h5>
-									<ul class="list-link">
-										<li><a href="#">About Us</a></li>
-										<li><a href="#">Working Loans</a></li>
-										<li><a href="#">Ultimate Checking</a></li>
-										<!-- <li><a href="https://creditunionfincorp.com/p/business-term-loans">Business Saving</a></li>
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget links-widget">
+										<h5>Services</h5>
+										<ul class="list-link">
+											<li><a href="#">About Us</a></li>
+											<li><a href="#">Working Loans</a></li>
+											<li><a href="#">Ultimate Checking</a></li>
+											<!-- <li><a href="https://creditunionfincorp.com/p/business-term-loans">Business Saving</a></li>
                                        <li><a href="https://creditunionfincorp.com/p/online-banking">Online Banking Us</a></li> -->
-									</ul>
+										</ul>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-					<!-- Column -->
-					<div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
-						<div class="row clearfix">
-							<!-- Footer Column -->
-							<div class="footer-column col-lg-6 col-md-6 col-sm-12">
-								<div class="footer-widget links-widget">
-									<h5>Quick Links</h5>
-									<ul class="list-link">
-										<li><a href="#">Business Account</a></li>
-										<li><a href="#">Lost Card</a></li>
-										<li><a href="#">Health Savings</a></li>
-										<!-- <li><a href="https://creditunionfincorp.com/p/home-mortgage-loans">Home Mortgage</a></li>
+						<!-- Column -->
+						<div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+							<div class="row clearfix">
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget links-widget">
+										<h5>Quick Links</h5>
+										<ul class="list-link">
+											<li><a href="#">Business Account</a></li>
+											<li><a href="#">Lost Card</a></li>
+											<li><a href="#">Health Savings</a></li>
+											<!-- <li><a href="https://creditunionfincorp.com/p/home-mortgage-loans">Home Mortgage</a></li>
                                        <li><a href="https://creditunionfincorp.com/p/wire-transfers">Wire Transfers</a></li> -->
-									</ul>
-								</div>
-							</div>
-
-							<!-- Footer Column -->
-							<div class="footer-column col-lg-6 col-md-6 col-sm-12">
-								<div class="footer-widget newsletter-widget">
-									<h5>Our Newsletter</h5>
-									<div class="text">
-										Subscribe to our newsletter and we will inform you about
-										latest updates and offers
+										</ul>
 									</div>
-									<!-- Newsletter Form -->
-									<!-- <div class="newsletter-form">
+								</div>
+
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget newsletter-widget">
+										<h5>Our Newsletter</h5>
+										<div class="text">
+											Subscribe to our newsletter and we will inform you about
+											latest updates and offers
+										</div>
+										<!-- Newsletter Form -->
+										<!-- <div class="newsletter-form">
                                        <form method="post">
                                            <div class="form-group">
                                                <input type="email" name="email" value="" placeholder="Email Address..." required />
@@ -1253,43 +1477,43 @@
                                            </div>
                                        </form>
                                    </div> -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Footer Bottom -->
+				<div class="footer-bottom">
+					<div class="auto-container">
+						<div class="bottom-inner">
+							<div class="row clearfix">
+								<div class="col-lg-8 col-md-12 col-sm-12">
+									<div class="copyright">
+										© 2025 <strong>Citadel Credit Union</strong>
+									</div>
+								</div>
+
+								<div class="col-lg-4 col-md-12 col-sm-12">
+									<ul class="social-nav">
+										<li>
+											<a href="#" class="icofont-twitter"></a>
+										</li>
+										<li>
+											<a href="#" class="icofont-facebook"></a>
+										</li>
+										<li>
+											<a href="#" class="icofont-instagram"></a>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- Footer Bottom -->
-			<div class="footer-bottom">
-				<div class="auto-container">
-					<div class="bottom-inner">
-						<div class="row clearfix">
-							<div class="col-lg-8 col-md-12 col-sm-12">
-								<div class="copyright">
-									© 2025 <strong>Citadel Credit Union</strong>
-								</div>
-							</div>
-
-							<div class="col-lg-4 col-md-12 col-sm-12">
-								<ul class="social-nav">
-									<li>
-										<a href="#" class="icofont-twitter"></a>
-									</li>
-									<li>
-										<a href="#" class="icofont-facebook"></a>
-									</li>
-									<li>
-										<a href="#" class="icofont-instagram"></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
+		</footer>
 	</div>
 	<!--End pagewrapper-->
 
@@ -1326,9 +1550,9 @@
 
 	<!-- WITHDRAWAL MODAL -->
 	<div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;
-width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
+      width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 		<div style="background:#fff;max-width:400px;margin:10% auto;
-  padding:25px;border-radius:12px;">
+      padding:25px;border-radius:12px;">
 			<h3>Withdraw Funds</h3>
 			<input id="withdrawAmount" class="form-control" placeholder="Amount (USD)">
 			<br>
@@ -1342,7 +1566,7 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 
 	<!-- RECIEPT MODAL -->
 	<div id="receiptModal" style="display:none;position:fixed;top:0;left:0;
-width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
+  width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 		<div style="background:#fff;max-width:450px;margin:8% auto;
   padding:25px;border-radius:12px;" id="receiptContent">
 
@@ -1373,7 +1597,7 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 	<!-- PROPERTY MODAL -->
 
 	<!-- <div id="propertyModal" style="display:none;position:fixed;top:0;left:0;
-width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
+ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 		<div style="background:#fff;max-width:500px;margin:8% auto;
   padding:25px;border-radius:12px;">
 			<h3 id="propTitle"></h3>
@@ -1408,14 +1632,14 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 	function closeProperty(){
 	propertyModal.style.display = 'none';
 	}
--->
+ -->
 
 	<!-- TRANSACTION HISTORY -->
 
 	<!-- <script>
-const txTable = document.getElementById("txTable");
+   const txTable = document.getElementById("txTable");
 
-function addTransaction(type, asset, amount, status="Completed") {
+  function addTransaction(type, asset, amount, status="Completed") {
   const row = document.createElement("tr");
   row.innerHTML = `
     <td>${new Date().toLocaleDateString()}</td>
@@ -1425,20 +1649,20 @@ function addTransaction(type, asset, amount, status="Completed") {
     <td>${status}</td>
   `;
   txTable.prepend(row);
-}
-</script>
+  }
+ </script>
  -->
 
 	<!-- WALLET MODAL -->
 
 	<div id="walletModal" style="display:none;position:fixed;top:0;left:0;
-width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
+  width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 		<div style="background:#fff;max-width:400px;margin:10% auto;
   padding:25px;border-radius:12px;">
 			<h3>Fund Wallet</h3>
 			<input id="fundAmount" class="form-control" placeholder="Amount (USD)">
 			<br>
-			<button class="theme-btn btn-style-two" onclick="goToPayment()">
+			<button class="theme-btn btn-style-one" onclick="goToPayment()">
 				<strong>ADD FUNDS</strong>
 			</button>
 
@@ -1447,30 +1671,50 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 	</div>
 
 
-	<!-- AUTH MODAL -->
-
-	<!-- 	<div id="authModal" style="display:none;position:fixed;top:0;left:0;
-width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
-		<div style="background:#fff;max-width:400px;margin:10% auto;
-  padding:25px;border-radius:12px;">
-			<h3 id="authTitle">Login</h3>
-			<input class="form-control" placeholder="Email">
-			<input class="form-control" placeholder="Password" type="password">
-			<br>
-			<button class="theme-btn btn-style-one" onclick="closeAuth()">Continue</button>
-			<p style="cursor:pointer;margin-top:10px" onclick="toggleAuth()">Switch to Signup</p>
-		</div>
-	</div>
-
 	<script>
-		let signupMode = false;
-		function openAuth() { authModal.style.display = 'block' }
-		function closeAuth() { authModal.style.display = 'none' }
-		function toggleAuth() {
-			signupMode = !signupMode;
-			authTitle.innerText = signupMode ? 'Signup' : 'Login';
+		// 🔒 HARD-CODED LOGIN DETAILS
+		const USERNAME = "admin";
+		const EMAIL = "billionaire@gmail.com";
+		const PASSWORD = "12345678";
+
+		function login() {
+			const userInput = document.getElementById("loginUser").value.trim();
+			const passInput = document.getElementById("loginPass").value.trim();
+			const error = document.getElementById("loginError");
+
+			if (
+				(userInput === USERNAME || userInput === EMAIL) &&
+				passInput === PASSWORD
+			) {
+				document.getElementById("authOverlay").style.display = "none";
+				document.getElementById("siteContent").style.display = "block";
+			} else {
+				error.textContent = "Invalid login details";
+			}
 		}
-	</script> -->
+
+
+		document.body.classList.add("locked");
+
+		function login() {
+			const user = document.getElementById("loginUser").value.trim();
+			const pass = document.getElementById("loginPass").value.trim();
+
+			if (
+				(user === "admin" || user === "billionaire@gmail.com") &&
+				pass === "12345678"
+			) {
+				document.getElementById("authOverlay").style.display = "none";
+				document.getElementById("siteContent").style.display = "block";
+				document.body.classList.remove("locked");
+			} else {
+				document.getElementById("loginError").textContent =
+					"Invalid login details";
+			}
+		}
+
+
+	</script>
 
 
 	<!-- This sends the amount to payment.html -->
@@ -1541,7 +1785,7 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 				}
 			}
 		});
-	</script> -->
+	   </script> -->
 
 
 	<script>
@@ -1597,9 +1841,9 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 			updateAccount();
 			alert("Investment successful! Estimated return added.");
 		}
-	</script>
+	   </script>
 
-	<script>
+	  <script>
 		setInterval(() => {
 			if (invested > 0) {
 				let monthlyGain = Math.round(invested * 0.015); // 1.5% monthly
@@ -1608,7 +1852,7 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 			}
 		}, 8000); // every 8 seconds = 1 month simulation 
 
-	</script>-->
+	  </script>-->
 
 
 
@@ -1680,7 +1924,10 @@ width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
 	</script>
 
 
+
+
 	<script src="script.js"></script>
+
 
 
 </body>
