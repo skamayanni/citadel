@@ -62,7 +62,7 @@
 
 		.banner {
 			/* background-image: url('img/2geda.jpeg'); */
-			background-color: #666572;
+			background-color: transparent;
 			margin: 25px;
 			padding: 60px;
 		}
@@ -76,7 +76,7 @@
 		/* Tablet view */
 		@media (max-width: 1024px) {
 			.banner {
-				background-color: #666572;
+				background-color: transparent;
 				margin: 15px;
 				padding: 40px;
 			}
@@ -85,7 +85,7 @@
 		/* Mobile view */
 		@media (max-width: 768px) {
 			.banner {
-				background-color: #666572;
+				background-color: transparent;
 				margin: 10px;
 				padding: 30px;
 			}
@@ -108,6 +108,86 @@
 			opacity: 1;
 			visibility: visible;
 			position: relative;
+		}
+
+
+		.card-container {
+			display: flex;
+			gap: 24px;
+			max-width: 1100px;
+			margin: 0 auto;
+		}
+
+		.card {
+			flex: 1;
+			border-radius: 18px;
+			padding: 26px 28px;
+			color: #fff;
+			min-height: 150px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.card::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at top right,
+					rgba(255, 255, 255, 0.15),
+					transparent 60%);
+			pointer-events: none;
+		}
+
+
+		.blue {
+			background: linear-gradient(135deg, #100863, #1a1a1a);
+		}
+
+		.red {
+			background: linear-gradient(135deg, #770e0e, #1a1a1a);
+		}
+
+		.black {
+			background: linear-gradient(135deg, #050505, #1a1a1a);
+		}
+
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 14px;
+			opacity: 0.85;
+		}
+
+		.chip {
+			width: 36px;
+			height: 28px;
+			border-radius: 6px;
+			background: linear-gradient(135deg, #f3d36b, #c9a338);
+		}
+
+		.amount {
+			font-size: 28px;
+			font-weight: 600;
+			letter-spacing: 0.6px;
+			margin-top: 10px;
+		}
+
+		.bottom {
+			font-size: 13px;
+			letter-spacing: 1.5px;
+			opacity: 0.85;
+		}
+
+		@media (max-width: 900px) {
+			.card-container {
+				flex-direction: column;
+			}
 		}
 
 		#authOverlay {
@@ -574,46 +654,36 @@
 		<!-- Hero Section -->
 		<div class="banner">
 			<div class="sec-title">
-				<h2><span>Your</span> Investment Account</h2>
+				<h2><span>Your</span> <strong>Investment Account</strong> </h2>
 			</div>
 
-			<div class="row clearfix">
-				<div class="col-md-4">
-					<div class="inner-box">
+			<div class="card-container">
+				<div class="card blue">
+					<div class="top">
 						<h4> <span class="icon ti-credit-card"></span>
 							Available Balance</h4>
-						<h2 id="balance">
-							<strong>$105,488</strong>
-						</h2>
 					</div>
+					<div class="amount">$105,488</div>
 				</div>
 
-				<div class="col-md-4">
-					<div class="inner-box">
+				<div class="card red">
+					<div class="top">
 						<h4> <span class="icon ti-wallet"></span>
 							Total Invested</h4>
-						<h2 id="invested">
-							<strong>$99,000</strong>
-						</h2>
 					</div>
+					<div class="amount">$99,000</div>
 				</div>
 
-				<div class="col-md-4">
-					<div class="inner-box">
-
+				<div class="card black">
+					<div class="top">
 						<h4> <span class="icon ti-briefcase"></span>
 							Estimated Returns</h4>
-						<h2 id="invested">
-							<strong>$121,400</strong>
-						</h2>
 					</div>
+					<div class="amount">$121,400</div>
 				</div>
 
 			</div>
 		</div>
-
-
-
 
 
 		<!-- CTA Section Start -->
