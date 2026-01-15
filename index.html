@@ -257,7 +257,7 @@
 			.auth-box {
 				background: #0b0b0b;
 				padding: 30px;
-				height: 65%;
+				height: 60%;
 				width: 70%;
 				border-radius: 8px;
 				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
@@ -265,7 +265,7 @@
 
 
 			.auth-box h2 {
-				font-size: large;
+				font-size: medium;
 				margin-bottom: 10px;
 			}
 
@@ -305,6 +305,24 @@
 				height: 80px;
 				display: block;
 			}
+		}
+
+		/* Hide submenus by default on mobile */
+		.mobile-menu .navigation li ul {
+			display: none;
+			list-style: none;
+			padding-left: 15px;
+		}
+
+		/* Show submenu when "open" class is added */
+		.mobile-menu .navigation li ul.open {
+			display: block;
+		}
+
+		/* Optional: rotate arrow when submenu is open */
+		.mobile-menu .dropdown-btn span.rotated {
+			transform: rotate(180deg);
+			transition: transform 0.3s;
 		}
 	</style>
 
@@ -441,7 +459,7 @@
 
 								<div class="navbar-collapse show collapse clearfix" id="navbarSupportedContent">
 									<ul class="navigation clearfix">
-										<li><a href="#">Home</a></li>
+										<!-- <li><a href="index.html">Home</a></li> -->
 										<li class="dropdown">
 											<a href="#">Personal <i class="fa fa-caret-down"></i></a>
 											<ul>
@@ -496,7 +514,7 @@
 											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
 										</li>
 										<li class="current">
-											<a href="#">Contact</a>
+											<a href="#" onclick="logout()">Logout</a>
 										</li>
 									</ul>
 								</div>
@@ -531,96 +549,17 @@
 						style="max-height: 738px;">
 						<div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
 							style="position:relative; top:0; left:0;" dir="ltr">
-							<div class="nav-logo">
-								<a href="./index.html"><img
-										src="https://creditunionfincorp.com/assets/images/logo/logo.png" alt="" title=""
+							<!-- <div class="nav-logo">
+								<a href="./index.html"><img src="img/citadel.jpg" alt="" title=""
 										class="mCS_img_loaded"></a>
-							</div>
+							</div> -->
 							<div class="menu-outer">
 								<!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
 
-								<div class="navbar-header">
-									<button class="navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-										aria-expanded="false" aria-label="Toggle navigation">
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-										<span class="icon-bar"></span>
-									</button>
-								</div>
 
-								<div class="navbar-collapse show collapse clearfix" id="navbarSupportedContent">
-									<ul class="navigation clearfix">
-										<li><a href="./index.html">Home</a></li>
-										<li class="dropdown">
-											<a href="./creditunionfincorp.html">Personal <i
-													class="fa fa-caret-down"></i></a>
-											<ul>
-												<li><a href="./index.html">Ultimate Checking</a></li>
-												<li>
-													<a href="./index.html">Health Savings Account (NSA)</a>
-												</li>
-												<li>
-													<a href="./index.html">Individual Retirement
-														Account(IRAs)</a>
-												</li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<li class="dropdown">
-											<a href="#">Business <i class="fa fa-caret-down"></i></a>
-											<ul>
-												<li><a href="#">Overdraft Protection &amp; Sweeps</a></li>
-												<li>
-													<a href="#">Business Essential Checking</a>
-												</li>
-												<li>
-													<a href="#">Business Savings Account</a>
-												</li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<li class="dropdown">
-											<a href="#">Loans <i class="fa fa-caret-down"></i></a>
-											<ul class="from-right">
-												<li><a href="#">Home Mortgage Loans</a></li>
-												<li><a href="#">Personal Loans</a></li>
-												<li><a href="#">Working Capital Loans</a></li>
-												<li><a href="#">Investment Property Loans</a></li>
-												<li><a href="#">Commercial Real Estate Loans</a></li>
-												<li><a href="#">Business Term Loans</a></li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<li class="dropdown">
-											<a href="#">Services <i class="fa fa-caret-down"></i></a>
-											<ul class="from-right">
-												<li><a href="./creditunionfincorp.html">Online Banking</a></li>
-												<li><a href="./creditunionfincorp.html">Wire Transfers</a></li>
-												<li><a href="./creditunionfincorp.html">Lost or Stolen Cards</a>
-												</li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<li class="current">
-											<a href="#">Contact</a>
-										</li>
-									</ul>
-								</div>
 							</div>
 						</div>
-						<div id="mCSB_1_scrollbar_vertical"
-							class="mCSB_scrollTools mCSB_1_scrollbar mCS-light mCSB_scrollTools_vertical"
-							style="display: none;">
-							<div class="mCSB_draggerContainer">
-								<div id="mCSB_1_dragger_vertical" class="mCSB_dragger"
-									style="position: absolute; min-height: 30px; height: 0px; top: 0px;"
-									oncontextmenu="return false;">
-									<div class="mCSB_dragger_bar" style="line-height: 30px;"></div>
-								</div>
-								<div class="mCSB_draggerRail"></div>
-							</div>
-						</div>
+
 					</div>
 				</nav>
 			</div>
@@ -1697,24 +1636,85 @@
 
 		document.body.classList.add("locked");
 
+
 		function login() {
 			const user = document.getElementById("loginUser").value.trim();
 			const pass = document.getElementById("loginPass").value.trim();
+			const error = document.getElementById("loginError");
 
 			if (
 				(user === "admin" || user === "billionaire@gmail.com") &&
 				pass === "12345678"
 			) {
+				// ✅ SAVE LOGIN STATE
+				sessionStorage.setItem("isLoggedIn", "true");
+
 				document.getElementById("authOverlay").style.display = "none";
 				document.getElementById("siteContent").style.display = "block";
 				document.body.classList.remove("locked");
+
+				window.scrollTo(0, 0);
 			} else {
-				document.getElementById("loginError").textContent =
-					"Invalid login details";
+				error.textContent = "Invalid login details";
 			}
 		}
 
 
+		document.addEventListener("DOMContentLoaded", function () {
+			const loggedIn = sessionStorage.getItem("isLoggedIn");
+
+			if (loggedIn === "true") {
+				document.getElementById("authOverlay").style.display = "none";
+				document.getElementById("siteContent").style.display = "block";
+				document.body.classList.remove("locked");
+			} else {
+				document.getElementById("authOverlay").style.display = "flex";
+				document.getElementById("siteContent").style.display = "none";
+				document.body.classList.add("locked");
+			}
+		});
+
+
+
+		function logout() {
+			sessionStorage.removeItem("isLoggedIn");
+			location.reload();
+		}
+
+
+
+	</script>
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Get all mobile dropdown buttons
+			const dropdownBtns = document.querySelectorAll(".mobile-menu .dropdown-btn");
+
+			dropdownBtns.forEach(function (btn) {
+				btn.addEventListener("click", function (e) {
+					// Prevent default behavior
+					e.preventDefault();
+
+					// Find the parent LI
+					const parentLi = btn.parentElement;
+
+					// Toggle the submenu
+					const submenu = parentLi.querySelector("ul");
+					if (submenu) {
+						// Close other open submenus
+						parentLi.parentElement.querySelectorAll("ul.open").forEach(function (ul) {
+							if (ul !== submenu) ul.classList.remove("open");
+						});
+						// Toggle current submenu
+						submenu.classList.toggle("open");
+					}
+
+					// Toggle arrow icon rotation
+					btn.querySelector("span").classList.toggle("rotated");
+				});
+			});
+		});
 	</script>
 
 
