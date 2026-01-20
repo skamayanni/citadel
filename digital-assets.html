@@ -1013,6 +1013,7 @@
 
 
 
+
 			let selectedCrypto = null;
 			let tradeType = null;
 
@@ -1185,10 +1186,14 @@
 					amount
 				};
 
+				// SAVE
 				transactions.unshift(transaction);
+				localStorage.setItem("transactions", JSON.stringify(transactions));
+
+				// DISPLAY
 				renderTransactions();
-				saveState();
 			}
+
 
 			function renderTransactions() {
 				const tbody = document.getElementById("transactionBody");
@@ -1196,24 +1201,27 @@
 
 				if (transactions.length === 0) {
 					tbody.innerHTML = `
-			<tr id="no-transactions">
-				<td colspan="4">No transactions yet</td>
-			</tr>
-		`;
+      <tr id="no-transactions">
+        <td colspan="4">No transactions yet</td>
+      </tr>
+    `;
 					return;
 				}
 
-				transactions.forEach(t => {
+				transactions.forEach(tx => {
 					const row = document.createElement("tr");
+
 					row.innerHTML = `
-			<td>${t.date}</td>
-			<td>${t.symbol}</td>
-			<td class="${t.type === 'Buy' ? 'buy' : 'sell'}">${t.type}</td>
-			<td>$${t.amount.toFixed(2)}</td>
-		`;
+      <td>${tx.date}</td>
+      <td>${tx.symbol}</td>
+      <td class="${tx.type === "Buy" ? "buy" : "sell"}">${tx.type}</td>
+      <td>$${tx.amount.toFixed(2)}</td>
+    `;
+
 					tbody.appendChild(row);
 				});
 			}
+
 
 			// Restore wallet UI
 			document.getElementById("walletBalance").innerText =
@@ -1238,7 +1246,10 @@
 
 
 			// Restore transaction history
-			renderTransactions();
+			document.addEventListener("DOMContentLoaded", () => {
+				renderTransactions();
+			});
+
 
 
 
