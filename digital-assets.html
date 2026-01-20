@@ -626,6 +626,7 @@
 			}
 		}
 
+
 		.receipt-overlay {
 			position: fixed;
 			inset: 0;
@@ -981,9 +982,7 @@
 		<div class="crypto-container">
 
 			<div class="crypto-header">
-				<h2>DIGITAL CURRENCIES</h2>
-
-				<p>Buy, hold & trade leading digital assets</p>
+				<h2>DIGITAL CURRENCY INVESTMENTS</h2>
 
 			</div>
 
@@ -1119,6 +1118,7 @@
 				const amount = parseFloat(document.getElementById("tradeAmount").value);
 				if (!amount || amount <= 0) return alert("Enter a valid amount");
 
+				// ---- TRADE LOGIC ----
 				if (tradeType === "Buy") {
 					if (walletBalance < amount) {
 						alert("Insufficient balance");
@@ -1135,11 +1135,11 @@
 					walletBalance += amount;
 				}
 
-				// SAVE ONCE
+				// ---- SAVE ----
 				localStorage.setItem("holdings", JSON.stringify(holdings));
 				localStorage.setItem("walletBalance", walletBalance);
 
-				// UPDATE UI
+				// ---- UPDATE UI ----
 				document.getElementById(`holding-${selectedCrypto}`).innerText =
 					`Your Investment: $${holdings[selectedCrypto].toFixed(2)}`;
 
@@ -1147,9 +1147,33 @@
 					`Balance: $${walletBalance.toLocaleString()}`;
 
 				addTransaction(selectedCrypto, tradeType, amount);
-				showReceipt(selectedCrypto, tradeType, amount);
-				closeTrade();
+
+				// ---- SHOW PROCESSING FEEDBACK ----
+				const feedback = document.getElementById("tradeFeedback");
+				feedback.innerText = "Processing transaction...";
+				feedback.style.display = "block";
+
+				const check = document.getElementById("successCheck");
+				check.style.display = "block";
+
+				// ---- DELAY RECEIPT (2 SECONDS) ----
+				setTimeout(() => {
+					feedback.innerText =
+						tradeType === "Buy"
+							? "Purchase successful ✅"
+							: "Sale successful ✅";
+
+					showReceipt(selectedCrypto, tradeType, amount);
+
+					setTimeout(() => {
+						check.style.display = "none";
+						feedback.style.display = "none";
+						closeTrade();
+					}, 1200);
+
+				}, 2000); // ⏱️ 2 seconds
 			}
+
 
 
 
