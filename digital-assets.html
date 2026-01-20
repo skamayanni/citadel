@@ -2,1067 +2,1065 @@
 <html lang="en-US">
 
 <head>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-
-
-    <meta charset="UTF-8">
-    <title>Home - Citadel Credit Union</title>
-    <meta property="og:image" content="images/logo.jpg">
-    <!--<meta name="description" content="Successfully Providing the Best Banking Solution for over 10 years." />-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
-    <link href="https://creditunionfincorp.com/front/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://creditunionfincorp.com/front/css/main.css" rel="stylesheet">
-    <link href="https://creditunionfincorp.com/front/css/responsive.css" rel="stylesheet">
-
-    <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;500;600;700;900&amp;family=Libre+Baskerville:wght@400;700&amp;family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet">
-
-    <!-- Add site Favicon -->
-    <link rel="icon" href="https://creditunionfincorp.com/front/images/favicon.png" type="image/x-icon">
-
-
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            width: 100%;
-            overflow-x: hidden;
-            -webkit-text-size-adjust: 100%;
-
-        }
-
-        .logo {
-            height: 40px;
-            width: 80px;
-            transition: transform 0.3s;
-        }
-
-        /* Tablet view */
-        @media (max-width: 1024px) {
-            .logo {
-                height: 40px;
-                width: 50px;
-            }
-        }
-
-        /* Mobile view */
-        @media (max-width: 768px) {
-            .logo {
-                height: 30px;
-                width: 30px;
-            }
-        }
-
-        .lower-content p {
-            color: #1F1B44 !important;
-        }
-
-        .sidebar-widget ul li a,
-        .auto-container,
-        .auto-container h2 {
-            color: #1F1B44;
-        }
-
-        .banner {
-            /* background-image: url('img/2geda.jpeg'); */
-            background-color: transparent;
-            margin: 25px;
-            padding: 60px;
-        }
-
-        .banner div {
-            color: #ebebef;
-
-        }
-
-
-        /* Tablet view */
-        @media (max-width: 1024px) {
-            .banner {
-                background-color: transparent;
-                margin: 15px;
-                padding: 40px;
-            }
-        }
-
-        /* Mobile view */
-        @media (max-width: 768px) {
-            .banner {
-                background-color: transparent;
-                margin: 10px;
-                padding: 30px;
-            }
-        }
-
-
-        body.locked {
-            overflow: hidden;
-        }
-
-
-        .rotating-text {
-            opacity: 0;
-            visibility: hidden;
-            position: absolute;
-            transition: opacity 0.8s ease;
-        }
-
-        .rotating-text.active {
-            opacity: 1;
-            visibility: visible;
-            position: relative;
-        }
-
-
-        .card-container {
-            display: flex;
-            gap: 24px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .card {
-            flex: 1;
-            border-radius: 18px;
-            padding: 26px 28px;
-            color: #fff;
-            min-height: 150px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at top right,
-                    rgba(255, 255, 255, 0.15),
-                    transparent 60%);
-            pointer-events: none;
-        }
-
-
-        .blue {
-            background: linear-gradient(135deg, #100863, #1a1a1a);
-        }
-
-        .red {
-            background: linear-gradient(135deg, #770e0e, #1a1a1a);
-        }
-
-        .black {
-            background: linear-gradient(135deg, #050505, #1a1a1a);
-        }
-
-
-        .top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-            opacity: 0.85;
-        }
-
-        .chip {
-            width: 36px;
-            height: 28px;
-            border-radius: 6px;
-            background: linear-gradient(135deg, #f3d36b, #c9a338);
-        }
-
-        .amount {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: 0.6px;
-            margin-top: 10px;
-        }
-
-        .bottom {
-            font-size: 13px;
-            letter-spacing: 1.5px;
-            opacity: 0.85;
-        }
-
-        @media (max-width: 900px) {
-            .card-container {
-                flex-direction: column;
-            }
-        }
-
-        #authOverlay {
-            position: fixed;
-            inset: 0;
-            background: #191539;
-            /* FULLY SOLID */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-        }
-
-
-        .auth-box {
-            background: #0b0b0b;
-            padding: 70px;
-            height: 80%;
-            width: 40%;
-            border-radius: 12px;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-        }
-
-
-        .auth-box h2 {
-            margin-bottom: 20px;
-        }
-
-        .auth-box input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 12px;
-            border-radius: 5px;
-            border: none;
-        }
-
-        .auth-box button {
-            width: 100%;
-            padding: 10px;
-            background: gold;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        #loginError {
-            color: red;
-            margin-top: 10px;
-        }
-
-        .auth-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .auth-logo {
-            margin-bottom: 30px;
-        }
-
-        .auth-logo img {
-            height: 100px;
-            display: block;
-        }
-
-
-        /* Tablet view */
-        @media (max-width: 1024px) {
-            #authOverlay {
-                position: fixed;
-                inset: 0;
-                background: #191539;
-                /* FULLY SOLID */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 99999;
-            }
-
-
-            .auth-box {
-                background: #0b0b0b;
-                padding: 70px;
-                height: 70%;
-                width: 40%;
-                border-radius: 10px;
-                box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-            }
-
-
-            .auth-box h2 {
-                margin-bottom: 20px;
-            }
-
-            .auth-box input {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 12px;
-                border-radius: 5px;
-                border: none;
-            }
-
-            .auth-box button {
-                width: 100%;
-                padding: 10px;
-                background: gold;
-                border: none;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            #loginError {
-                color: red;
-                margin-top: 10px;
-            }
-
-            .auth-box {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .auth-logo {
-                margin-bottom: 30px;
-            }
-
-            .auth-logo img {
-                height: 100px;
-                display: block;
-            }
-        }
-
-        /* Mobile view */
-        @media (max-width: 768px) {
-            #authOverlay {
-                position: fixed;
-                inset: 0;
-                background: #191539;
-                /* FULLY SOLID */
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                z-index: 99999;
-            }
-
-
-            .auth-box {
-                background: #0b0b0b;
-                padding: 30px;
-                height: 60%;
-                width: 70%;
-                border-radius: 8px;
-                box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-            }
-
-
-            .auth-box h2 {
-                font-size: medium;
-                margin-bottom: 10px;
-            }
-
-            .auth-box input {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 12px;
-                border-radius: 5px;
-                border: none;
-            }
-
-            .auth-box button {
-                width: 100%;
-                padding: 10px;
-                background: gold;
-                border: none;
-                font-weight: bold;
-                cursor: pointer;
-            }
-
-            #loginError {
-                color: red;
-                margin-top: 5px;
-            }
-
-            .auth-box {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .auth-logo {
-                margin-bottom: 20px;
-            }
-
-            .auth-logo img {
-                height: 80px;
-                display: block;
-            }
-        }
-
-        /* Hide submenus by default on mobile */
-        .mobile-menu .navigation li ul {
-            display: none;
-            list-style: none;
-            padding-left: 15px;
-        }
-
-        /* Show submenu when "open" class is added */
-        .mobile-menu .navigation li ul.open {
-            display: block;
-        }
-
-        /* Optional: rotate arrow when submenu is open */
-        .mobile-menu .dropdown-btn span.rotated {
-            transform: rotate(180deg);
-            transition: transform 0.3s;
-        }
-
-        .service-link {
-            display: block;
-            height: 100%;
-            color: inherit;
-            text-decoration: none;
-        }
-
-        .service-link:hover {
-            text-decoration: none;
-        }
-
-
-        /* <style> */
-        body {
-            font-family: Arial, sans-serif;
-            background: #f6f8fc;
-        }
-
-        .crypto-container {
-            max-width: 1200px;
-            margin: 50px auto;
-        }
-
-        .crypto-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .crypto-header h2 {
-            font-size: 28px;
-            color: #0b1c39;
-        }
-
-        .crypto-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .crypto-card {
-            background: #fff;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
-        }
-
-        .crypto-top {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .crypto-top img {
-            width: 40px;
-        }
-
-        .crypto-name {
-            font-weight: bold;
-        }
-
-        .crypto-price {
-            margin-top: 15px;
-            font-size: 20px;
-        }
-
-        .crypto-change {
-            font-size: 14px;
-            margin-top: 5px;
-        }
-
-        .up {
-            color: #16a34a;
-        }
-
-        .down {
-            color: #dc2626;
-        }
-
-        .crypto-actions {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .crypto-actions button {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .buy {
-            background: #2563eb;
-            color: #fff;
-        }
-
-        .sell {
-            background: #111827;
-            color: #fff;
-        }
-
-        .trade-modal {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .trade-box {
-            background: #fff;
-            padding: 30px;
-            width: 350px;
-            border-radius: 12px;
-        }
-
-        .trade-box input {
-            width: 100%;
-            padding: 10px;
-            margin: 15px 0;
-        }
-
-        .trade-actions {
-            display: flex;
-            gap: 10px;
-        }
-
-        .trade-actions button {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .trade-actions .cancel {
-            background: #e5e7eb;
-        }
-
-        .transaction-section {
-            max-width: 1200px;
-            margin: 60px auto;
-        }
-
-        .transaction-section h3 {
-            margin-bottom: 15px;
-        }
-
-        .transaction-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-        }
-
-        .transaction-table th,
-        .transaction-table td {
-            padding: 12px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-
-        .crypto-holdings {
-            margin-top: 8px;
-            font-size: 14px;
-            color: #374151;
-            font-weight: 600;
-        }
-
-        .trade-feedback {
-            margin-top: 10px;
-            color: green;
-            font-weight: 600;
-            display: none;
-            text-align: center;
-        }
-
-        .wallet-balance {
-            font-weight: 800;
-            font-size: large;
-            margin-bottom: 15px;
-        }
-
-        .success-check {
-            display: none;
-            font-size: 40px;
-            color: green;
-            text-align: center;
-            animation: pop 0.5s ease;
-        }
-
-        @keyframes pop {
-            0% {
-                transform: scale(0);
-                opacity: 0;
-            }
-
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .receipt-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 9999;
-        }
-
-        .receipt-box {
-            background: #fff;
-            width: 360px;
-            padding: 25px;
-            border-radius: 10px;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .receipt-box h3 {
-            text-align: center;
-            margin-bottom: 15px;
-        }
-
-        .receipt-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 14px;
-        }
-
-        .receipt-status {
-            text-align: center;
-            margin: 15px 0;
-            font-weight: bold;
-        }
-
-        .receipt-status.success {
-            color: green;
-        }
-
-        .receipt-box button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background: #0a2cff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        .receipt-header {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .receipt-header img {
-            width: 55px;
-            margin-bottom: 5px;
-        }
-
-        .receipt-header h4 {
-            margin: 0;
-            font-size: 15px;
-            font-weight: bold;
-        }
-
-        .receipt-header p {
-            margin: 0;
-            font-size: 12px;
-            color: #666;
-        }
-
-        .receipt-watermark {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-30deg);
-            font-size: 70px;
-            font-weight: 800;
-            color: rgba(0, 0, 0, 0.05);
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .receipt-box {
-            position: relative;
-        }
-
-        .receipt-footer {
-            font-size: 11px;
-            color: #666;
-            text-align: center;
-            margin: 10px 0;
-        }
-    </style>
-
-    <script src="https://js.paystack.co/v1/inline.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
-
-    <script>
-
-        document.onkeydown = function (e) {
-            if (event.keyCode == 123) {
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'i'.charCodeAt(0))) {
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && (e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'c'.charCodeAt(0))) {
-                return false;
-            }
-            if (e.ctrlKey && e.shiftKey && (e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'j'.charCodeAt(0))) {
-                return false;
-            }
-            if (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'u'.charCodeAt(0))) {
-                return false;
-            }
-            if (e.ctrlKey && (e.keyCode == 'S'.charCodeAt(0) || e.keyCode == 's'.charCodeAt(0))) {
-                return false;
-            }
-        }
-    </script>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+
+
+	<meta charset="UTF-8">
+	<title>Home - Citadel Credit Union</title>
+	<meta property="og:image" content="images/logo.jpg">
+	<!--<meta name="description" content="Successfully Providing the Best Banking Solution for over 10 years." />-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<link href="https://creditunionfincorp.com/front/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://creditunionfincorp.com/front/css/main.css" rel="stylesheet">
+	<link href="https://creditunionfincorp.com/front/css/responsive.css" rel="stylesheet">
+
+	<!-- Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;500;600;700;900&amp;family=Libre+Baskerville:wght@400;700&amp;family=Work+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+		rel="stylesheet">
+
+	<!-- Add site Favicon -->
+	<link rel="icon" href="https://creditunionfincorp.com/front/images/favicon.png" type="image/x-icon">
+
+
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+	<link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		html,
+		body {
+			width: 100%;
+			overflow-x: hidden;
+			-webkit-text-size-adjust: 100%;
+
+		}
+
+		.logo {
+			height: 40px;
+			width: 80px;
+			transition: transform 0.3s;
+		}
+
+		/* Tablet view */
+		@media (max-width: 1024px) {
+			.logo {
+				height: 40px;
+				width: 50px;
+			}
+		}
+
+		/* Mobile view */
+		@media (max-width: 768px) {
+			.logo {
+				height: 30px;
+				width: 30px;
+			}
+		}
+
+		.lower-content p {
+			color: #1F1B44 !important;
+		}
+
+		.sidebar-widget ul li a,
+		.auto-container,
+		.auto-container h2 {
+			color: #1F1B44;
+		}
+
+		.banner {
+			/* background-image: url('img/2geda.jpeg'); */
+			background-color: transparent;
+			margin: 25px;
+			padding: 60px;
+		}
+
+		.banner div {
+			color: #ebebef;
+
+		}
+
+
+		/* Tablet view */
+		@media (max-width: 1024px) {
+			.banner {
+				background-color: transparent;
+				margin: 15px;
+				padding: 40px;
+			}
+		}
+
+		/* Mobile view */
+		@media (max-width: 768px) {
+			.banner {
+				background-color: transparent;
+				margin: 10px;
+				padding: 30px;
+			}
+		}
+
+
+		body.locked {
+			overflow: hidden;
+		}
+
+
+		.rotating-text {
+			opacity: 0;
+			visibility: hidden;
+			position: absolute;
+			transition: opacity 0.8s ease;
+		}
+
+		.rotating-text.active {
+			opacity: 1;
+			visibility: visible;
+			position: relative;
+		}
+
+
+		.card-container {
+			display: flex;
+			gap: 24px;
+			max-width: 1100px;
+			margin: 0 auto;
+		}
+
+		.card {
+			flex: 1;
+			border-radius: 18px;
+			padding: 26px 28px;
+			color: #fff;
+			min-height: 150px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.card::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at top right,
+					rgba(255, 255, 255, 0.15),
+					transparent 60%);
+			pointer-events: none;
+		}
+
+
+		.blue {
+			background: linear-gradient(135deg, #100863, #1a1a1a);
+		}
+
+		.red {
+			background: linear-gradient(135deg, #770e0e, #1a1a1a);
+		}
+
+		.black {
+			background: linear-gradient(135deg, #050505, #1a1a1a);
+		}
+
+
+		.top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			font-size: 14px;
+			opacity: 0.85;
+		}
+
+		.chip {
+			width: 36px;
+			height: 28px;
+			border-radius: 6px;
+			background: linear-gradient(135deg, #f3d36b, #c9a338);
+		}
+
+		.amount {
+			font-size: 28px;
+			font-weight: 600;
+			letter-spacing: 0.6px;
+			margin-top: 10px;
+		}
+
+		.bottom {
+			font-size: 13px;
+			letter-spacing: 1.5px;
+			opacity: 0.85;
+		}
+
+		@media (max-width: 900px) {
+			.card-container {
+				flex-direction: column;
+			}
+		}
+
+		#authOverlay {
+			position: fixed;
+			inset: 0;
+			background: #191539;
+			/* FULLY SOLID */
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 99999;
+		}
+
+
+		.auth-box {
+			background: #0b0b0b;
+			padding: 70px;
+			height: 80%;
+			width: 40%;
+			border-radius: 12px;
+			box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+		}
+
+
+		.auth-box h2 {
+			margin-bottom: 20px;
+		}
+
+		.auth-box input {
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 12px;
+			border-radius: 5px;
+			border: none;
+		}
+
+		.auth-box button {
+			width: 100%;
+			padding: 10px;
+			background: gold;
+			border: none;
+			font-weight: bold;
+			cursor: pointer;
+		}
+
+		#loginError {
+			color: red;
+			margin-top: 10px;
+		}
+
+		.auth-box {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		.auth-logo {
+			margin-bottom: 30px;
+		}
+
+		.auth-logo img {
+			height: 100px;
+			display: block;
+		}
+
+
+		/* Tablet view */
+		@media (max-width: 1024px) {
+			#authOverlay {
+				position: fixed;
+				inset: 0;
+				background: #191539;
+				/* FULLY SOLID */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 99999;
+			}
+
+
+			.auth-box {
+				background: #0b0b0b;
+				padding: 70px;
+				height: 70%;
+				width: 40%;
+				border-radius: 10px;
+				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+			}
+
+
+			.auth-box h2 {
+				margin-bottom: 20px;
+			}
+
+			.auth-box input {
+				width: 100%;
+				padding: 10px;
+				margin-bottom: 12px;
+				border-radius: 5px;
+				border: none;
+			}
+
+			.auth-box button {
+				width: 100%;
+				padding: 10px;
+				background: gold;
+				border: none;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			#loginError {
+				color: red;
+				margin-top: 10px;
+			}
+
+			.auth-box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.auth-logo {
+				margin-bottom: 30px;
+			}
+
+			.auth-logo img {
+				height: 100px;
+				display: block;
+			}
+		}
+
+		/* Mobile view */
+		@media (max-width: 768px) {
+			#authOverlay {
+				position: fixed;
+				inset: 0;
+				background: #191539;
+				/* FULLY SOLID */
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 99999;
+			}
+
+
+			.auth-box {
+				background: #0b0b0b;
+				padding: 30px;
+				height: 60%;
+				width: 70%;
+				border-radius: 8px;
+				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+			}
+
+
+			.auth-box h2 {
+				font-size: medium;
+				margin-bottom: 10px;
+			}
+
+			.auth-box input {
+				width: 100%;
+				padding: 10px;
+				margin-bottom: 12px;
+				border-radius: 5px;
+				border: none;
+			}
+
+			.auth-box button {
+				width: 100%;
+				padding: 10px;
+				background: gold;
+				border: none;
+				font-weight: bold;
+				cursor: pointer;
+			}
+
+			#loginError {
+				color: red;
+				margin-top: 5px;
+			}
+
+			.auth-box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.auth-logo {
+				margin-bottom: 20px;
+			}
+
+			.auth-logo img {
+				height: 80px;
+				display: block;
+			}
+		}
+
+		/* Hide submenus by default on mobile */
+		.mobile-menu .navigation li ul {
+			display: none;
+			list-style: none;
+			padding-left: 15px;
+		}
+
+		/* Show submenu when "open" class is added */
+		.mobile-menu .navigation li ul.open {
+			display: block;
+		}
+
+		/* Optional: rotate arrow when submenu is open */
+		.mobile-menu .dropdown-btn span.rotated {
+			transform: rotate(180deg);
+			transition: transform 0.3s;
+		}
+
+		.service-link {
+			display: block;
+			height: 100%;
+			color: inherit;
+			text-decoration: none;
+		}
+
+		.service-link:hover {
+			text-decoration: none;
+		}
+
+
+		/* <style> */
+		body {
+			font-family: Arial, sans-serif;
+			background: #f6f8fc;
+		}
+
+		.crypto-container {
+			max-width: 1200px;
+			margin: 50px auto;
+		}
+
+		.crypto-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 30px;
+		}
+
+		.crypto-header h2 {
+			font-size: 28px;
+			color: #0b1c39;
+		}
+
+		.crypto-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+			gap: 25px;
+		}
+
+		.crypto-card {
+			background: #fff;
+			border-radius: 12px;
+			padding: 20px;
+			box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+		}
+
+		.crypto-top {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+		}
+
+		.crypto-top img {
+			width: 40px;
+		}
+
+		.crypto-name {
+			font-weight: bold;
+		}
+
+		.crypto-price {
+			margin-top: 15px;
+			font-size: 20px;
+		}
+
+		.crypto-change {
+			font-size: 14px;
+			margin-top: 5px;
+		}
+
+		.up {
+			color: #16a34a;
+		}
+
+		.down {
+			color: #dc2626;
+		}
+
+		.crypto-actions {
+			margin-top: 20px;
+			display: flex;
+			gap: 10px;
+		}
+
+		.crypto-actions button {
+			flex: 1;
+			padding: 10px;
+			border-radius: 6px;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.buy {
+			background: #2563eb;
+			color: #fff;
+		}
+
+		.sell {
+			background: #111827;
+			color: #fff;
+		}
+
+		.trade-modal {
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.7);
+			display: none;
+			align-items: center;
+			justify-content: center;
+			z-index: 9999;
+		}
+
+		.trade-box {
+			background: #fff;
+			padding: 30px;
+			width: 350px;
+			border-radius: 12px;
+		}
+
+		.trade-box input {
+			width: 100%;
+			padding: 10px;
+			margin: 15px 0;
+		}
+
+		.trade-actions {
+			display: flex;
+			gap: 10px;
+		}
+
+		.trade-actions button {
+			flex: 1;
+			padding: 10px;
+			border: none;
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		.trade-actions .cancel {
+			background: #e5e7eb;
+		}
+
+		.transaction-section {
+			max-width: 1200px;
+			margin: 60px auto;
+		}
+
+		.transaction-section h3 {
+			margin-bottom: 15px;
+		}
+
+		.transaction-table {
+			width: 100%;
+			border-collapse: collapse;
+			background: #fff;
+		}
+
+		.transaction-table th,
+		.transaction-table td {
+			padding: 12px;
+			border-bottom: 1px solid #eee;
+			text-align: left;
+		}
+
+		.crypto-holdings {
+			margin-top: 8px;
+			font-size: 14px;
+			color: #374151;
+			font-weight: 600;
+		}
+
+		.trade-feedback {
+			margin-top: 10px;
+			color: green;
+			font-weight: 600;
+			display: none;
+			text-align: center;
+		}
+
+		.wallet-balance {
+			font-weight: 800;
+			font-size: large;
+			margin-bottom: 15px;
+		}
+
+		.success-check {
+			display: none;
+			font-size: 40px;
+			color: green;
+			text-align: center;
+			animation: pop 0.5s ease;
+		}
+
+		@keyframes pop {
+			0% {
+				transform: scale(0);
+				opacity: 0;
+			}
+
+			100% {
+				transform: scale(1);
+				opacity: 1;
+			}
+		}
+
+		.receipt-overlay {
+			position: fixed;
+			inset: 0;
+			background: rgba(0, 0, 0, 0.6);
+			display: none;
+			align-items: center;
+			justify-content: center;
+			z-index: 9999;
+		}
+
+		.receipt-box {
+			background: #fff;
+			width: 360px;
+			padding: 25px;
+			border-radius: 10px;
+			animation: fadeIn 0.3s ease;
+		}
+
+		.receipt-box h3 {
+			text-align: center;
+			margin-bottom: 15px;
+		}
+
+		.receipt-row {
+			display: flex;
+			justify-content: space-between;
+			margin-bottom: 8px;
+			font-size: 14px;
+		}
+
+		.receipt-status {
+			text-align: center;
+			margin: 15px 0;
+			font-weight: bold;
+		}
+
+		.receipt-status.success {
+			color: green;
+		}
+
+		.receipt-box button {
+			width: 100%;
+			padding: 10px;
+			border: none;
+			background: #0a2cff;
+			color: white;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: scale(0.9);
+			}
+
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+
+		.receipt-header {
+			text-align: center;
+			margin-bottom: 10px;
+		}
+
+		.receipt-header img {
+			width: 55px;
+			margin-bottom: 5px;
+		}
+
+		.receipt-header h4 {
+			margin: 0;
+			font-size: 15px;
+			font-weight: bold;
+		}
+
+		.receipt-header p {
+			margin: 0;
+			font-size: 12px;
+			color: #666;
+		}
+
+		.receipt-watermark {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) rotate(-30deg);
+			font-size: 70px;
+			font-weight: 800;
+			color: rgba(0, 0, 0, 0.05);
+			pointer-events: none;
+			user-select: none;
+		}
+
+		.receipt-box {
+			position: relative;
+		}
+
+		.receipt-footer {
+			font-size: 11px;
+			color: #666;
+			text-align: center;
+			margin: 10px 0;
+		}
+	</style>
+
+	<script src="https://js.paystack.co/v1/inline.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+	<script>
+
+		document.onkeydown = function (e) {
+			if (event.keyCode == 123) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'i'.charCodeAt(0))) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && (e.keyCode == 'C'.charCodeAt(0) || e.keyCode == 'c'.charCodeAt(0))) {
+				return false;
+			}
+			if (e.ctrlKey && e.shiftKey && (e.keyCode == 'J'.charCodeAt(0) || e.keyCode == 'j'.charCodeAt(0))) {
+				return false;
+			}
+			if (e.ctrlKey && (e.keyCode == 'U'.charCodeAt(0) || e.keyCode == 'u'.charCodeAt(0))) {
+				return false;
+			}
+			if (e.ctrlKey && (e.keyCode == 'S'.charCodeAt(0) || e.keyCode == 's'.charCodeAt(0))) {
+				return false;
+			}
+		}
+	</script>
 
 </head>
 
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-    (function () {
-        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.src = 'https://embed.tawk.to/68c6bc223c57f819275d5edd/1j544tq3s';
-        s1.charset = 'UTF-8';
-        s1.setAttribute('crossorigin', '*');
-        s0.parentNode.insertBefore(s1, s0);
-    })();
+	var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+	(function () {
+		var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+		s1.async = true;
+		s1.src = 'https://embed.tawk.to/68c6bc223c57f819275d5edd/1j544tq3s';
+		s1.charset = 'UTF-8';
+		s1.setAttribute('crossorigin', '*');
+		s0.parentNode.insertBefore(s1, s0);
+	})();
 </script>
 <!--End of Tawk.to Script-->
 
 
 <body oncontextmenu="return false">
 
-    <!-- LOGIN OVERLAY -->
-    <div id="authOverlay">
-        <div class="auth-box">
-            <div class="auth-logo">
-                <img src="img/citadel.jpg" alt="citadel">
-            </div>
+	<!-- LOGIN OVERLAY -->
+	<div id="authOverlay">
+		<div class="auth-box">
+			<div class="auth-logo">
+				<img src="img/citadel.jpg" alt="citadel">
+			</div>
 
-            <h2><strong>LOGIN</strong></h2>
+			<h2><strong>LOGIN</strong></h2>
 
-            <input type="text" id="loginUser" placeholder="Username or Email">
-            <input type="password" id="loginPass" placeholder="Password">
+			<input type="text" id="loginUser" placeholder="Username or Email">
+			<input type="password" id="loginPass" placeholder="Password">
 
-            <button onclick="login()">Login</button>
-            <p id="loginError"></p>
-        </div>
-    </div>
+			<button onclick="login()">Login</button>
+			<p id="loginError"></p>
+		</div>
+	</div>
 
-    <!-- MAIN WEBSITE CONTENT -->
-    <div id="siteContent" style="display:none;">
-        <!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
-
-
+	<!-- MAIN WEBSITE CONTENT -->
+	<div id="siteContent" style="display:none;">
+		<!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
 
 
 
-        <!-- Main Header-->
-        <header class="main-header style-three">
-            <!-- Header Top -->
-            <div class="header-top">
-                <div class="auto-container">
-                    <div class="inner-container clearfix">
-                        <!-- Top Left -->
-                        <div class="top-left">
-                            <!-- Info List -->
-                            <ul class="info-list">
-                                <li class="share rotating-text active">
-                                    <a href="./index.html">
-                                        <span class="icon icofont-handshake-deal"></span>
-                                        Invest with Confidence. Grow with Purpose.
-                                    </a>
-                                </li>
-
-                                <li class="share rotating-text">
-                                    <a href="./index.html">
-                                        <span class="icon icofont-chart-growth"></span>
-                                        A Fortress for Your Investments.
-                                    </a>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                        <!-- Top Right -->
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Header Upper -->
-            <div class="header-upper">
-                <div class="auto-container">
-                    <div class="inner-container clearfix">
-                        <div class="pull-left logo-box">
-                            <div class="logo">
-                                <a href="index.html"><img src="img/citadel.jpg" alt="" title=""></a>
-                            </div>
-                        </div>
-
-                        <div class="nav-outer pull-left clearfix">
-                            <!-- Main Menu -->
-                            <nav class="main-menu navbar-expand-md">
-                                <div class="navbar-header">
-                                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                        aria-expanded="false" aria-label="Toggle navigation">
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                        <span class="icon-bar"></span>
-                                    </button>
-                                </div>
-
-                                <div class="navbar-collapse show collapse clearfix" id="navbarSupportedContent">
-                                    <ul class="navigation clearfix">
-                                        <!-- <li><a href="index.html">Home</a></li> -->
-                                        <li class="dropdown">
-                                            <a href="#">Personal <i class="fa fa-caret-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">Ultimate
-                                                        Checking</a></li>
-                                                <li>
-                                                    <a href="#">Health
-                                                        Savings Account (NSA)</a>
-                                                </li>
-                                                <li>
-                                                    <a onclick="openWallet()">Fund Wallet</a>
-                                                </li>
-                                            </ul>
-                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Business <i class="fa fa-caret-down"></i></a>
-                                            <ul>
-                                                <li><a href="#">Overdraft
-                                                        Protection &amp; Sweeps</a></li>
-                                                <li>
-                                                    <a href="#">Business
-                                                        Essential Checking</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Business
-                                                        Savings Account</a>
-                                                </li>
-                                            </ul>
-                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Loans <i class="fa fa-caret-down"></i></a>
-                                            <ul class="from-right">
-                                                <li><a href="#">Home Mortgage Loans</a></li>
-                                                <li><a href="#">Personal Loans</a></li>
-                                                <li><a href="#">Working Capital Loans</a></li>
-                                                <li><a href="#">Investment Property Loans</a></li>
-                                                <li><a href="#">Commercial Real Estate Loans</a></li>
-                                                <li><a href="#">Business Term Loans</a></li>
-                                            </ul>
-                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#">Services <i class="fa fa-caret-down"></i></a>
-                                            <ul class="from-right">
-                                                <li><a href="./creditunionfincorp.html">Online Banking</a></li>
-                                                <li><a href="./creditunionfincorp.html">Wire Transfers</a></li>
-                                                <li><a href="./creditunionfincorp.html">Lost or Stolen Cards</a>
-                                                </li>
-                                            </ul>
-                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-                                        </li>
-                                        <li class="current">
-                                            <a href="#" onclick="logout()">Logout</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
-                        </div>
-                        <!-- Outer Box -->
-                        <div class="outer-box">
-                            <!-- Search Btn -->
-
-                            <button class="theme-btn btn-style-two" onclick="openWallet()">
-                                <strong>ADD FUNDS</strong>
-                            </button>
 
 
-                            <!-- Mobile Navigation Toggler -->
-                            <div class="mobile-nav-toggler">
+		<!-- Main Header-->
+		<header class="main-header style-three">
+			<!-- Header Top -->
+			<div class="header-top">
+				<div class="auto-container">
+					<div class="inner-container clearfix">
+						<!-- Top Left -->
+						<div class="top-left">
+							<!-- Info List -->
+							<ul class="info-list">
+								<li class="share rotating-text active">
+									<a href="./index.html">
+										<span class="icon icofont-handshake-deal"></span>
+										Invest with Confidence. Grow with Purpose.
+									</a>
+								</li>
 
-                                <span class="icon ti-menu"></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--End Header Upper-->
+								<li class="share rotating-text">
+									<a href="./index.html">
+										<span class="icon icofont-chart-growth"></span>
+										A Fortress for Your Investments.
+									</a>
+								</li>
+							</ul>
 
-            <!-- Mobile Menu  -->
-            <div class="mobile-menu">
-                <div class="menu-backdrop"></div>
-                <div class="close-btn"><span class="icon lnr lnr-cross"></span></div>
-                <nav class="menu-box mCustomScrollbar _mCS_1 mCS_no_scrollbar">
-                    <div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
-                        style="max-height: 738px;">
-                        <div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
-                            style="position:relative; top:0; left:0;" dir="ltr">
-                            <!-- <div class="nav-logo">
+						</div>
+
+						<!-- Top Right -->
+
+					</div>
+				</div>
+			</div>
+
+			<!-- Header Upper -->
+			<div class="header-upper">
+				<div class="auto-container">
+					<div class="inner-container clearfix">
+						<div class="pull-left logo-box">
+							<div class="logo">
+								<a href="index.html"><img src="img/citadel.jpg" alt="" title=""></a>
+							</div>
+						</div>
+
+						<div class="nav-outer pull-left clearfix">
+							<!-- Main Menu -->
+							<nav class="main-menu navbar-expand-md">
+								<div class="navbar-header">
+									<button class="navbar-toggler" type="button" data-toggle="collapse"
+										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+										aria-expanded="false" aria-label="Toggle navigation">
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+										<span class="icon-bar"></span>
+									</button>
+								</div>
+
+								<div class="navbar-collapse show collapse clearfix" id="navbarSupportedContent">
+									<ul class="navigation clearfix">
+										<!-- <li><a href="index.html">Home</a></li> -->
+										<li class="dropdown">
+											<a href="#">Personal <i class="fa fa-caret-down"></i></a>
+											<ul>
+												<li><a href="#">Ultimate
+														Checking</a></li>
+												<li>
+													<a href="#">Health
+														Savings Account (NSA)</a>
+												</li>
+												<li>
+													<a onclick="openWallet()">Fund Wallet</a>
+												</li>
+											</ul>
+											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+										</li>
+										<li class="dropdown">
+											<a href="#">Business <i class="fa fa-caret-down"></i></a>
+											<ul>
+												<li><a href="#">Overdraft
+														Protection &amp; Sweeps</a></li>
+												<li>
+													<a href="#">Business
+														Essential Checking</a>
+												</li>
+												<li>
+													<a href="#">Business
+														Savings Account</a>
+												</li>
+											</ul>
+											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+										</li>
+										<li class="dropdown">
+											<a href="#">Loans <i class="fa fa-caret-down"></i></a>
+											<ul class="from-right">
+												<li><a href="#">Home Mortgage Loans</a></li>
+												<li><a href="#">Personal Loans</a></li>
+												<li><a href="#">Working Capital Loans</a></li>
+												<li><a href="#">Investment Property Loans</a></li>
+												<li><a href="#">Commercial Real Estate Loans</a></li>
+												<li><a href="#">Business Term Loans</a></li>
+											</ul>
+											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+										</li>
+										<li class="dropdown">
+											<a href="#">Services <i class="fa fa-caret-down"></i></a>
+											<ul class="from-right">
+												<li><a href="./creditunionfincorp.html">Online Banking</a></li>
+												<li><a href="./creditunionfincorp.html">Wire Transfers</a></li>
+												<li><a href="./creditunionfincorp.html">Lost or Stolen Cards</a>
+												</li>
+											</ul>
+											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+										</li>
+										<li class="current">
+											<a href="#" onclick="logout()">Logout</a>
+										</li>
+									</ul>
+								</div>
+							</nav>
+						</div>
+						<!-- Outer Box -->
+						<div class="outer-box">
+							<!-- Search Btn -->
+
+							<div id="walletBalance" class="wallet-balance">
+								<strong>
+									Balance: $6,000
+								</strong>
+							</div>
+
+
+							<!-- Mobile Navigation Toggler -->
+							<div class="mobile-nav-toggler">
+
+								<span class="icon ti-menu"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--End Header Upper-->
+
+			<!-- Mobile Menu  -->
+			<div class="mobile-menu">
+				<div class="menu-backdrop"></div>
+				<div class="close-btn"><span class="icon lnr lnr-cross"></span></div>
+				<nav class="menu-box mCustomScrollbar _mCS_1 mCS_no_scrollbar">
+					<div id="mCSB_1" class="mCustomScrollBox mCS-light mCSB_vertical mCSB_inside" tabindex="0"
+						style="max-height: 738px;">
+						<div id="mCSB_1_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
+							style="position:relative; top:0; left:0;" dir="ltr">
+							<!-- <div class="nav-logo">
 								<a href="./index.html"><img src="img/citadel.jpg" alt="" title=""
 										class="mCS_img_loaded"></a>
 							</div> -->
-                            <div class="menu-outer">
-                                <!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+							<div class="menu-outer">
+								<!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
 
 
-                            </div>
-                        </div>
+							</div>
+						</div>
 
-                    </div>
-                </nav>
-            </div>
-            <!-- End Mobile Menu -->
-        </header>
-
-
-
-        <div class="crypto-container">
-
-            <div class="crypto-header">
-                <h2>DIGITAL CURRENCIES</h2>
-
-                <!-- <p>Buy, hold & trade leading digital assets</p> -->
-                <div id="walletBalance" class="wallet-balance">
-                    <strong>
-                        Balance: $6,000
-                    </strong>
-                </div>
-            </div>
+					</div>
+				</nav>
+			</div>
+			<!-- End Mobile Menu -->
+		</header>
 
 
 
-            <div class="crypto-grid" id="cryptoGrid"></div>
+		<div class="crypto-container">
 
-        </div>
+			<div class="crypto-header">
+				<h2>DIGITAL CURRENCIES</h2>
 
-        <script>
+				<p>Buy, hold & trade leading digital assets</p>
 
-
-            /* ========= PERSISTED STATE ========= */
-            const STORAGE_KEY = "cryptoAppState";
-
-            const defaultState = {
-                walletBalance: 6000,
-                holdings: {},
-                transactions: []
-            };
-
-            let appState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
-
-            // LOAD SAVED DATA
-            let holdings = JSON.parse(localStorage.getItem("holdings")) || {};
-            let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
-            let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+			</div>
 
 
 
-            let selectedCrypto = null;
-            let tradeType = null;
+			<div class="crypto-grid" id="cryptoGrid"></div>
 
-            // let walletBalance = 6000; // you control this
+		</div>
 
-            // const holdings = {
-            // 	BTC: 1500,
-            // 	ETH: 1000,
-            // 	USDT: 2000,
-            // 	BNB: 0,
-            // 	SOL: 0,
-            // 	XRP: 600,
-            // 	ADA: 0,
-            // 	DOGE: 0
-            // };
+		<script>
 
 
-            // Crypto data
-            const cryptos = [
-                { name: "Bitcoin", symbol: "BTC", price: 65420, change: 2.4, img: "https://cryptologos.cc/logos/bitcoin-btc-logo.png" },
-                { name: "Ethereum", symbol: "ETH", price: 3450, change: -1.1, img: "https://cryptologos.cc/logos/ethereum-eth-logo.png" },
-                { name: "Tether", symbol: "USDT", price: 1.00, change: 0.0, img: "https://cryptologos.cc/logos/tether-usdt-logo.png" },
-                { name: "BNB", symbol: "BNB", price: 420, change: 1.9, img: "https://cryptologos.cc/logos/bnb-bnb-logo.png" },
-                { name: "Solana", symbol: "SOL", price: 98.6, change: 3.2, img: "https://cryptologos.cc/logos/solana-sol-logo.png" },
-                { name: "XRP", symbol: "XRP", price: 0.63, change: -0.8, img: "https://cryptologos.cc/logos/xrp-xrp-logo.png" },
-                { name: "Cardano", symbol: "ADA", price: 0.52, change: 1.1, img: "https://cryptologos.cc/logos/cardano-ada-logo.png" },
-                { name: "Dogecoin", symbol: "DOGE", price: 0.087, change: -0.4, img: "https://cryptologos.cc/logos/dogecoin-doge-logo.png" }
-            ];
+			/* ========= PERSISTED STATE ========= */
+			const STORAGE_KEY = "cryptoAppState";
 
-            const grid = document.getElementById("cryptoGrid");
-            const historyBody = document.getElementById("transactionHistory");
+			const defaultState = {
+				walletBalance: 6000,
+				holdings: {},
+				transactions: []
+			};
 
-            function saveState() {
-                appState.walletBalance = walletBalance;
-                appState.holdings = holdings;
-                appState.transactions = transactions;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-            }
+			let appState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
+
+			// LOAD SAVED DATA
+			let holdings = JSON.parse(localStorage.getItem("holdings")) || {};
+			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+			let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
 
-            cryptos.forEach(c => {
+
+			let selectedCrypto = null;
+			let tradeType = null;
+
+			// let walletBalance = 6000; // you control this
+
+			// const holdings = {
+			// 	BTC: 1500,
+			// 	ETH: 1000,
+			// 	USDT: 2000,
+			// 	BNB: 0,
+			// 	SOL: 0,
+			// 	XRP: 600,
+			// 	ADA: 0,
+			// 	DOGE: 0
+			// };
 
 
-                const card = document.createElement("div");
-                card.className = "crypto-card";
+			// Crypto data
+			const cryptos = [
+				{ name: "Bitcoin", symbol: "BTC", price: 65420, change: 2.4, img: "https://cryptologos.cc/logos/bitcoin-btc-logo.png" },
+				{ name: "Ethereum", symbol: "ETH", price: 3450, change: -1.1, img: "https://cryptologos.cc/logos/ethereum-eth-logo.png" },
+				{ name: "Tether", symbol: "USDT", price: 1.00, change: 0.0, img: "https://cryptologos.cc/logos/tether-usdt-logo.png" },
+				{ name: "BNB", symbol: "BNB", price: 420, change: 1.9, img: "https://cryptologos.cc/logos/bnb-bnb-logo.png" },
+				{ name: "Solana", symbol: "SOL", price: 98.6, change: 3.2, img: "https://cryptologos.cc/logos/solana-sol-logo.png" },
+				{ name: "XRP", symbol: "XRP", price: 0.63, change: -0.8, img: "https://cryptologos.cc/logos/xrp-xrp-logo.png" },
+				{ name: "Cardano", symbol: "ADA", price: 0.52, change: 1.1, img: "https://cryptologos.cc/logos/cardano-ada-logo.png" },
+				{ name: "Dogecoin", symbol: "DOGE", price: 0.087, change: -0.4, img: "https://cryptologos.cc/logos/dogecoin-doge-logo.png" }
+			];
 
-                card.innerHTML = `
+			const grid = document.getElementById("cryptoGrid");
+			const historyBody = document.getElementById("transactionHistory");
+
+			function saveState() {
+				appState.walletBalance = walletBalance;
+				appState.holdings = holdings;
+				appState.transactions = transactions;
+				localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+			}
+
+
+			cryptos.forEach(c => {
+
+
+				const card = document.createElement("div");
+				card.className = "crypto-card";
+
+				card.innerHTML = `
     <div class="crypto-top">
       <img src="${c.img}">
       <strong>${c.name} (${c.symbol})</strong>
@@ -1100,234 +1098,234 @@
     </div>
   `;
 
-                grid.appendChild(card);
-            });
+				grid.appendChild(card);
+			});
 
-            function openTrade(symbol, type) {
-                selectedCrypto = symbol;
-                tradeType = type;
+			function openTrade(symbol, type) {
+				selectedCrypto = symbol;
+				tradeType = type;
 
-                document.getElementById("tradeTitle").innerText =
-                    `${type} ${symbol}`;
-                document.getElementById("tradeAmount").value = "";
-                document.getElementById("tradeModal").style.display = "flex";
-            }
+				document.getElementById("tradeTitle").innerText =
+					`${type} ${symbol}`;
+				document.getElementById("tradeAmount").value = "";
+				document.getElementById("tradeModal").style.display = "flex";
+			}
 
-            function closeTrade() {
-                document.getElementById("tradeModal").style.display = "none";
-            }
+			function closeTrade() {
+				document.getElementById("tradeModal").style.display = "none";
+			}
 
-            function confirmTrade() {
-                const amount = parseFloat(document.getElementById("tradeAmount").value);
-                if (!amount || amount <= 0) return alert("Enter a valid amount");
+			function confirmTrade() {
+				const amount = parseFloat(document.getElementById("tradeAmount").value);
+				if (!amount || amount <= 0) return alert("Enter a valid amount");
 
-                if (tradeType === "Buy") {
-                    if (walletBalance < amount) {
-                        alert("Insufficient balance");
-                        return;
-                    }
-                    holdings[selectedCrypto] += amount;
-                    walletBalance -= amount;
-                } else {
-                    if (holdings[selectedCrypto] < amount) {
-                        alert("Insufficient asset balance");
-                        return;
-                    }
-                    holdings[selectedCrypto] -= amount;
-                    walletBalance += amount;
-                }
+				if (tradeType === "Buy") {
+					if (walletBalance < amount) {
+						alert("Insufficient balance");
+						return;
+					}
+					holdings[selectedCrypto] += amount;
+					walletBalance -= amount;
+				} else {
+					if (holdings[selectedCrypto] < amount) {
+						alert("Insufficient asset balance");
+						return;
+					}
+					holdings[selectedCrypto] -= amount;
+					walletBalance += amount;
+				}
 
-                // SAVE ONCE
-                localStorage.setItem("holdings", JSON.stringify(holdings));
-                localStorage.setItem("walletBalance", walletBalance);
+				// SAVE ONCE
+				localStorage.setItem("holdings", JSON.stringify(holdings));
+				localStorage.setItem("walletBalance", walletBalance);
 
-                // UPDATE UI
-                document.getElementById(`holding-${selectedCrypto}`).innerText =
-                    `Your Investment: $${holdings[selectedCrypto].toFixed(2)}`;
+				// UPDATE UI
+				document.getElementById(`holding-${selectedCrypto}`).innerText =
+					`Your Investment: $${holdings[selectedCrypto].toFixed(2)}`;
 
-                document.getElementById("walletBalance").innerText =
-                    `Balance: $${walletBalance.toLocaleString()}`;
+				document.getElementById("walletBalance").innerText =
+					`Balance: $${walletBalance.toLocaleString()}`;
 
-                addTransaction(selectedCrypto, tradeType, amount);
-                showReceipt(selectedCrypto, tradeType, amount);
-                closeTrade();
-            }
+				addTransaction(selectedCrypto, tradeType, amount);
+				showReceipt(selectedCrypto, tradeType, amount);
+				closeTrade();
+			}
 
 
 
-            function addTransaction(symbol, type, amount) {
-                const transaction = {
-                    date: new Date().toLocaleString(),
-                    symbol,
-                    type,
-                    amount
-                };
+			function addTransaction(symbol, type, amount) {
+				const transaction = {
+					date: new Date().toLocaleString(),
+					symbol,
+					type,
+					amount
+				};
 
-                transactions.unshift(transaction);
-                renderTransactions();
-                saveState();
-            }
+				transactions.unshift(transaction);
+				renderTransactions();
+				saveState();
+			}
 
-            function renderTransactions() {
-                const tbody = document.getElementById("transactionBody");
-                tbody.innerHTML = "";
+			function renderTransactions() {
+				const tbody = document.getElementById("transactionBody");
+				tbody.innerHTML = "";
 
-                if (transactions.length === 0) {
-                    tbody.innerHTML = `
+				if (transactions.length === 0) {
+					tbody.innerHTML = `
 			<tr id="no-transactions">
 				<td colspan="4">No transactions yet</td>
 			</tr>
 		`;
-                    return;
-                }
+					return;
+				}
 
-                transactions.forEach(t => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
+				transactions.forEach(t => {
+					const row = document.createElement("tr");
+					row.innerHTML = `
 			<td>${t.date}</td>
 			<td>${t.symbol}</td>
 			<td class="${t.type === 'Buy' ? 'buy' : 'sell'}">${t.type}</td>
 			<td>$${t.amount.toFixed(2)}</td>
 		`;
-                    tbody.appendChild(row);
-                });
-            }
+					tbody.appendChild(row);
+				});
+			}
 
-            // Restore wallet UI
-            document.getElementById("walletBalance").innerText =
-                `Balance: $${walletBalance.toLocaleString()}`;
+			// Restore wallet UI
+			document.getElementById("walletBalance").innerText =
+				`Balance: $${walletBalance.toLocaleString()}`;
 
-            // Restore holdings UI
+			// Restore holdings UI
 
-            cryptos.forEach(c => {
-                if (holdings[c.symbol] === undefined) {
-                    holdings[c.symbol] = 0; // just create key, NO addition
-                }
+			cryptos.forEach(c => {
+				if (holdings[c.symbol] === undefined) {
+					holdings[c.symbol] = 0; // just create key, NO addition
+				}
 
-                const el = document.getElementById(`holding-${c.symbol}`);
-                if (el) {
-                    el.innerText = `Your Investment: $${holdings[c.symbol].toFixed(2)}`;
-                }
-            });
-
-
+				const el = document.getElementById(`holding-${c.symbol}`);
+				if (el) {
+					el.innerText = `Your Investment: $${holdings[c.symbol].toFixed(2)}`;
+				}
+			});
 
 
 
 
-            // Restore transaction history
-            renderTransactions();
+
+
+			// Restore transaction history
+			renderTransactions();
 
 
 
-        </script>
+		</script>
 
 
-        <div class="transaction-section">
-            <h3>Transaction History</h3>
+		<div class="transaction-section">
+			<h3>Transaction History</h3>
 
-            <table class="transaction-table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Asset</th>
-                        <th>Type</th>
-                        <th>Amount ($)</th>
-                    </tr>
-                </thead>
-                <tbody id="transactionBody">
-                    <tr id="no-transactions">
-                        <td colspan="4">No transactions yet</td>
-                    </tr>
-                </tbody>
-            </table>
+			<table class="transaction-table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Asset</th>
+						<th>Type</th>
+						<th>Amount ($)</th>
+					</tr>
+				</thead>
+				<tbody id="transactionBody">
+					<tr id="no-transactions">
+						<td colspan="4">No transactions yet</td>
+					</tr>
+				</tbody>
+			</table>
 
-        </div>
-
-
+		</div>
 
 
-        <!-- Main Footer -->
-        <style>
-            .footer-widget * {
-                color: white !important;
-            }
-
-            .main-footer {
-                background-color: #1F1B44;
-            }
-        </style>
-        <footer class="main-footer">
-            <div class="auto-container">
-                <!--Widgets Section-->
-                <div class="widgets-section">
-                    <div class="row clearfix">
-                        <!-- Column -->
-                        <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
-                            <div class="row clearfix">
-                                <!-- Footer Column -->
-                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                    <div class="footer-widget logo-widget">
-
-                                        <div class="call">
-                                            Call us directly
-                                            <a class="phone" href="#">+19189173462</a>
-                                            <a class="email"
-                                                href="mailto:info@citadelcreditunion.com">info@citadelcreditunion.com</a>
-                                        </div>
-
-                                        <div id="google_translate_element" style="height:0px!important;">
-                                        </div>
 
 
-                                    </div>
+		<!-- Main Footer -->
+		<style>
+			.footer-widget * {
+				color: white !important;
+			}
 
-                                </div>
+			.main-footer {
+				background-color: #1F1B44;
+			}
+		</style>
+		<footer class="main-footer">
+			<div class="auto-container">
+				<!--Widgets Section-->
+				<div class="widgets-section">
+					<div class="row clearfix">
+						<!-- Column -->
+						<div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+							<div class="row clearfix">
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget logo-widget">
+
+										<div class="call">
+											Call us directly
+											<a class="phone" href="#">+19189173462</a>
+											<a class="email"
+												href="mailto:info@citadelcreditunion.com">info@citadelcreditunion.com</a>
+										</div>
+
+										<div id="google_translate_element" style="height:0px!important;">
+										</div>
 
 
-                                <!-- Footer Column -->
-                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                    <div class="footer-widget links-widget">
-                                        <h5>Services</h5>
-                                        <ul class="list-link">
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">Working Loans</a></li>
-                                            <li><a href="#">Ultimate Checking</a></li>
-                                            <!-- <li><a href="https://creditunionfincorp.com/p/business-term-loans">Business Saving</a></li>
+									</div>
+
+								</div>
+
+
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget links-widget">
+										<h5>Services</h5>
+										<ul class="list-link">
+											<li><a href="#">About Us</a></li>
+											<li><a href="#">Working Loans</a></li>
+											<li><a href="#">Ultimate Checking</a></li>
+											<!-- <li><a href="https://creditunionfincorp.com/p/business-term-loans">Business Saving</a></li>
                                        <li><a href="https://creditunionfincorp.com/p/online-banking">Online Banking Us</a></li> -->
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
 
-                        <!-- Column -->
-                        <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
-                            <div class="row clearfix">
-                                <!-- Footer Column -->
-                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                    <div class="footer-widget links-widget">
-                                        <h5>Quick Links</h5>
-                                        <ul class="list-link">
-                                            <li><a href="#">Business Account</a></li>
-                                            <li><a href="#">Lost Card</a></li>
-                                            <li><a href="#">Health Savings</a></li>
-                                            <!-- <li><a href="https://creditunionfincorp.com/p/home-mortgage-loans">Home Mortgage</a></li>
+						<!-- Column -->
+						<div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+							<div class="row clearfix">
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget links-widget">
+										<h5>Quick Links</h5>
+										<ul class="list-link">
+											<li><a href="#">Business Account</a></li>
+											<li><a href="#">Lost Card</a></li>
+											<li><a href="#">Health Savings</a></li>
+											<!-- <li><a href="https://creditunionfincorp.com/p/home-mortgage-loans">Home Mortgage</a></li>
                                        <li><a href="https://creditunionfincorp.com/p/wire-transfers">Wire Transfers</a></li> -->
-                                        </ul>
-                                    </div>
-                                </div>
+										</ul>
+									</div>
+								</div>
 
-                                <!-- Footer Column -->
-                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                                    <div class="footer-widget newsletter-widget">
-                                        <h5>Our Newsletter</h5>
-                                        <div class="text">
-                                            Subscribe to our newsletter and we will inform you about
-                                            latest updates and offers
-                                        </div>
-                                        <!-- Newsletter Form -->
-                                        <!-- <div class="newsletter-form">
+								<!-- Footer Column -->
+								<div class="footer-column col-lg-6 col-md-6 col-sm-12">
+									<div class="footer-widget newsletter-widget">
+										<h5>Our Newsletter</h5>
+										<div class="text">
+											Subscribe to our newsletter and we will inform you about
+											latest updates and offers
+										</div>
+										<!-- Newsletter Form -->
+										<!-- <div class="newsletter-form">
                                        <form method="post">
                                            <div class="form-group">
                                                <input type="email" name="email" value="" placeholder="Email Address..." required />
@@ -1335,309 +1333,309 @@
                                            </div>
                                        </form>
                                    </div> -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
-                <!-- Footer Bottom -->
-                <div class="footer-bottom">
-                    <div class="auto-container">
-                        <div class="bottom-inner">
-                            <div class="row clearfix">
-                                <div class="col-lg-8 col-md-12 col-sm-12">
-                                    <div class="copyright">
-                                        © 2025 <strong>Citadel Credit Union</strong>
-                                    </div>
-                                </div>
+				<!-- Footer Bottom -->
+				<div class="footer-bottom">
+					<div class="auto-container">
+						<div class="bottom-inner">
+							<div class="row clearfix">
+								<div class="col-lg-8 col-md-12 col-sm-12">
+									<div class="copyright">
+										© 2025 <strong>Citadel Credit Union</strong>
+									</div>
+								</div>
 
-                                <div class="col-lg-4 col-md-12 col-sm-12">
-                                    <ul class="social-nav">
-                                        <li>
-                                            <a href="#" class="icofont-twitter"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="icofont-facebook"></a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="icofont-instagram"></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <!--End pagewrapper-->
-
-
-
-    <!-- Scroll To Top -->
-    <div class="scroll-to-top scroll-to-target" data-target="html">
-        <span class="fa fa-arrow-circle-up"></span>
-    </div>
-
-    <script src="https://creditunionfincorp.com/front/js/jquery.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/popper.min.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/bootstrap.min.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/jquery.fancybox.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/appear.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/owl.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/wow.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/validate.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/jquery-ui.js"></script>
-    <script src="https://creditunionfincorp.com/front/js/script.js"></script>
+								<div class="col-lg-4 col-md-12 col-sm-12">
+									<ul class="social-nav">
+										<li>
+											<a href="#" class="icofont-twitter"></a>
+										</li>
+										<li>
+											<a href="#" class="icofont-facebook"></a>
+										</li>
+										<li>
+											<a href="#" class="icofont-instagram"></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<!--End pagewrapper-->
 
 
 
-    <script>
-        const withdrawModal = document.getElementById("withdrawModal");
-        const receiptModal = document.getElementById("receiptModal");
-    </script>
+	<!-- Scroll To Top -->
+	<div class="scroll-to-top scroll-to-target" data-target="html">
+		<span class="fa fa-arrow-circle-up"></span>
+	</div>
+
+	<script src="https://creditunionfincorp.com/front/js/jquery.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/popper.min.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/bootstrap.min.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/jquery.mCustomScrollbar.concat.min.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/jquery.fancybox.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/appear.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/owl.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/wow.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/validate.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/jquery-ui.js"></script>
+	<script src="https://creditunionfincorp.com/front/js/script.js"></script>
 
 
+
+	<script>
+		const withdrawModal = document.getElementById("withdrawModal");
+		const receiptModal = document.getElementById("receiptModal");
+	</script>
 
 
 
 
-    <!-- WITHDRAWAL MODAL -->
-    <div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;
+
+
+	<!-- WITHDRAWAL MODAL -->
+	<div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;
       width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
-        <div style="background:#fff;max-width:400px;margin:10% auto;
+		<div style="background:#fff;max-width:400px;margin:10% auto;
       padding:25px;border-radius:12px;">
-            <h3>Withdraw Funds</h3>
-            <input id="withdrawAmount" class="form-control" placeholder="Amount (USD)">
-            <br>
-            <button type="button" class="theme-btn btn-style-one" onclick="withdrawFunds()">
-                SUBMIT
-            </button>
-            <p style="cursor:pointer;margin-top:10px" onclick="closeWithdraw()">Cancel</p>
-        </div>
-    </div>
+			<h3>Withdraw Funds</h3>
+			<input id="withdrawAmount" class="form-control" placeholder="Amount (USD)">
+			<br>
+			<button type="button" class="theme-btn btn-style-one" onclick="withdrawFunds()">
+				SUBMIT
+			</button>
+			<p style="cursor:pointer;margin-top:10px" onclick="closeWithdraw()">Cancel</p>
+		</div>
+	</div>
 
 
-    <!-- WALLET MODAL -->
+	<!-- WALLET MODAL -->
 
-    <div id="walletModal" style="display:none;position:fixed;top:0;left:0;
+	<div id="walletModal" style="display:none;position:fixed;top:0;left:0;
   width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
-        <div style="background:#fff;max-width:400px;margin:10% auto;
+		<div style="background:#fff;max-width:400px;margin:10% auto;
   padding:25px;border-radius:12px;">
-            <h3>Fund Wallet</h3>
-            <input id="fundAmount" class="form-control" placeholder="Amount (USD)">
-            <br>
-            <button class="theme-btn btn-style-one" onclick="goToPayment()">
-                <strong>ADD FUNDS</strong>
-            </button>
+			<h3>Fund Wallet</h3>
+			<input id="fundAmount" class="form-control" placeholder="Amount (USD)">
+			<br>
+			<button class="theme-btn btn-style-one" onclick="goToPayment()">
+				<strong>ADD FUNDS</strong>
+			</button>
 
-            <p style="cursor:pointer;margin-top:10px" onclick="closeWallet()">Cancel</p>
-        </div>
-    </div>
+			<p style="cursor:pointer;margin-top:10px" onclick="closeWallet()">Cancel</p>
+		</div>
+	</div>
 
-    <!-- TRADE MODAL -->
-    <div id="tradeModal" class="trade-modal">
-        <div class="trade-box">
-            <h3 id="tradeTitle"></h3>
+	<!-- TRADE MODAL -->
+	<div id="tradeModal" class="trade-modal">
+		<div class="trade-box">
+			<h3 id="tradeTitle"></h3>
 
-            <label>Amount (USD)</label>
-            <input type="number" id="tradeAmount" placeholder="Enter amount" min="1">
+			<label>Amount (USD)</label>
+			<input type="number" id="tradeAmount" placeholder="Enter amount" min="1">
 
-            <div class="trade-actions">
-                <button onclick="confirmTrade()">Proceed</button>
-                <button class="cancel" onclick="closeTrade()">Cancel</button>
-            </div>
-            <div id="tradeFeedback" class="trade-feedback"></div>
+			<div class="trade-actions">
+				<button onclick="confirmTrade()">Proceed</button>
+				<button class="cancel" onclick="closeTrade()">Cancel</button>
+			</div>
+			<div id="tradeFeedback" class="trade-feedback"></div>
 
-            <div id="successCheck" class="success-check">✔</div>
+			<div id="successCheck" class="success-check">✔</div>
 
-        </div>
-    </div>
+		</div>
+	</div>
 
-    <!-- RECEIPT MODAL -->
-    <div id="receiptModal" class="receipt-overlay">
-        <div class="receipt-box">
+	<!-- RECEIPT MODAL -->
+	<div id="receiptModal" class="receipt-overlay">
+		<div class="receipt-box">
 
-            <!-- BRAND HEADER -->
-            <div class="receipt-header">
-                <img src="img/citadel.jpg" alt="Company Logo">
-                <h4>CITADEL CREDIT UNION</h4>
-                <p>A Fortress for Your Investments</p>
-            </div>
+			<!-- BRAND HEADER -->
+			<div class="receipt-header">
+				<img src="img/citadel.jpg" alt="Company Logo">
+				<h4>CITADEL CREDIT UNION</h4>
+				<p>A Fortress for Your Investments</p>
+			</div>
 
-            <!-- WATERMARK -->
-            <div class="receipt-watermark">CITADEL</div>
+			<!-- WATERMARK -->
+			<div class="receipt-watermark">CITADEL</div>
 
-            <h3>Transaction Receipt</h3>
+			<h3>Transaction Receipt</h3>
 
-            <div class="receipt-row"><span>Transaction ID:</span> <span id="r-id"></span></div>
-            <div class="receipt-row"><span>Date:</span> <span id="r-date"></span></div>
-            <div class="receipt-row"><span>Asset:</span> <span id="r-asset"></span></div>
-            <div class="receipt-row"><span>Type:</span> <span id="r-type"></span></div>
-            <div class="receipt-row"><span>Amount:</span> <span id="r-amount"></span></div>
-            <div class="receipt-row"><span>Wallet Balance:</span> <span id="r-balance"></span></div>
+			<div class="receipt-row"><span>Transaction ID:</span> <span id="r-id"></span></div>
+			<div class="receipt-row"><span>Date:</span> <span id="r-date"></span></div>
+			<div class="receipt-row"><span>Asset:</span> <span id="r-asset"></span></div>
+			<div class="receipt-row"><span>Type:</span> <span id="r-type"></span></div>
+			<div class="receipt-row"><span>Amount:</span> <span id="r-amount"></span></div>
+			<div class="receipt-row"><span>Wallet Balance:</span> <span id="r-balance"></span></div>
 
-            <div class="receipt-status success">✔ Transaction Successful</div>
+			<div class="receipt-status success">✔ Transaction Successful</div>
 
-            <!-- FOOTER -->
-            <div class="receipt-footer">
-                This receipt confirms a completed digital asset transaction.
-            </div>
+			<!-- FOOTER -->
+			<div class="receipt-footer">
+				This receipt confirms a completed digital asset transaction.
+			</div>
 
-            <button onclick="closeReceipt()">Done</button>
-        </div>
-    </div>
+			<button onclick="closeReceipt()">Done</button>
+		</div>
+	</div>
 
-    <script>
-        // 🔒 HARD-CODED LOGIN DETAILS
-        const USERNAME = "admin";
-        const EMAIL = "billionaire@gmail.com";
-        const PASSWORD = "12345678";
-
-
-
-
-        function login() {
-            const user = document.getElementById("loginUser").value.trim();
-            const pass = document.getElementById("loginPass").value.trim();
-            const error = document.getElementById("loginError");
-
-            if (
-                (user === "admin" || user === "billionaire@gmail.com") &&
-                pass === "12345678"
-            ) {
-                // ✅ SAVE LOGIN STATE
-                sessionStorage.setItem("isLoggedIn", "true");
-
-                document.getElementById("authOverlay").style.display = "none";
-                document.getElementById("siteContent").style.display = "block";
-                document.body.classList.remove("locked");
-
-                window.scrollTo(0, 0);
-            } else {
-                error.textContent = "Invalid login details";
-            }
-        }
-
-
-        document.addEventListener("DOMContentLoaded", function () {
-            const loggedIn = sessionStorage.getItem("isLoggedIn");
-
-            if (loggedIn === "true") {
-                document.getElementById("authOverlay").style.display = "none";
-                document.getElementById("siteContent").style.display = "block";
-                document.body.classList.remove("locked");
-            } else {
-                document.getElementById("authOverlay").style.display = "flex";
-                document.getElementById("siteContent").style.display = "none";
-                document.body.classList.add("locked");
-            }
-        });
-
-
-        function generateTransactionId() {
-            return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-        }
-
-        function showReceipt(asset, type, amount) {
-            document.getElementById("r-id").innerText = generateTransactionId();
-            document.getElementById("r-date").innerText = new Date().toLocaleString();
-            document.getElementById("r-asset").innerText = asset;
-            document.getElementById("r-type").innerText = type;
-            document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
-            document.getElementById("r-balance").innerText =
-                `$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-
-            document.getElementById("receiptModal").style.display = "flex";
-        }
-
-        function closeReceipt() {
-            document.getElementById("receiptModal").style.display = "none";
-        }
-
-
-        // function fluctuatePrices() {
-        // 	cryptos.forEach(c => {
-        // 		const change = (Math.random() - 0.5) * 2; // -1% to +1%
-        // 		c.price += c.price * (change / 100);
-        // 		c.change = change.toFixed(2);
-
-        // 		document.getElementById(`price-${c.symbol}`).innerText =
-        // 			`$${c.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-
-        // 		document.getElementById(`change-${c.symbol}`).innerText =
-        // 			`${change >= 0 ? '+' : ''}${change}%`;
-
-        // 		updateProfitLoss(c.symbol, c.price);
-        // 	});
-        // }
-
-        // setInterval(fluctuatePrices, 5000);
+	<script>
+		// 🔒 HARD-CODED LOGIN DETAILS
+		const USERNAME = "admin";
+		const EMAIL = "billionaire@gmail.com";
+		const PASSWORD = "12345678";
 
 
 
-    </script>
+
+		function login() {
+			const user = document.getElementById("loginUser").value.trim();
+			const pass = document.getElementById("loginPass").value.trim();
+			const error = document.getElementById("loginError");
+
+			if (
+				(user === "admin" || user === "billionaire@gmail.com") &&
+				pass === "12345678"
+			) {
+				// ✅ SAVE LOGIN STATE
+				sessionStorage.setItem("isLoggedIn", "true");
+
+				document.getElementById("authOverlay").style.display = "none";
+				document.getElementById("siteContent").style.display = "block";
+				document.body.classList.remove("locked");
+
+				window.scrollTo(0, 0);
+			} else {
+				error.textContent = "Invalid login details";
+			}
+		}
 
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Get all mobile dropdown buttons
-            const dropdownBtns = document.querySelectorAll(".mobile-menu .dropdown-btn");
+		document.addEventListener("DOMContentLoaded", function () {
+			const loggedIn = sessionStorage.getItem("isLoggedIn");
 
-            dropdownBtns.forEach(function (btn) {
-                btn.addEventListener("click", function (e) {
-                    // Prevent default behavior
-                    e.preventDefault();
-
-                    // Find the parent LI
-                    const parentLi = btn.parentElement;
-
-                    // Toggle the submenu
-                    const submenu = parentLi.querySelector("ul");
-                    if (submenu) {
-                        // Close other open submenus
-                        parentLi.parentElement.querySelectorAll("ul.open").forEach(function (ul) {
-                            if (ul !== submenu) ul.classList.remove("open");
-                        });
-                        // Toggle current submenu
-                        submenu.classList.toggle("open");
-                    }
-
-                    // Toggle arrow icon rotation
-                    btn.querySelector("span").classList.toggle("rotated");
-                });
-            });
-        });
-    </script>
+			if (loggedIn === "true") {
+				document.getElementById("authOverlay").style.display = "none";
+				document.getElementById("siteContent").style.display = "block";
+				document.body.classList.remove("locked");
+			} else {
+				document.getElementById("authOverlay").style.display = "flex";
+				document.getElementById("siteContent").style.display = "none";
+				document.body.classList.add("locked");
+			}
+		});
 
 
-    <!-- This sends the amount to payment.html -->
-    <script>
-        function openWallet() { walletModal.style.display = 'block'; }
-        function closeWallet() { walletModal.style.display = 'none'; }
+		function generateTransactionId() {
+			return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+		}
+
+		function showReceipt(asset, type, amount) {
+			document.getElementById("r-id").innerText = generateTransactionId();
+			document.getElementById("r-date").innerText = new Date().toLocaleString();
+			document.getElementById("r-asset").innerText = asset;
+			document.getElementById("r-type").innerText = type;
+			document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
+			document.getElementById("r-balance").innerText =
+				`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+
+			document.getElementById("receiptModal").style.display = "flex";
+		}
+
+		function closeReceipt() {
+			document.getElementById("receiptModal").style.display = "none";
+		}
 
 
-        function goToPayment() {
-            const amount = document.getElementById("fundAmount").value;
+		// function fluctuatePrices() {
+		// 	cryptos.forEach(c => {
+		// 		const change = (Math.random() - 0.5) * 2; // -1% to +1%
+		// 		c.price += c.price * (change / 100);
+		// 		c.change = change.toFixed(2);
 
-            if (!amount || isNaN(amount) || amount <= 0) {
-                alert("Please enter a valid amount");
-                return;
-            }
+		// 		document.getElementById(`price-${c.symbol}`).innerText =
+		// 			`$${c.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
 
-            // Redirect with amount in URL
-            window.location.href = "payment.html?amount=" + encodeURIComponent(amount);
-        }
-    </script>
+		// 		document.getElementById(`change-${c.symbol}`).innerText =
+		// 			`${change >= 0 ? '+' : ''}${change}%`;
+
+		// 		updateProfitLoss(c.symbol, c.price);
+		// 	});
+		// }
+
+		// setInterval(fluctuatePrices, 5000);
 
 
 
-    <!-- rotation logic -->
-    <!-- How it works (simple explanation)
+	</script>
+
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Get all mobile dropdown buttons
+			const dropdownBtns = document.querySelectorAll(".mobile-menu .dropdown-btn");
+
+			dropdownBtns.forEach(function (btn) {
+				btn.addEventListener("click", function (e) {
+					// Prevent default behavior
+					e.preventDefault();
+
+					// Find the parent LI
+					const parentLi = btn.parentElement;
+
+					// Toggle the submenu
+					const submenu = parentLi.querySelector("ul");
+					if (submenu) {
+						// Close other open submenus
+						parentLi.parentElement.querySelectorAll("ul.open").forEach(function (ul) {
+							if (ul !== submenu) ul.classList.remove("open");
+						});
+						// Toggle current submenu
+						submenu.classList.toggle("open");
+					}
+
+					// Toggle arrow icon rotation
+					btn.querySelector("span").classList.toggle("rotated");
+				});
+			});
+		});
+	</script>
+
+
+	<!-- This sends the amount to payment.html -->
+	<script>
+		function openWallet() { walletModal.style.display = 'block'; }
+		function closeWallet() { walletModal.style.display = 'none'; }
+
+
+		function goToPayment() {
+			const amount = document.getElementById("fundAmount").value;
+
+			if (!amount || isNaN(amount) || amount <= 0) {
+				alert("Please enter a valid amount");
+				return;
+			}
+
+			// Redirect with amount in URL
+			window.location.href = "payment.html?amount=" + encodeURIComponent(amount);
+		}
+	</script>
+
+
+
+	<!-- rotation logic -->
+	<!-- How it works (simple explanation)
 
         First message shows immediately
 
@@ -1647,26 +1645,26 @@
 
         Then it loops forever ♻️ -->
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const items = document.querySelectorAll(".rotating-text");
-            let currentIndex = 0;
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			const items = document.querySelectorAll(".rotating-text");
+			let currentIndex = 0;
 
-            setInterval(() => {
-                items[currentIndex].classList.remove("active");
-                currentIndex = (currentIndex + 1) % items.length;
-                items[currentIndex].classList.add("active");
-            }, 10000); // 10 seconds 
-        });
-    </script>
-
-
+			setInterval(() => {
+				items[currentIndex].classList.remove("active");
+				currentIndex = (currentIndex + 1) % items.length;
+				items[currentIndex].classList.add("active");
+			}, 10000); // 10 seconds 
+		});
+	</script>
 
 
-    <script src="script.js"></script>
 
 
-    </div>
+	<script src="script.js"></script>
+
+
+	</div>
 </body>
 
 </html>
