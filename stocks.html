@@ -1553,7 +1553,8 @@
 
         <div class="receipt-status success">SUCCESSFUL</div>
 
-        <button type="button" onclick="closeReceipt()">Close</button>
+        <button onclick="closeReceipt()">Close</button>
+
 
 
         <div class="receipt-footer">
@@ -1615,33 +1616,7 @@
     }
 
 
-    // let receiptTimer = null;
 
-    function showReceipt({ date, stock, type, amount, balance }) {
-        document.getElementById("rDate").innerText = date;
-        document.getElementById("rStock").innerText = stock;
-        document.getElementById("rType").innerText = type;
-        document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
-        document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
-
-        const overlay = document.getElementById("receiptOverlay");
-        overlay.style.display = "flex";
-
-        document.body.classList.add("locked");
-
-        // ⏱ AUTO-CLOSE after 5 seconds
-        clearTimeout(receiptTimer);
-        receiptTimer = setTimeout(closeReceipt, 5000);
-    }
-
-    function closeReceipt() {
-        const overlay = document.getElementById("receiptOverlay");
-        overlay.style.display = "none";
-
-        document.body.classList.remove("locked");
-
-        clearTimeout(receiptTimer);
-    }
 
 
 
@@ -1759,29 +1734,20 @@
         document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
         document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
 
-        const overlay = document.getElementById("receiptOverlay");
-        overlay.style.display = "flex";
-
+        document.getElementById("receiptOverlay").style.display = "flex";
         document.body.classList.add("locked");
-
-        clearTimeout(receiptTimer);
-        receiptTimer = setTimeout(closeReceipt, 5000);
     }
 
     function closeReceipt() {
-        const overlay = document.getElementById("receiptOverlay");
-        if (!overlay) return;
-
-        overlay.style.display = "none";
+        document.getElementById("receiptOverlay").style.display = "none";
         document.body.classList.remove("locked");
-
-        clearTimeout(receiptTimer);
     }
 
-    /* 🔥 EXPOSE GLOBALLY */
-    window.closeReceipt = closeReceipt;
+    /* 🔑 THIS IS THE KEY FIX */
     window.showReceipt = showReceipt;
+    window.closeReceipt = closeReceipt;
 </script>
+
 
 
 
