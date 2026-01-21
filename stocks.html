@@ -635,7 +635,11 @@
             align-items: center;
             justify-content: center;
             z-index: 9999;
+            pointer-events: auto;
+            z-index: 9999;
         }
+
+
 
         .receipt-box {
             background: #fff;
@@ -1001,50 +1005,50 @@
                                 </div>
 
                                 <div class="navbar-collapse show collapse clearfix" id="navbarSupportedContent">
-									<ul class="navigation clearfix">
-										<li><a href="index.html">Home</a></li>
-										<li class="dropdown">
-											<a href="#">Personal <i class="fa fa-caret-down"></i></a>
-											<ul>
-												<li><a href="stocks.html">Stocks</a></li>
-												<li>
-													<a href="digital-assets.html">Digital Assets</a>
-												</li>
-												<li>
-													<a onclick="openWallet()">Fund Wallet</a>
-												</li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<li class="dropdown">
-											<a href="#">Business <i class="fa fa-caret-down"></i></a>
-											<ul>
-												<li><a href="#">Overdraft
-														Protection &amp; Sweeps</a></li>
-												<li>
-													<a href="#">Business
-														Essential Checking</a>
-												</li>
-												<li>
-													<a href="#">Business
-														Savings Account</a>
-												</li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<li class="dropdown">
-											<a href="#">Loans <i class="fa fa-caret-down"></i></a>
-											<ul class="from-right">
-												<li><a href="#">Home Mortgage Loans</a></li>
-												<li><a href="#">Personal Loans</a></li>
-												<li><a href="#">Working Capital Loans</a></li>
-												<li><a href="#">Investment Property Loans</a></li>
-												<li><a href="#">Commercial Real Estate Loans</a></li>
-												<li><a href="#">Business Term Loans</a></li>
-											</ul>
-											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
-										</li>
-										<!-- <li class="dropdown">
+                                    <ul class="navigation clearfix">
+                                        <li><a href="index.html">Home</a></li>
+                                        <li class="dropdown">
+                                            <a href="#">Personal <i class="fa fa-caret-down"></i></a>
+                                            <ul>
+                                                <li><a href="stocks.html">Stocks</a></li>
+                                                <li>
+                                                    <a href="digital-assets.html">Digital Assets</a>
+                                                </li>
+                                                <li>
+                                                    <a onclick="openWallet()">Fund Wallet</a>
+                                                </li>
+                                            </ul>
+                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#">Business <i class="fa fa-caret-down"></i></a>
+                                            <ul>
+                                                <li><a href="#">Overdraft
+                                                        Protection &amp; Sweeps</a></li>
+                                                <li>
+                                                    <a href="#">Business
+                                                        Essential Checking</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Business
+                                                        Savings Account</a>
+                                                </li>
+                                            </ul>
+                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a href="#">Loans <i class="fa fa-caret-down"></i></a>
+                                            <ul class="from-right">
+                                                <li><a href="#">Home Mortgage Loans</a></li>
+                                                <li><a href="#">Personal Loans</a></li>
+                                                <li><a href="#">Working Capital Loans</a></li>
+                                                <li><a href="#">Investment Property Loans</a></li>
+                                                <li><a href="#">Commercial Real Estate Loans</a></li>
+                                                <li><a href="#">Business Term Loans</a></li>
+                                            </ul>
+                                            <div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
+                                        </li>
+                                        <!-- <li class="dropdown">
 											<a href="#">Services <i class="fa fa-caret-down"></i></a>
 											<ul class="from-right">
 												<li><a href="./creditunionfincorp.html">Ultimate
@@ -1056,11 +1060,11 @@
 											</ul>
 											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
 										</li> -->
-										<li class="current">
-											<a href="#" onclick="logout()">Logout</a>
-										</li>
-									</ul>
-								</div>
+                                        <li class="current">
+                                            <a href="#" onclick="logout()">Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </nav>
                         </div>
                         <!-- Outer Box -->
@@ -1557,7 +1561,8 @@
 
         <div class="receipt-status success">SUCCESSFUL</div>
 
-        <button onclick="closeReceipt()">Close</button>
+        <button type="button" onclick="closeReceipt()">Close</button>
+
 
         <div class="receipt-footer">
             This receipt was generated electronically.
@@ -1618,6 +1623,8 @@
     }
 
 
+    let receiptTimer = null;
+
     function showReceipt({ date, stock, type, amount, balance }) {
         document.getElementById("rDate").innerText = date;
         document.getElementById("rStock").innerText = stock;
@@ -1625,13 +1632,23 @@
         document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
         document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
 
-        document.getElementById("receiptOverlay").style.display = "flex";
+        const overlay = document.getElementById("receiptOverlay");
+        overlay.style.display = "flex";
+
         document.body.classList.add("locked");
+
+        // ⏱ AUTO-CLOSE after 5 seconds
+        clearTimeout(receiptTimer);
+        receiptTimer = setTimeout(closeReceipt, 5000);
     }
 
     function closeReceipt() {
-        document.getElementById("receiptOverlay").style.display = "none";
+        const overlay = document.getElementById("receiptOverlay");
+        overlay.style.display = "none";
+
         document.body.classList.remove("locked");
+
+        clearTimeout(receiptTimer);
     }
 
 
