@@ -634,7 +634,6 @@
             display: none;
             align-items: center;
             justify-content: center;
-            pointer-events: auto;
             z-index: 9999;
         }
 
@@ -1147,15 +1146,6 @@
 
         </div>
 
-        <!-- TRADE MODAL -->
-        <div class="modal" id="tradeModal">
-            <div class="modal-box">
-                <h3 id="tradeTitle"></h3>
-                <input type="number" id="tradeAmount" placeholder="Amount ($)">
-                <button onclick="confirmTrade()">Proceed</button>
-                <button onclick="closeTrade()">Cancel</button>
-            </div>
-        </div>
 
         <script>
             /* -------------------- DATA -------------------- */
@@ -1235,47 +1225,61 @@
             }
 
             function confirmTrade() {
-                const amount = parseFloat(document.getElementById("tradeAmount").value);
-                if (!amount || amount <= 0) return alert("Enter valid amount");
+                try {
+                    const amount = parseFloat(document.getElementById("tradeAmount").value);
+                    if (!amount || amount <= 0) return alert("Enter valid amount");
 
-                if (tradeType === "Buy") {
-                    if (walletBalance < amount) return alert("Insufficient balance");
-                    walletBalance -= amount;
-                    holdings[selectedStock] += amount;
-                } else {
-                    if (holdings[selectedStock] < amount) return alert("Insufficient holdings");
-                    walletBalance += amount;
-                    holdings[selectedStock] -= amount;
+                    if (!holdings[selectedStock]) {
+                        holdings[selectedStock] = 0;
+                    }
+
+                    if (tradeType === "Buy") {
+                        if (walletBalance < amount) return alert("Insufficient balance");
+                        walletBalance -= amount;
+                        holdings[selectedStock] += amount;
+                    } else {
+                        if (holdings[selectedStock] < amount) return alert("Insufficient holdings");
+                        walletBalance += amount;
+                        holdings[selectedStock] -= amount;
+                    }
+
+                    const tx = {
+                        date: new Date().toLocaleString(),
+                        stock: selectedStock,
+                        type: tradeType,
+                        amount
+                    };
+
+                    transactions.unshift(tx);
+                    saveState();
+
+                    const holdingEl = document.getElementById(`holding-${selectedStock}`);
+                    if (holdingEl) {
+                        holdingEl.innerText = `Your Investment: $${holdings[selectedStock].toFixed(2)}`;
+                    }
+
+
+                    showReceipt({
+                        date: tx.date,
+                        stock: tx.stock,
+                        type: tx.type,
+                        amount: tx.amount,
+                        balance: walletBalance
+                    });
+
+                    updateWallet();
+                    renderHistory();
+                    closeTrade();
+
+
+                    document.getElementById("tradeAmount").value = "";
+
+                } catch (err) {
+                    console.error("CONFIRM TRADE ERROR:", err);
+                    alert("Something went wrong. Check console.");
                 }
-
-                const tx = {
-                    date: new Date().toLocaleString(),
-                    stock: selectedStock,
-                    type: tradeType,
-                    amount
-                };
-
-                transactions.unshift(tx);
-                saveState();
-
-                document.getElementById(`holding-${selectedStock}`).innerText =
-                    `Your Investment: $${holdings[selectedStock].toFixed(2)}`;
-
-                updateWallet();
-                renderHistory();
-                closeTrade();
-
-                // 🔥 SHOW RECEIPT
-                showReceipt({
-                    date: tx.date,
-                    stock: tx.stock,
-                    type: tx.type,
-                    amount: tx.amount,
-                    balance: walletBalance
-                });
-
-                document.getElementById("tradeAmount").value = "";
             }
+
 
 
             function renderHistory() {
@@ -1306,92 +1310,114 @@
             }
         </script>
 
-</body>
+        <script>
 
-</html>
+            /* ================= RECEIPT ================= */
+
+            function showReceipt({ date, stock, type, amount, balance }) {
+                document.getElementById("rDate").innerText = date;
+                document.getElementById("rStock").innerText = stock;
+                document.getElementById("rType").innerText = type;
+                document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
+                document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
+
+                document.getElementById("receiptOverlay").style.display = "flex";
+                document.body.classList.add("locked");
+            }
+
+            function closeReceipt() {
+                document.getElementById("receiptOverlay").style.display = "none";
+                document.body.classList.remove("locked");
+            }
 
 
-<!-- Main Footer -->
-<style>
-    .footer-widget * {
-        color: white !important;
-    }
+            /* 🔑 THIS IS THE KEY FIX */
+            window.showReceipt = showReceipt;
+            window.closeReceipt = closeReceipt;
+        </script>
 
-    .main-footer {
-        background-color: #1F1B44;
-    }
-</style>
-<footer class="main-footer">
-    <div class="auto-container">
-        <!--Widgets Section-->
-        <div class="widgets-section">
-            <div class="row clearfix">
-                <!-- Column -->
-                <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+
+        <!-- Main Footer -->
+        <style>
+            .footer-widget * {
+                color: white !important;
+            }
+
+            .main-footer {
+                background-color: #1F1B44;
+            }
+        </style>
+        <footer class="main-footer">
+            <div class="auto-container">
+                <!--Widgets Section-->
+                <div class="widgets-section">
                     <div class="row clearfix">
-                        <!-- Footer Column -->
-                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                            <div class="footer-widget logo-widget">
+                        <!-- Column -->
+                        <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+                            <div class="row clearfix">
+                                <!-- Footer Column -->
+                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                                    <div class="footer-widget logo-widget">
 
-                                <div class="call">
-                                    Call us directly
-                                    <a class="phone" href="#">+19189173462</a>
-                                    <a class="email"
-                                        href="mailto:info@citadelcreditunion.com">info@citadelcreditunion.com</a>
+                                        <div class="call">
+                                            Call us directly
+                                            <a class="phone" href="#">+19189173462</a>
+                                            <a class="email"
+                                                href="mailto:info@citadelcreditunion.com">info@citadelcreditunion.com</a>
+                                        </div>
+
+                                        <div id="google_translate_element" style="height:0px!important;">
+                                        </div>
+
+
+                                    </div>
+
                                 </div>
 
-                                <div id="google_translate_element" style="height:0px!important;">
-                                </div>
 
-
-                            </div>
-
-                        </div>
-
-
-                        <!-- Footer Column -->
-                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                            <div class="footer-widget links-widget">
-                                <h5>Services</h5>
-                                <ul class="list-link">
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Working Loans</a></li>
-                                    <li><a href="#">Ultimate Checking</a></li>
-                                    <!-- <li><a href="https://creditunionfincorp.com/p/business-term-loans">Business Saving</a></li>
+                                <!-- Footer Column -->
+                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                                    <div class="footer-widget links-widget">
+                                        <h5>Services</h5>
+                                        <ul class="list-link">
+                                            <li><a href="#">About Us</a></li>
+                                            <li><a href="#">Working Loans</a></li>
+                                            <li><a href="#">Ultimate Checking</a></li>
+                                            <!-- <li><a href="https://creditunionfincorp.com/p/business-term-loans">Business Saving</a></li>
                                        <li><a href="https://creditunionfincorp.com/p/online-banking">Online Banking Us</a></li> -->
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Column -->
-                <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
-                    <div class="row clearfix">
-                        <!-- Footer Column -->
-                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                            <div class="footer-widget links-widget">
-                                <h5>Quick Links</h5>
-                                <ul class="list-link">
-                                    <li><a href="#">Business Account</a></li>
-                                    <li><a href="#">Lost Card</a></li>
-                                    <li><a href="#">Health Savings</a></li>
-                                    <!-- <li><a href="https://creditunionfincorp.com/p/home-mortgage-loans">Home Mortgage</a></li>
-                                       <li><a href="https://creditunionfincorp.com/p/wire-transfers">Wire Transfers</a></li> -->
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Footer Column -->
-                        <div class="footer-column col-lg-6 col-md-6 col-sm-12">
-                            <div class="footer-widget newsletter-widget">
-                                <h5>Our Newsletter</h5>
-                                <div class="text">
-                                    Subscribe to our newsletter and we will inform you about
-                                    latest updates and offers
+                                        </ul>
+                                    </div>
                                 </div>
-                                <!-- Newsletter Form -->
-                                <!-- <div class="newsletter-form">
+                            </div>
+                        </div>
+
+                        <!-- Column -->
+                        <div class="big-column col-lg-6 col-md-12 col-sm-6 col-12">
+                            <div class="row clearfix">
+                                <!-- Footer Column -->
+                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                                    <div class="footer-widget links-widget">
+                                        <h5>Quick Links</h5>
+                                        <ul class="list-link">
+                                            <li><a href="#">Business Account</a></li>
+                                            <li><a href="#">Lost Card</a></li>
+                                            <li><a href="#">Health Savings</a></li>
+                                            <!-- <li><a href="https://creditunionfincorp.com/p/home-mortgage-loans">Home Mortgage</a></li>
+                                       <li><a href="https://creditunionfincorp.com/p/wire-transfers">Wire Transfers</a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Footer Column -->
+                                <div class="footer-column col-lg-6 col-md-6 col-sm-12">
+                                    <div class="footer-widget newsletter-widget">
+                                        <h5>Our Newsletter</h5>
+                                        <div class="text">
+                                            Subscribe to our newsletter and we will inform you about
+                                            latest updates and offers
+                                        </div>
+                                        <!-- Newsletter Form -->
+                                        <!-- <div class="newsletter-form">
                                        <form method="post">
                                            <div class="form-group">
                                                <input type="email" name="email" value="" placeholder="Email Address..." required />
@@ -1399,221 +1425,225 @@
                                            </div>
                                        </form>
                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Bottom -->
+                <div class="footer-bottom">
+                    <div class="auto-container">
+                        <div class="bottom-inner">
+                            <div class="row clearfix">
+                                <div class="col-lg-8 col-md-12 col-sm-12">
+                                    <div class="copyright">
+                                        © 2025 <strong>Citadel Credit Union</strong>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4 col-md-12 col-sm-12">
+                                    <ul class="social-nav">
+                                        <li>
+                                            <a href="#" class="icofont-twitter"></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="icofont-facebook"></a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="icofont-instagram"></a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Footer Bottom -->
-        <div class="footer-bottom">
-            <div class="auto-container">
-                <div class="bottom-inner">
-                    <div class="row clearfix">
-                        <div class="col-lg-8 col-md-12 col-sm-12">
-                            <div class="copyright">
-                                © 2025 <strong>Citadel Credit Union</strong>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 col-md-12 col-sm-12">
-                            <ul class="social-nav">
-                                <li>
-                                    <a href="#" class="icofont-twitter"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="icofont-facebook"></a>
-                                </li>
-                                <li>
-                                    <a href="#" class="icofont-instagram"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </footer>
     </div>
-</footer>
-</div>
-<!--End pagewrapper-->
+    <!--End pagewrapper-->
 
 
 
-<!-- Scroll To Top -->
-<div class="scroll-to-top scroll-to-target" data-target="html">
-    <span class="fa fa-arrow-circle-up"></span>
-</div>
+    <!-- Scroll To Top -->
+    <div class="scroll-to-top scroll-to-target" data-target="html">
+        <span class="fa fa-arrow-circle-up"></span>
+    </div>
 
-<script src="https://creditunionfincorp.com/front/js/jquery.js"></script>
-<script src="https://creditunionfincorp.com/front/js/popper.min.js"></script>
-<script src="https://creditunionfincorp.com/front/js/bootstrap.min.js"></script>
-<script src="https://creditunionfincorp.com/front/js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="https://creditunionfincorp.com/front/js/jquery.fancybox.js"></script>
-<script src="https://creditunionfincorp.com/front/js/appear.js"></script>
-<script src="https://creditunionfincorp.com/front/js/owl.js"></script>
-<script src="https://creditunionfincorp.com/front/js/wow.js"></script>
-<script src="https://creditunionfincorp.com/front/js/validate.js"></script>
-<script src="https://creditunionfincorp.com/front/js/jquery-ui.js"></script>
-<script src="https://creditunionfincorp.com/front/js/script.js"></script>
-
-
+    <script src="https://creditunionfincorp.com/front/js/jquery.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/popper.min.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/bootstrap.min.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/jquery.fancybox.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/appear.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/owl.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/wow.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/validate.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/jquery-ui.js"></script>
+    <script src="https://creditunionfincorp.com/front/js/script.js"></script>
 
 
+    <script>
+        const withdrawModal = document.getElementById("withdrawModal");
+        const receiptModal = document.getElementById("receiptModal");
+    </script>
 
 
-<!-- WITHDRAWAL MODAL -->
-<div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;
+
+
+    <!-- WITHDRAWAL MODAL -->
+    <div id="withdrawModal" style="display:none;position:fixed;top:0;left:0;
       width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
-    <div style="background:#fff;max-width:400px;margin:10% auto;
+        <div style="background:#fff;max-width:400px;margin:10% auto;
       padding:25px;border-radius:12px;">
-        <h3>Withdraw Funds</h3>
-        <input id="withdrawAmount" class="form-control" placeholder="Amount (USD)">
-        <br>
-        <button type="button" class="theme-btn btn-style-one" onclick="withdrawFunds()">
-            SUBMIT
-        </button>
-        <p style="cursor:pointer;margin-top:10px" onclick="closeWithdraw()">Cancel</p>
+            <h3>Withdraw Funds</h3>
+            <input id="withdrawAmount" class="form-control" placeholder="Amount (USD)">
+            <br>
+            <button type="button" class="theme-btn btn-style-one" onclick="withdrawFunds()">
+                SUBMIT
+            </button>
+            <p style="cursor:pointer;margin-top:10px" onclick="closeWithdraw()">Cancel</p>
+        </div>
     </div>
-</div>
 
 
-<!-- WALLET MODAL -->
+    <!-- WALLET MODAL -->
 
-<div id="walletModal" style="display:none;position:fixed;top:0;left:0;
+    <div id="walletModal" style="display:none;position:fixed;top:0;left:0;
   width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;">
-    <div style="background:#fff;max-width:400px;margin:10% auto;
+        <div style="background:#fff;max-width:400px;margin:10% auto;
   padding:25px;border-radius:12px;">
-        <h3>Fund Wallet</h3>
-        <input id="fundAmount" class="form-control" placeholder="Amount (USD)">
-        <br>
-        <button class="theme-btn btn-style-one" onclick="goToPayment()">
-            <strong>ADD FUNDS</strong>
-        </button>
+            <h3>Fund Wallet</h3>
+            <input id="fundAmount" class="form-control" placeholder="Amount (USD)">
+            <br>
+            <button class="theme-btn btn-style-one" onclick="goToPayment()">
+                <strong>ADD FUNDS</strong>
+            </button>
 
-        <p style="cursor:pointer;margin-top:10px" onclick="closeWallet()">Cancel</p>
-    </div>
-</div>
-
-<!-- TRADE MODAL -->
-<div id="tradeModal" class="trade-modal">
-    <div class="trade-box">
-        <h3 id="tradeTitle"></h3>
-
-        <label>Amount (USD)</label>
-        <input type="number" id="tradeAmount" placeholder="Enter amount" min="1">
-
-        <div class="trade-actions">
-            <button onclick="confirmTrade()">Proceed</button>
-            <button class="cancel" onclick="closeTrade()">Cancel</button>
-        </div>
-        <div id="tradeFeedback" class="trade-feedback"></div>
-
-        <div id="successCheck" class="success-check">✔</div>
-
-    </div>
-</div>
-
-<!-- RECEIPT MODAL -->
-<div class="receipt-overlay" id="receiptOverlay">
-    <div class="receipt-box">
-        <div class="receipt-watermark">PAID</div>
-
-        <div class="receipt-header">
-            <img src="img/citadel.jpg" alt="logo">
-            <h4>Citadel Credit Union</h4>
-            <p>Transaction Receipt</p>
-        </div>
-
-        <div class="receipt-row">
-            <span>Date</span>
-            <span id="rDate"></span>
-        </div>
-
-        <div class="receipt-row">
-            <span>Stock</span>
-            <span id="rStock"></span>
-        </div>
-
-        <div class="receipt-row">
-            <span>Type</span>
-            <span id="rType"></span>
-        </div>
-
-        <div class="receipt-row">
-            <span>Amount</span>
-            <span id="rAmount"></span>
-        </div>
-
-        <div class="receipt-row">
-            <span>Balance</span>
-            <span id="rBalance"></span>
-        </div>
-
-        <div class="receipt-status success">SUCCESSFUL</div>
-
-        <button onclick="closeReceipt()">Close</button>
-
-
-
-        <div class="receipt-footer">
-            This receipt was generated electronically.
+            <p style="cursor:pointer;margin-top:10px" onclick="closeWallet()">Cancel</p>
         </div>
     </div>
-</div>
+
+    <!-- TRADE MODAL -->
+    <div id="tradeModal" class="trade-modal">
+        <div class="trade-box">
+            <h3 id="tradeTitle"></h3>
+
+            <label>Amount (USD)</label>
+            <input type="number" id="tradeAmount" placeholder="Enter amount" min="1">
+
+            <div class="trade-actions">
+                <button onclick="confirmTrade()">Proceed</button>
+                <button class="cancel" onclick="closeTrade()">Cancel</button>
+            </div>
+            <div id="tradeFeedback" class="trade-feedback"></div>
+
+            <div id="successCheck" class="success-check">✔</div>
+
+        </div>
+    </div>
+
+    <!-- RECEIPT MODAL -->
+    <div class="receipt-overlay" id="receiptOverlay">
+        <div class="receipt-box">
+            <div class="receipt-watermark">PAID</div>
+
+            <div class="receipt-header">
+                <img src="img/citadel.jpg" alt="logo">
+                <h4>CITADEL CREDIT UNION</h4>
+                <p>Transaction Receipt</p>
+            </div>
+
+            <div class="receipt-row">
+                <span>Date</span>
+                <span id="rDate"></span>
+            </div>
+
+            <div class="receipt-row">
+                <span>Stock</span>
+                <span id="rStock"></span>
+            </div>
+
+            <div class="receipt-row">
+                <span>Type</span>
+                <span id="rType"></span>
+            </div>
+
+            <div class="receipt-row">
+                <span>Amount</span>
+                <span id="rAmount"></span>
+            </div>
+
+            <div class="receipt-row">
+                <span>Balance</span>
+                <span id="rBalance"></span>
+            </div>
+
+            <div class="receipt-status success">SUCCESSFUL</div>
+
+            <div class="receipt-footer">
+                This receipt was generated electronically.
+            </div>
+
+            <button onclick="closeReceipt()">Close</button>
+        </div>
+    </div>
 
 
-<script>
-    // 🔒 HARD-CODED LOGIN DETAILS
-    const USERNAME = "admin";
-    const EMAIL = "billionaire@gmail.com";
-    const PASSWORD = "12345678";
+
+
+    <script>
+        // 🔒 HARD-CODED LOGIN DETAILS
+        const USERNAME = "admin";
+        const EMAIL = "billionaire@gmail.com";
+        const PASSWORD = "12345678";
 
 
 
 
-    function login() {
-        const user = document.getElementById("loginUser").value.trim();
-        const pass = document.getElementById("loginPass").value.trim();
-        const error = document.getElementById("loginError");
+        function login() {
+            const user = document.getElementById("loginUser").value.trim();
+            const pass = document.getElementById("loginPass").value.trim();
+            const error = document.getElementById("loginError");
 
-        if (
-            (user === "admin" || user === "billionaire@gmail.com") &&
-            pass === "12345678"
-        ) {
-            // ✅ SAVE LOGIN STATE
-            sessionStorage.setItem("isLoggedIn", "true");
+            if (
+                (user === "admin" || user === "billionaire@gmail.com") &&
+                pass === "12345678"
+            ) {
+                // ✅ SAVE LOGIN STATE
+                sessionStorage.setItem("isLoggedIn", "true");
 
-            document.getElementById("authOverlay").style.display = "none";
-            document.getElementById("siteContent").style.display = "block";
-            document.body.classList.remove("locked");
+                document.getElementById("authOverlay").style.display = "none";
+                document.getElementById("siteContent").style.display = "block";
+                document.body.classList.remove("locked");
 
-            window.scrollTo(0, 0);
-        } else {
-            error.textContent = "Invalid login details";
+                window.scrollTo(0, 0);
+            } else {
+                error.textContent = "Invalid login details";
+            }
         }
-    }
 
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const loggedIn = sessionStorage.getItem("isLoggedIn");
+        document.addEventListener("DOMContentLoaded", function () {
+            const loggedIn = sessionStorage.getItem("isLoggedIn");
 
-        if (loggedIn === "true") {
-            document.getElementById("authOverlay").style.display = "none";
-            document.getElementById("siteContent").style.display = "block";
-            document.body.classList.remove("locked");
-        } else {
-            document.getElementById("authOverlay").style.display = "flex";
-            document.getElementById("siteContent").style.display = "none";
-            document.body.classList.add("locked");
+            if (loggedIn === "true") {
+                document.getElementById("authOverlay").style.display = "none";
+                document.getElementById("siteContent").style.display = "block";
+                document.body.classList.remove("locked");
+            } else {
+                document.getElementById("authOverlay").style.display = "flex";
+                document.getElementById("siteContent").style.display = "none";
+                document.body.classList.add("locked");
+            }
+        });
+
+
+        function generateTransactionId() {
+            return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
         }
-    });
-
-
-    function generateTransactionId() {
-        return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-    }
 
 
 
@@ -1621,84 +1651,84 @@
 
 
 
-    // function fluctuatePrices() {
-    // 	cryptos.forEach(c => {
-    // 		const change = (Math.random() - 0.5) * 2; // -1% to +1%
-    // 		c.price += c.price * (change / 100);
-    // 		c.change = change.toFixed(2);
+        // function fluctuatePrices() {
+        // 	cryptos.forEach(c => {
+        // 		const change = (Math.random() - 0.5) * 2; // -1% to +1%
+        // 		c.price += c.price * (change / 100);
+        // 		c.change = change.toFixed(2);
 
-    // 		document.getElementById(`price-${c.symbol}`).innerText =
-    // 			`$${c.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+        // 		document.getElementById(`price-${c.symbol}`).innerText =
+        // 			`$${c.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
 
-    // 		document.getElementById(`change-${c.symbol}`).innerText =
-    // 			`${change >= 0 ? '+' : ''}${change}%`;
+        // 		document.getElementById(`change-${c.symbol}`).innerText =
+        // 			`${change >= 0 ? '+' : ''}${change}%`;
 
-    // 		updateProfitLoss(c.symbol, c.price);
-    // 	});
-    // }
+        // 		updateProfitLoss(c.symbol, c.price);
+        // 	});
+        // }
 
-    // setInterval(fluctuatePrices, 5000);
-
-
-
-</script>
+        // setInterval(fluctuatePrices, 5000);
 
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Get all mobile dropdown buttons
-        const dropdownBtns = document.querySelectorAll(".mobile-menu .dropdown-btn");
 
-        dropdownBtns.forEach(function (btn) {
-            btn.addEventListener("click", function (e) {
-                // Prevent default behavior
-                e.preventDefault();
+    </script>
 
-                // Find the parent LI
-                const parentLi = btn.parentElement;
 
-                // Toggle the submenu
-                const submenu = parentLi.querySelector("ul");
-                if (submenu) {
-                    // Close other open submenus
-                    parentLi.parentElement.querySelectorAll("ul.open").forEach(function (ul) {
-                        if (ul !== submenu) ul.classList.remove("open");
-                    });
-                    // Toggle current submenu
-                    submenu.classList.toggle("open");
-                }
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Get all mobile dropdown buttons
+            const dropdownBtns = document.querySelectorAll(".mobile-menu .dropdown-btn");
 
-                // Toggle arrow icon rotation
-                btn.querySelector("span").classList.toggle("rotated");
+            dropdownBtns.forEach(function (btn) {
+                btn.addEventListener("click", function (e) {
+                    // Prevent default behavior
+                    e.preventDefault();
+
+                    // Find the parent LI
+                    const parentLi = btn.parentElement;
+
+                    // Toggle the submenu
+                    const submenu = parentLi.querySelector("ul");
+                    if (submenu) {
+                        // Close other open submenus
+                        parentLi.parentElement.querySelectorAll("ul.open").forEach(function (ul) {
+                            if (ul !== submenu) ul.classList.remove("open");
+                        });
+                        // Toggle current submenu
+                        submenu.classList.toggle("open");
+                    }
+
+                    // Toggle arrow icon rotation
+                    btn.querySelector("span").classList.toggle("rotated");
+                });
             });
         });
-    });
-</script>
+    </script>
 
 
-<!-- This sends the amount to payment.html -->
-<script>
-    function openWallet() { walletModal.style.display = 'block'; }
-    function closeWallet() { walletModal.style.display = 'none'; }
+    <!-- This sends the amount to payment.html -->
+    <script>
+        function openWallet() { walletModal.style.display = 'block'; }
+        function closeWallet() { walletModal.style.display = 'none'; }
 
 
-    function goToPayment() {
-        const amount = document.getElementById("fundAmount").value;
+        function goToPayment() {
+            const amount = document.getElementById("fundAmount").value;
 
-        if (!amount || isNaN(amount) || amount <= 0) {
-            alert("Please enter a valid amount");
-            return;
+            if (!amount || isNaN(amount) || amount <= 0) {
+                alert("Please enter a valid amount");
+                return;
+            }
+
+            // Redirect with amount in URL
+            window.location.href = "payment.html?amount=" + encodeURIComponent(amount);
         }
-
-        // Redirect with amount in URL
-        window.location.href = "payment.html?amount=" + encodeURIComponent(amount);
-    }
-</script>
+    </script>
 
 
 
-<!-- rotation logic -->
-<!-- How it works (simple explanation)
+    <!-- rotation logic -->
+    <!-- How it works (simple explanation)
 
         First message shows immediately
 
@@ -1708,53 +1738,26 @@
 
         Then it loops forever ♻️ -->
 
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const items = document.querySelectorAll(".rotating-text");
-        let currentIndex = 0;
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const items = document.querySelectorAll(".rotating-text");
+            let currentIndex = 0;
 
-        setInterval(() => {
-            items[currentIndex].classList.remove("active");
-            currentIndex = (currentIndex + 1) % items.length;
-            items[currentIndex].classList.add("active");
-        }, 10000); // 10 seconds 
-    });
-</script>
-
-
-<script>
-    let receiptTimer = null;
-
-    /* ================= RECEIPT ================= */
-
-    function showReceipt({ date, stock, type, amount, balance }) {
-        document.getElementById("rDate").innerText = date;
-        document.getElementById("rStock").innerText = stock;
-        document.getElementById("rType").innerText = type;
-        document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
-        document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
-
-        document.getElementById("receiptOverlay").style.display = "flex";
-        document.body.classList.add("locked");
-    }
-
-    function closeReceipt() {
-        document.getElementById("receiptOverlay").style.display = "none";
-        document.body.classList.remove("locked");
-    }
-
-    /* 🔑 THIS IS THE KEY FIX */
-    window.showReceipt = showReceipt;
-    window.closeReceipt = closeReceipt;
-</script>
+            setInterval(() => {
+                items[currentIndex].classList.remove("active");
+                currentIndex = (currentIndex + 1) % items.length;
+                items[currentIndex].classList.add("active");
+            }, 10000); // 10 seconds 
+        });
+    </script>
 
 
 
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 
-</div>
+    </div>
 </body>
 
 </html>
