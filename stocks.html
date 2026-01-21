@@ -1119,7 +1119,9 @@
 
 
 
-            <h2>Stock Market</h2>
+            <h2>
+                <strong>Your</strong> Stocks.
+            </h2>
 
             <div class="stock-grid" id="stockGrid"></div>
 
@@ -1243,21 +1245,35 @@
                     holdings[selectedStock] -= amount;
                 }
 
-                transactions.unshift({
+                const tx = {
                     date: new Date().toLocaleString(),
                     stock: selectedStock,
                     type: tradeType,
                     amount
-                });
+                };
 
+                transactions.unshift(tx);
                 saveState();
+
                 document.getElementById(`holding-${selectedStock}`).innerText =
                     `Your Investment: $${holdings[selectedStock].toFixed(2)}`;
 
                 updateWallet();
                 renderHistory();
                 closeTrade();
+
+                // 🔥 SHOW RECEIPT
+                showReceipt({
+                    date: tx.date,
+                    stock: tx.stock,
+                    type: tx.type,
+                    amount: tx.amount,
+                    balance: walletBalance
+                });
+
+                document.getElementById("tradeAmount").value = "";
             }
+
 
             function renderHistory() {
                 const body = document.getElementById("historyBody");
@@ -1504,38 +1520,51 @@
 </div>
 
 <!-- RECEIPT MODAL -->
-<div id="receiptModal" class="receipt-overlay">
+<div class="receipt-overlay" id="receiptOverlay">
     <div class="receipt-box">
+        <div class="receipt-watermark">PAID</div>
 
-        <!-- BRAND HEADER -->
         <div class="receipt-header">
-            <img src="img/citadel.jpg" alt="Company Logo">
-            <h4>CITADEL CREDIT UNION</h4>
-            <p>A Fortress for Your Investments</p>
+            <img src="img/citadel.jpg" alt="logo">
+            <h4>Citadel Credit Union</h4>
+            <p>Transaction Receipt</p>
         </div>
 
-        <!-- WATERMARK -->
-        <div class="receipt-watermark">CITADEL</div>
+        <div class="receipt-row">
+            <span>Date</span>
+            <span id="rDate"></span>
+        </div>
 
-        <h3>Transaction Receipt</h3>
+        <div class="receipt-row">
+            <span>Stock</span>
+            <span id="rStock"></span>
+        </div>
 
-        <div class="receipt-row"><span>Transaction ID:</span> <span id="r-id"></span></div>
-        <div class="receipt-row"><span>Date:</span> <span id="r-date"></span></div>
-        <div class="receipt-row"><span>Asset:</span> <span id="r-asset"></span></div>
-        <div class="receipt-row"><span>Type:</span> <span id="r-type"></span></div>
-        <div class="receipt-row"><span>Amount:</span> <span id="r-amount"></span></div>
-        <div class="receipt-row"><span>Wallet Balance:</span> <span id="r-balance"></span></div>
+        <div class="receipt-row">
+            <span>Type</span>
+            <span id="rType"></span>
+        </div>
 
-        <div class="receipt-status success">✔ Transaction Successful</div>
+        <div class="receipt-row">
+            <span>Amount</span>
+            <span id="rAmount"></span>
+        </div>
 
-        <!-- FOOTER -->
+        <div class="receipt-row">
+            <span>Balance</span>
+            <span id="rBalance"></span>
+        </div>
+
+        <div class="receipt-status success">SUCCESSFUL</div>
+
+        <button onclick="closeReceipt()">Close</button>
+
         <div class="receipt-footer">
-            This receipt confirms a completed digital asset transaction.
+            This receipt was generated electronically.
         </div>
-
-        <button onclick="closeReceipt()">Done</button>
     </div>
 </div>
+
 
 <script>
     // 🔒 HARD-CODED LOGIN DETAILS
@@ -1588,21 +1617,24 @@
         return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
     }
 
-    function showReceipt(asset, type, amount) {
-        document.getElementById("r-id").innerText = generateTransactionId();
-        document.getElementById("r-date").innerText = new Date().toLocaleString();
-        document.getElementById("r-asset").innerText = asset;
-        document.getElementById("r-type").innerText = type;
-        document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
-        document.getElementById("r-balance").innerText =
-            `$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
 
-        document.getElementById("receiptModal").style.display = "flex";
+    function showReceipt({ date, stock, type, amount, balance }) {
+        document.getElementById("rDate").innerText = date;
+        document.getElementById("rStock").innerText = stock;
+        document.getElementById("rType").innerText = type;
+        document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
+        document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
+
+        document.getElementById("receiptOverlay").style.display = "flex";
+        document.body.classList.add("locked");
     }
 
     function closeReceipt() {
-        document.getElementById("receiptModal").style.display = "none";
+        document.getElementById("receiptOverlay").style.display = "none";
+        document.body.classList.remove("locked");
     }
+
+
 
 
     // function fluctuatePrices() {
