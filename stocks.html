@@ -1460,13 +1460,6 @@
 
 
 
-<script>
-    const withdrawModal = document.getElementById("withdrawModal");
-    const receiptModal = document.getElementById("receiptModal");
-</script>
-
-
-
 
 
 
@@ -1622,7 +1615,7 @@
     }
 
 
-    let receiptTimer = null;
+    // let receiptTimer = null;
 
     function showReceipt({ date, stock, type, amount, balance }) {
         document.getElementById("rDate").innerText = date;
@@ -1753,6 +1746,42 @@
     });
 </script>
 
+
+<script>
+    let receiptTimer = null;
+
+    /* ================= RECEIPT ================= */
+
+    function showReceipt({ date, stock, type, amount, balance }) {
+        document.getElementById("rDate").innerText = date;
+        document.getElementById("rStock").innerText = stock;
+        document.getElementById("rType").innerText = type;
+        document.getElementById("rAmount").innerText = `$${amount.toFixed(2)}`;
+        document.getElementById("rBalance").innerText = `$${balance.toLocaleString()}`;
+
+        const overlay = document.getElementById("receiptOverlay");
+        overlay.style.display = "flex";
+
+        document.body.classList.add("locked");
+
+        clearTimeout(receiptTimer);
+        receiptTimer = setTimeout(closeReceipt, 5000);
+    }
+
+    function closeReceipt() {
+        const overlay = document.getElementById("receiptOverlay");
+        if (!overlay) return;
+
+        overlay.style.display = "none";
+        document.body.classList.remove("locked");
+
+        clearTimeout(receiptTimer);
+    }
+
+    /* 🔥 EXPOSE GLOBALLY */
+    window.closeReceipt = closeReceipt;
+    window.showReceipt = showReceipt;
+</script>
 
 
 
