@@ -69,7 +69,7 @@
 		.sidebar-widget ul li a,
 		.auto-container,
 		.auto-container h2 {
-			color: #1F1B44;
+			color: #032548;
 		}
 
 		.banner {
@@ -204,8 +204,7 @@
 
 		#authOverlay {
 			position: fixed;
-			inset: 0;
-			background: #191539;
+			inset: 0;background: #032548;
 			/* FULLY SOLID */
 			display: flex;
 			align-items: center;
@@ -683,26 +682,26 @@
 			<div class="card-container">
 				<div class="card blue">
 					<div class="top">
-						<h4> <span class="icon ti-wallet"></span>
+						<h4> <span class="icon ti-briefcase"></span>
 							Available Balance</h4>
 					</div>
-					<div class="amount">$6,000.46</div>
+					<div class="amount">$16,000.46</div>
 				</div>
 
 				<div class="card red">
 					<div class="top">
-						<h4> <span class="icon ti-briefcase"></span>
-							Total invested</h4>
+						<h4> <span class="icon ti-bar-chart"></span>
+							Total Stocks</h4>
 					</div>
-					<div class="amount">$5,040.00</div>
+					<div class="amount">$9,540.00</div>
 				</div>
 
 				<div class="card black">
 					<div class="top">
-						<h4> <span class="icon ti-bar-chart"></span>
-							Expected return</h4>
+						<h4> <span class="icon ti-shield"></span>
+							Digital Assets</h4>
 					</div>
-					<div class="amount">$8,900.51</div>
+					<div class="amount">$5,900.51</div>
 				</div>
 
 			</div>
@@ -1442,7 +1441,7 @@
 			}
 
 			.main-footer {
-				background-color: #1F1B44;
+				background-color: #032548;
 			}
 		</style>
 		<footer class="main-footer">
@@ -2035,7 +2034,47 @@
 
 	<script src="script.js"></script>
 
+	 <!-- Place this before </body> in your HTML -->
+    <script>
+        // Disable right-click
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+            alert("Right-click is disabled on this website!");
+        });
 
+        // Disable certain keyboard shortcuts
+        document.addEventListener("keydown", function (e) {
+            // F12
+            if (e.key === "F12") {
+                e.preventDefault();
+                alert("This shortcut is disabled!");
+            }
+
+            // Ctrl+Shift+I or Cmd+Option+I (Open DevTools)
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "i") {
+                e.preventDefault();
+                alert("This shortcut is disabled!");
+            }
+
+            // Ctrl+Shift+J or Cmd+Option+J (Console)
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "j") {
+                e.preventDefault();
+                alert("This shortcut is disabled!");
+            }
+
+            // Ctrl+U or Cmd+U (View Source)
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "u") {
+                e.preventDefault();
+                alert("Viewing source is disabled!");
+            }
+
+            // Ctrl+S or Cmd+S (Save page)
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
+                e.preventDefault();
+                alert("Saving the page is disabled!");
+            }
+        });
+    </script>
 
 </body>
 
