@@ -393,7 +393,7 @@ body.locked {
     color: inherit;
     text-decoration: none;
 }
- 
+
 .service-link:hover {
     text-decoration: none;
 }
@@ -425,4 +425,19 @@ body.locked {
 .whatsapp-float img {
     width: 28px;
     height: 28px;
+}
+
+.wallet-balance {
+    font-weight: bolder;
+    font-size: 25px;
+    /* margin-bottom: 15px; */
+}
+
+#availableBalance{
+    font-size: 25px;
+    font-weight: bolder;
+}
+.symbol{
+    font-size: 25px;
+    font-weight: bolder;
 }
