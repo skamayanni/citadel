@@ -27,406 +27,7 @@
 	<link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-	<style>
-		* {
-			box-sizing: border-box;
-		}
-
-		html,
-		body {
-			width: 100%;
-			overflow-x: hidden;
-			-webkit-text-size-adjust: 100%;
-
-		}
-
-		.logo {
-			height: 40px;
-			width: 80px;
-			transition: transform 0.3s;
-		}
-
-		/* Tablet view */
-		@media (max-width: 1024px) {
-			.logo {
-				height: 40px;
-				width: 50px;
-			}
-		}
-
-		/* Mobile view */
-		@media (max-width: 768px) {
-			.logo {
-				height: 30px;
-				width: 30px;
-			}
-		}
-
-		.lower-content p {
-			color: #1F1B44 !important;
-		}
-
-		.sidebar-widget ul li a,
-		.auto-container,
-		.auto-container h2 {
-			color: #032548;
-		}
-
-		.banner {
-			/* background-image: url('img/2geda.jpeg'); */
-			background-color: transparent;
-			margin: 25px;
-			padding: 60px;
-		}
-
-		.banner div {
-			color: #ebebef;
-
-		}
-
-
-		/* Tablet view */
-		@media (max-width: 1024px) {
-			.banner {
-				background-color: transparent;
-				margin: 15px;
-				padding: 40px;
-			}
-		}
-
-		/* Mobile view */
-		@media (max-width: 768px) {
-			.banner {
-				background-color: transparent;
-				margin: 10px;
-				padding: 30px;
-			}
-		}
-
-
-		body.locked {
-			overflow: hidden;
-		}
-
-
-		.rotating-text {
-			opacity: 0;
-			visibility: hidden;
-			position: absolute;
-			transition: opacity 0.8s ease;
-		}
-
-		.rotating-text.active {
-			opacity: 1;
-			visibility: visible;
-			position: relative;
-		}
-
-
-		.card-container {
-			display: flex;
-			gap: 24px;
-			max-width: 1100px;
-			margin: 0 auto;
-		}
-
-		.card {
-			flex: 1;
-			border-radius: 18px;
-			padding: 26px 28px;
-			color: #fff;
-			min-height: 150px;
-			display: flex;
-			flex-direction: column;
-			justify-content: space-between;
-			box-shadow: 0 18px 35px rgba(0, 0, 0, 0.18);
-			position: relative;
-			overflow: hidden;
-		}
-
-		.card::after {
-			content: "";
-			position: absolute;
-			inset: 0;
-			background: radial-gradient(circle at top right,
-					rgba(255, 255, 255, 0.15),
-					transparent 60%);
-			pointer-events: none;
-		}
-
-
-		.blue {
-			background: linear-gradient(135deg, #100863, #1a1a1a);
-		}
-
-		.red {
-			background: linear-gradient(135deg, #770e0e, #1a1a1a);
-		}
-
-		.black {
-			background: linear-gradient(135deg, #050505, #1a1a1a);
-		}
-
-
-		.top {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			font-size: 14px;
-			opacity: 0.85;
-		}
-
-		.chip {
-			width: 36px;
-			height: 28px;
-			border-radius: 6px;
-			background: linear-gradient(135deg, #f3d36b, #c9a338);
-		}
-
-		.amount {
-			font-size: 28px;
-			font-weight: 600;
-			letter-spacing: 0.6px;
-			margin-top: 10px;
-		}
-
-		.bottom {
-			font-size: 13px;
-			letter-spacing: 1.5px;
-			opacity: 0.85;
-		}
-
-		@media (max-width: 900px) {
-			.card-container {
-				flex-direction: column;
-			}
-		}
-
-		#authOverlay {
-			position: fixed;
-			inset: 0;background: #032548;
-			/* FULLY SOLID */
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			z-index: 99999;
-		}
-
-
-		.auth-box {
-			background: #0b0b0b;
-			padding: 70px;
-			height: 80%;
-			width: 40%;
-			border-radius: 12px;
-			box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-		}
-
-
-		.auth-box h2 {
-			margin-bottom: 20px;
-		}
-
-		.auth-box input {
-			width: 100%;
-			padding: 10px;
-			margin-bottom: 12px;
-			border-radius: 5px;
-			border: none;
-		}
-
-		.auth-box button {
-			width: 100%;
-			padding: 10px;
-			background: gold;
-			border: none;
-			font-weight: bold;
-			cursor: pointer;
-		}
-
-		#loginError {
-			color: red;
-			margin-top: 10px;
-		}
-
-		.auth-box {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-
-		.auth-logo {
-			margin-bottom: 30px;
-		}
-
-		.auth-logo img {
-			height: 100px;
-			display: block;
-		}
-
-
-		/* Tablet view */
-		@media (max-width: 1024px) {
-			#authOverlay {
-				position: fixed;
-				inset: 0;
-				background: #191539;
-				/* FULLY SOLID */
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				z-index: 99999;
-			}
-
-
-			.auth-box {
-				background: #0b0b0b;
-				padding: 70px;
-				height: 70%;
-				width: 40%;
-				border-radius: 10px;
-				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-			}
-
-
-			.auth-box h2 {
-				margin-bottom: 20px;
-			}
-
-			.auth-box input {
-				width: 100%;
-				padding: 10px;
-				margin-bottom: 12px;
-				border-radius: 5px;
-				border: none;
-			}
-
-			.auth-box button {
-				width: 100%;
-				padding: 10px;
-				background: gold;
-				border: none;
-				font-weight: bold;
-				cursor: pointer;
-			}
-
-			#loginError {
-				color: red;
-				margin-top: 10px;
-			}
-
-			.auth-box {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-
-			.auth-logo {
-				margin-bottom: 30px;
-			}
-
-			.auth-logo img {
-				height: 100px;
-				display: block;
-			}
-		}
-
-		/* Mobile view */
-		@media (max-width: 768px) {
-			#authOverlay {
-				position: fixed;
-				inset: 0;
-				background: #191539;
-				/* FULLY SOLID */
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				z-index: 99999;
-			}
-
-
-			.auth-box {
-				background: #0b0b0b;
-				padding: 30px;
-				height: 60%;
-				width: 70%;
-				border-radius: 8px;
-				box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-			}
-
-
-			.auth-box h2 {
-				font-size: medium;
-				margin-bottom: 10px;
-			}
-
-			.auth-box input {
-				width: 100%;
-				padding: 10px;
-				margin-bottom: 12px;
-				border-radius: 5px;
-				border: none;
-			}
-
-			.auth-box button {
-				width: 100%;
-				padding: 10px;
-				background: gold;
-				border: none;
-				font-weight: bold;
-				cursor: pointer;
-			}
-
-			#loginError {
-				color: red;
-				margin-top: 5px;
-			}
-
-			.auth-box {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-
-			.auth-logo {
-				margin-bottom: 20px;
-			}
-
-			.auth-logo img {
-				height: 80px;
-				display: block;
-			}
-		}
-
-		/* Hide submenus by default on mobile */
-		.mobile-menu .navigation li ul {
-			display: none;
-			list-style: none;
-			padding-left: 15px;
-		}
-
-		/* Show submenu when "open" class is added */
-		.mobile-menu .navigation li ul.open {
-			display: block;
-		}
-
-		/* Optional: rotate arrow when submenu is open */
-		.mobile-menu .dropdown-btn span.rotated {
-			transform: rotate(180deg);
-			transition: transform 0.3s;
-		}
-
-		.service-link {
-			display: block;
-			height: 100%;
-			color: inherit;
-			text-decoration: none;
-		}
-
-		.service-link:hover {
-			text-decoration: none;
-		}
-	</style>
+	<link rel="stylesheet" href="ccu.css">
 
 	<script src="https://js.paystack.co/v1/inline.js"></script>
 
@@ -673,6 +274,7 @@
 
 		 -->
 
+
 		<!-- Hero Section -->
 		<div class="banner">
 			<div class="sec-title">
@@ -680,29 +282,42 @@
 			</div>
 
 			<div class="card-container">
-				<div class="card blue">
-					<div class="top">
-						<h4> <span class="icon ti-briefcase"></span>
-							Available Balance</h4>
-					</div>
-					<div class="amount">$16,000.46</div>
-				</div>
 
 				<div class="card red">
 					<div class="top">
 						<h4> <span class="icon ti-bar-chart"></span>
-							Total Stocks</h4>
+							Total Investments</h4>
 					</div>
-					<div class="amount">$9,540.00</div>
+					<div id="walletBalance" class="wallet-balance">
+						<strong>
+							$6,000.00
+						</strong>
+					</div>
 				</div>
 
 				<div class="card black">
+					<div class="top">
+						<h4> <span class="icon ti-briefcase"></span>
+							Available Balance</h4>
+					</div>
+					<!-- <h4> $<span id="availableBalance">0.00</span></h4> -->
+					<div class="symbol">
+						<!-- <strong> -->
+						$<span id="availableBalance">0.00</span>
+						<!-- </strong> -->
+					</div>
+
+				</div>
+
+
+
+				<!-- <div class="card black">
 					<div class="top">
 						<h4> <span class="icon ti-shield"></span>
 							Digital Assets</h4>
 					</div>
 					<div class="amount">$5,900.51</div>
-				</div>
+				</div> -->
 
 			</div>
 		</div>
@@ -710,6 +325,46 @@
 
 		<!-- CTA Section Start -->
 
+
+		<script>
+
+
+			/* ========= PERSISTED STATE ========= */
+			const STORAGE_KEY = "cryptoAppState";
+
+			const defaultState = {
+				walletBalance: 6000,
+				holdings: {},
+				transactions: []
+			};
+
+			let appState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
+
+			// LOAD SAVED DATA
+			let holdings = JSON.parse(localStorage.getItem("holdings")) || {};
+			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+			let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+
+
+
+
+			let selectedCrypto = null;
+			let tradeType = null;
+
+			// let walletBalance = 6000; // you control this
+
+			// const holdings = {
+			// 	BTC: 1500,
+			// 	ETH: 1000,
+			// 	USDT: 2000,
+			// 	BNB: 0,
+			// 	SOL: 0,
+			// 	XRP: 600,
+			// 	ADA: 0,
+			// 	DOGE: 0
+			// };
+
+		</script>
 
 		<div class="auto-container">
 
@@ -721,6 +376,8 @@
 		</div>
 
 		<!-- CTA Section End -->
+
+
 
 
 
@@ -832,14 +489,18 @@
 							<div class="about-column">
 								<div class="sec-title">
 									<div class="title">about us</div>
-									<h2> <span>Citadel Credit Union</span> <br></h2>
+									<h2> <span>Citadel Investment Platform</span> <br></h2>
 								</div>
 								<div class="text">
 									<p>
-										Citadel Credit Union continues to serve the financial
-										needs of
-										individuals, farmers, businesses, and industries by offering the traditional
-										banking products, as well as online, mobile and telephone banking products.
+
+										Citadel Investment Platform is committed to helping individuals, entrepreneurs,
+										and institutions grow their wealth through smart, strategic investment
+										solutions.
+
+										With advanced tools, real-time portfolio tracking, and seamless digital access,
+										Citadel empowers investors to build, manage, and expand their financial future
+										with confidence.
 									</p>
 								</div>
 								<div class="signature">billionaire</div>
@@ -1233,12 +894,12 @@
 					<div class="form-column col-lg-5 col-md-12 col-sm-12">
 						<div class="inner-column">
 							<div class="form-boxed">
-								<!-- <h5>Our Values</h5> -->
-								<div class="text">The mission of Citadel Credit Union is to
-									contribute
-									to
-									the sustainable development of the international banking sector by
-									providing. Below are our core values</div>
+								<h4>Our Vision</h4>
+								<div class="text">To create a global investment ecosystem that makes wealth
+											building accessible, secure, and rewarding for everyone.
+								</div>
+
+								<br>
 
 								<div class="consult-form">
 									<div class="sidebar-widget categories-blog">
@@ -1272,37 +933,31 @@
 							<div class="blocks-outer">
 
 								<!-- Reputation Block -->
-								<div class="reputation-block">
+								<!-- <div class="reputation-block">
 									<div class="inner-box">
 										<h5>Our Vision</h5>
-										<div class="text">To be a leading bank in the World, supporting
-											the
-											development
-											of small businesses and financial inclusion around the
-											world.</div>
+										<div class="text">To create a global investment ecosystem that makes wealth
+											building accessible, secure, and rewarding for everyone.</div>
 									</div>
-								</div>
+								</div> -->
 
 								<!-- Reputation Block -->
 								<div class="reputation-block">
 									<div class="inner-box">
 										<h5>Our Mission</h5>
-										<div class="text">The mission of Citadel Credit Union is
-											to
-											contribute to the sustainable development of the
-											international banking
-											sector by
-											providing responsible financial services and solutions to
-											households and
-											micro, small and medium enterprises, using internationally
-											recognized best banking practices. We are committed to
-											delivering value
-											for
-											our clients, shareholders, employees, and society at large.
-											The mission is based on our values: integrity and openness,
-											professionalism,
-											commitment to customers, team work, and social and
-											environmental responsibility.</div>
+										<div class="text">The mission of Citadel Credit Union is to empower individuals
+											and businesses to build sustainable wealth through smart, accessible, and
+											responsible investment opportunities. We are committed to driving financial
+											growth by providing innovative investment solutions, advanced digital tools,
+											and globally aligned best practices.
+
+											Our goal is to create long-term value for our investors, partners, and
+											communities by fostering financial confidence, transparency, and strategic
+											growth.
+
+											Our mission is guided by our core values: integrity and transparency,
+											professionalism, investor commitment, collaboration, innovation, and social
+											responsibility.</div>
 									</div>
 								</div>
 
@@ -1426,6 +1081,66 @@
 		<!-- End Blog Section -->
 
 
+		<style>
+			#sliding-div {
+				position: fixed;
+				bottom: 60%;
+				right: 0;
+				padding: 30px;
+				transition: transform 0.1s ease-in-out;
+				background-color: #191539;
+				color: white;
+				height: 100px;
+				font-family: arial;
+				font-weight: bold;
+			}
+		</style>
+		<div id="sliding-div" style="transform: translateX(0px);">Investor from mali invested $5,000</div>
+		<script>
+			// Array of random texts
+			const randomTexts = [
+				"Investor from india invested $7,000",
+				"Investor from Texas invested $5,000",
+				"Investor from india invested $500",
+				"Investor from spain deposited $2,100",
+				"Investor from india invested $83,000",
+				"Investor from mali invested $8,00",
+				"Investor from korea invested $5,000",
+				"Investor from  invested china $9,000",
+				"Investor from india invested $13,000",
+				"Investor from china withdrew $1,200",
+				"Investor from Germany invested $5,000",
+				"Investor from United Kingdom invested $5,000",
+				"Investor from South Africa invested $500",
+				"Investor from Russia deposited $2,100",
+				"Investor from Japan invested $50,000",
+				"Investor from Korea invested $75,000",
+				"Investor from korea invested $22,000",
+				"Investor from india invested $130,500",
+				"Investor from china withdrew $11,200"
+			];
+
+			// Get the sliding div element
+			const slidingDiv = document.getElementById("sliding-div");
+
+			// Display random text every 5 seconds
+			setInterval(() => {
+				// Get a random text from the array
+				const randomIndex = Math.floor(Math.random() * randomTexts.length);
+				const randomText = randomTexts[randomIndex];
+
+				// Set the text of the sliding div
+				slidingDiv.innerHTML = randomText;
+
+				// Slide the div in
+				slidingDiv.style.transform = "translateX(0)";
+
+				// Slide the div out after 2 seconds
+				setTimeout(() => {
+					slidingDiv.style.transform = "translateX(100%)";
+				}, 5000);
+			}, 10000); // Repeat every 4 seconds (2 seconds for showing and 2 seconds for hiding)
+		</script>
 
 		<!-- Map Section -->
 		<!-- <div class="map-section">
@@ -1779,6 +1494,26 @@
 			}
 		});
 
+		function generateTransactionId() {
+			return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+		}
+
+		function showReceipt(asset, type, amount) {
+			document.getElementById("r-id").innerText = generateTransactionId();
+			document.getElementById("r-date").innerText = new Date().toLocaleString();
+			document.getElementById("r-asset").innerText = asset;
+			document.getElementById("r-type").innerText = type;
+			document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
+			document.getElementById("r-balance").innerText =
+				`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+
+			document.getElementById("receiptModal").style.display = "flex";
+		}
+
+		function closeReceipt() {
+			document.getElementById("receiptModal").style.display = "none";
+		}
+
 
 
 		function logout() {
@@ -2034,47 +1769,87 @@
 
 	<script src="script.js"></script>
 
-	 <!-- Place this before </body> in your HTML -->
-    <script>
-        // Disable right-click
-        document.addEventListener("contextmenu", function (e) {
-            e.preventDefault();
-            alert("Right-click is disabled on this website!");
-        });
+	<!-- Place this before </body> in your HTML -->
+	<script>
+		// Disable right-click
+		document.addEventListener("contextmenu", function (e) {
+			e.preventDefault();
+			alert("Right-click is disabled on this website!");
+		});
 
-        // Disable certain keyboard shortcuts
-        document.addEventListener("keydown", function (e) {
-            // F12
-            if (e.key === "F12") {
-                e.preventDefault();
-                alert("This shortcut is disabled!");
-            }
+		// Disable certain keyboard shortcuts
+		document.addEventListener("keydown", function (e) {
+			// F12
+			if (e.key === "F12") {
+				e.preventDefault();
+				alert("This shortcut is disabled!");
+			}
 
-            // Ctrl+Shift+I or Cmd+Option+I (Open DevTools)
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "i") {
-                e.preventDefault();
-                alert("This shortcut is disabled!");
-            }
+			// Ctrl+Shift+I or Cmd+Option+I (Open DevTools)
+			if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "i") {
+				e.preventDefault();
+				alert("This shortcut is disabled!");
+			}
 
-            // Ctrl+Shift+J or Cmd+Option+J (Console)
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "j") {
-                e.preventDefault();
-                alert("This shortcut is disabled!");
-            }
+			// Ctrl+Shift+J or Cmd+Option+J (Console)
+			if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === "j") {
+				e.preventDefault();
+				alert("This shortcut is disabled!");
+			}
 
-            // Ctrl+U or Cmd+U (View Source)
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "u") {
-                e.preventDefault();
-                alert("Viewing source is disabled!");
-            }
+			// Ctrl+U or Cmd+U (View Source)
+			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "u") {
+				e.preventDefault();
+				alert("Viewing source is disabled!");
+			}
 
-            // Ctrl+S or Cmd+S (Save page)
-            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
-                e.preventDefault();
-                alert("Saving the page is disabled!");
-            }
-        });
-    </script>
+			// Ctrl+S or Cmd+S (Save page)
+			if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s") {
+				e.preventDefault();
+				alert("Saving the page is disabled!");
+			}
+		});
+	</script>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+
+			// Get saved balance from localStorage
+			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+
+			// Format and display
+			document.getElementById("availableBalance").textContent =
+				walletBalance.toLocaleString("en-NG", {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				});
+
+		});
+
+
+		function loadBalance() {
+			const balance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+
+			document.getElementById("availableBalance").textContent =
+				balance.toLocaleString("en-NG", {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				});
+		}
+
+		// Run the function when page loads
+		document.addEventListener("DOMContentLoaded", loadBalance);
+	</script>
+
+
+
+	<a href="https://wa.me/19189173462?text=Hello%20Citadel%20Investments,%20would%20like%20to%20make%20an%20enquiry"
+		class="whatsapp-float" target="_blank" aria-label="Chat with us on WhatsApp">
+		<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp Chat">
+		<span>Chat with us</span>
+	</a>
+
+
 
 </body>
 
