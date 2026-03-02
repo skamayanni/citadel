@@ -172,6 +172,10 @@ body.locked {
     }
 }
 
+
+/* Login/Signup Page */
+
+
 #authOverlay {
     position: fixed;
     inset: 0;
@@ -184,6 +188,57 @@ body.locked {
 }
 
 
+.auth-box {
+    background: white;
+    border-radius: 10px;
+    padding: 40px;
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: scaleIn 0.5s;
+}
+
+.auth-tabs {
+    display: flex;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+}
+
+.auth-tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s;
+}
+
+.auth-tab.active {
+    color: var(--wells-red);
+    border-bottom: 3px solid var(--wells-red);
+}
+
+.auth-tab:hover {
+    color: var(--wells-dark);
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+    animation: fadeIn 0.5s;
+}
+
+.auth-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.auth-logo img {
+    height: 70px;
+}
 
 
 /* Tablet view */
@@ -191,7 +246,7 @@ body.locked {
     #authOverlay {
         position: fixed;
         inset: 0;
-        background: #032548;
+        background: #191539;
         /* FULLY SOLID */
         display: flex;
         align-items: center;
@@ -200,92 +255,196 @@ body.locked {
     }
 
 
-    /* Mobile view */
-    @media (max-width: 768px) {
-        #authOverlay {
-            position: fixed;
-            inset: 0;
-            background: #032548;
-            /* FULLY SOLID */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 99999;
-        }
-
-
+    .auth-box {
+        background: white;
+        border-radius: 10px;
+        padding: 40px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: scaleIn 0.5s;
     }
 
-    /* Hide submenus by default on mobile */
-    .mobile-menu .navigation li ul {
+    .auth-tabs {
+        display: flex;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .auth-tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #666;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
+    }
+
+    .auth-tab.active {
+        color: var(--wells-red);
+        border-bottom: 3px solid var(--wells-red);
+    }
+
+    .auth-tab:hover {
+        color: var(--wells-dark);
+    }
+
+    .auth-form {
         display: none;
-        list-style: none;
-        padding-left: 15px;
     }
 
-    /* Show submenu when "open" class is added */
-    .mobile-menu .navigation li ul.open {
+    .auth-form.active {
         display: block;
+        animation: fadeIn 0.5s;
     }
 
-    /* Optional: rotate arrow when submenu is open */
-    .mobile-menu .dropdown-btn span.rotated {
-        transform: rotate(180deg);
-        transition: transform 0.3s;
+    .auth-logo {
+        text-align: center;
+        margin-bottom: 30px;
     }
 
-    .service-link {
-        display: block;
-        height: 100%;
-        color: inherit;
-        text-decoration: none;
+    .auth-logo img {
+        height: 70px;
     }
+}
 
-    .service-link:hover {
-        text-decoration: none;
-    }
-
-    .whatsapp-float {
+/* Mobile view */
+@media (max-width: 768px) {
+    #authOverlay {
         position: fixed;
-        bottom: 20px;
-        left: 20px;
+        inset: 0;
+        background: #191539;
+        /* FULLY SOLID */
         display: flex;
         align-items: center;
-        gap: 10px;
-        background-color: #25D366;
-        color: #fff;
-        padding: 10px 14px;
-        border-radius: 50px;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-        z-index: 9999;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        justify-content: center;
+        z-index: 99999;
     }
 
-    .whatsapp-float:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+    .auth-box {
+        background: white;
+        border-radius: 10px;
+        padding: 40px;
+        width: 100%;
+        max-width: 450px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        animation: scaleIn 0.5s;
     }
 
-    .whatsapp-float img {
-        width: 28px;
-        height: 28px;
+    .auth-tabs {
+        display: flex;
+        margin-bottom: 30px;
+        border-bottom: 1px solid #ddd;
     }
 
-    .wallet-balance {
-        font-weight: bolder;
-        font-size: 25px;
-        /* margin-bottom: 15px; */
+    .auth-tab {
+        padding: 10px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        color: #666;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
     }
 
-    #availableBalance {
-        font-size: 25px;
-        font-weight: bolder;
+    .auth-tab.active {
+        color: var(--wells-red);
+        border-bottom: 3px solid var(--wells-red);
     }
 
-    .symbol {
-        font-size: 25px;
-        font-weight: bolder;
+    .auth-tab:hover {
+        color: var(--wells-dark);
     }
+
+    .auth-form {
+        display: none;
+    }
+
+    .auth-form.active {
+        display: block;
+        animation: fadeIn 0.5s;
+    }
+
+    .auth-logo {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .auth-logo img {
+        height: 70px;
+    }
+}
+
+/* Hide submenus by default on mobile */
+.mobile-menu .navigation li ul {
+    display: none;
+    list-style: none;
+    padding-left: 15px;
+}
+
+/* Show submenu when "open" class is added */
+.mobile-menu .navigation li ul.open {
+    display: block;
+}
+
+/* Optional: rotate arrow when submenu is open */
+.mobile-menu .dropdown-btn span.rotated {
+    transform: rotate(180deg);
+    transition: transform 0.3s;
+}
+
+.service-link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.service-link:hover {
+    text-decoration: none;
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #25D366;
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.whatsapp-float img {
+    width: 28px;
+    height: 28px;
+}
+
+.wallet-balance {
+    font-weight: bolder;
+    font-size: 25px;
+    /* margin-bottom: 15px; */
+}
+
+#availableBalance {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.symbol {
+    font-size: 25px;
+    font-weight: bolder;
+}
