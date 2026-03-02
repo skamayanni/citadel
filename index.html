@@ -59,6 +59,93 @@
 		}
 	</script>
 
+	<style>
+		 /* Login/Signup Page */
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--wells-red), var(--wells-dark-red));
+            padding: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        .auth-box {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: scaleIn 0.5s;
+        }
+
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            color: var(--wells-red);
+            border-bottom: 3px solid var(--wells-red);
+        }
+
+        .auth-tab:hover {
+            color: var(--wells-dark);
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .auth-logo img {
+            height: 70px;
+        }
+
+        /* New Account Creation */
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.2s;
+        }
+
+        .color-option.selected {
+            border-color: #333;
+            transform: scale(1.2);
+        }
+
+	</style>
+
 </head>
 
 
@@ -80,7 +167,7 @@
 <body oncontextmenu="return false">
 
 	<!-- LOGIN OVERLAY -->
-	<div id="authOverlay">
+	<!-- <div id="authOverlay">
 		<div class="auth-box">
 			<div class="auth-logo">
 				<img src="img/citadel.jpg" alt="citadel">
@@ -94,7 +181,47 @@
 			<button onclick="login()">Login</button>
 			<p id="loginError"></p>
 		</div>
-	</div>
+	</div> -->
+
+	<!-- Login/Signup Page -->
+    <div id="authOverlay" class="auth-container">
+        <div class="auth-box">
+            <div class="auth-logo">
+                <img src="img/citadel.jpg" alt="Concora Credit Union">
+            </div>
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+                <div class="auth-tab" style="opacity: 0.5; cursor: not-allowed;">Sign Up</div>
+            </div>
+
+            <form id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label>Username or Email</label>
+                    <input type="text" class="form-control" id="loginUser" placeholder="Enter your username or email"
+                        required="" fdprocessedid="g4myyl">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" id="loginPass" placeholder="Enter your password"
+                        required="" fdprocessedid="kkvztd">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="rememberUsername"> Remember my username
+                    </label>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-primary" style="width: 100%;" onclick="login()"
+                        fdprocessedid="tl63r">Login</button>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="#" style="color: var(--wells-blue);">Forgot username or password?</a>
+                </div>
+            </form>
+
+           
+        </div>
+    </div>
 
 	<!-- MAIN WEBSITE CONTENT -->
 	<div id="siteContent" style="display:none;">
