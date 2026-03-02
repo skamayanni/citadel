@@ -184,56 +184,6 @@ body.locked {
 }
 
 
-.auth-box {
-    background: #0b0b0b;
-    padding: 70px;
-    height: 80%;
-    width: 40%;
-    border-radius: 12px;
-    box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
-}
-
-
-.auth-box h2 {
-    margin-bottom: 20px;
-}
-
-.auth-box input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 12px;
-    border-radius: 5px;
-    border: none;
-}
-
-.auth-box button {
-    width: 100%;
-    padding: 10px;
-    background: gold;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-#loginError {
-    color: red;
-    margin-top: 10px;
-}
-
-.auth-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.auth-logo {
-    margin-bottom: 30px;
-}
-
-.auth-logo img {
-    height: 100px;
-    display: block;
-}
 
 
 /* Tablet view */
@@ -241,7 +191,7 @@ body.locked {
     #authOverlay {
         position: fixed;
         inset: 0;
-        background: #191539;
+        background: #032548;
         /* FULLY SOLID */
         display: flex;
         align-items: center;
@@ -250,194 +200,92 @@ body.locked {
     }
 
 
-    .auth-box {
-        background: #0b0b0b;
-        padding: 70px;
-        height: 70%;
-        width: 40%;
-        border-radius: 10px;
-        box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+    /* Mobile view */
+    @media (max-width: 768px) {
+        #authOverlay {
+            position: fixed;
+            inset: 0;
+            background: #032548;
+            /* FULLY SOLID */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 99999;
+        }
+
+
     }
 
-
-    .auth-box h2 {
-        margin-bottom: 20px;
+    /* Hide submenus by default on mobile */
+    .mobile-menu .navigation li ul {
+        display: none;
+        list-style: none;
+        padding-left: 15px;
     }
 
-    .auth-box input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 12px;
-        border-radius: 5px;
-        border: none;
-    }
-
-    .auth-box button {
-        width: 100%;
-        padding: 10px;
-        background: gold;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    #loginError {
-        color: red;
-        margin-top: 10px;
-    }
-
-    .auth-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .auth-logo {
-        margin-bottom: 30px;
-    }
-
-    .auth-logo img {
-        height: 100px;
+    /* Show submenu when "open" class is added */
+    .mobile-menu .navigation li ul.open {
         display: block;
     }
-}
 
-/* Mobile view */
-@media (max-width: 768px) {
-    #authOverlay {
+    /* Optional: rotate arrow when submenu is open */
+    .mobile-menu .dropdown-btn span.rotated {
+        transform: rotate(180deg);
+        transition: transform 0.3s;
+    }
+
+    .service-link {
+        display: block;
+        height: 100%;
+        color: inherit;
+        text-decoration: none;
+    }
+
+    .service-link:hover {
+        text-decoration: none;
+    }
+
+    .whatsapp-float {
         position: fixed;
-        inset: 0;
-        background: #191539;
-        /* FULLY SOLID */
+        bottom: 20px;
+        left: 20px;
         display: flex;
         align-items: center;
-        justify-content: center;
-        z-index: 99999;
+        gap: 10px;
+        background-color: #25D366;
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        z-index: 9999;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-
-    .auth-box {
-        background: #0b0b0b;
-        padding: 30px;
-        height: 60%;
-        width: 70%;
-        border-radius: 8px;
-        box-shadow: 0 0 40px rgba(255, 215, 0, 0.25);
+    .whatsapp-float:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
     }
 
-
-    .auth-box h2 {
-        font-size: medium;
-        margin-bottom: 10px;
+    .whatsapp-float img {
+        width: 28px;
+        height: 28px;
     }
 
-    .auth-box input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 12px;
-        border-radius: 5px;
-        border: none;
+    .wallet-balance {
+        font-weight: bolder;
+        font-size: 25px;
+        /* margin-bottom: 15px; */
     }
 
-    .auth-box button {
-        width: 100%;
-        padding: 10px;
-        background: gold;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
+    #availableBalance {
+        font-size: 25px;
+        font-weight: bolder;
     }
 
-    #loginError {
-        color: red;
-        margin-top: 5px;
+    .symbol {
+        font-size: 25px;
+        font-weight: bolder;
     }
-
-    .auth-box {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .auth-logo {
-        margin-bottom: 20px;
-    }
-
-    .auth-logo img {
-        height: 80px;
-        display: block;
-    }
-}
-
-/* Hide submenus by default on mobile */
-.mobile-menu .navigation li ul {
-    display: none;
-    list-style: none;
-    padding-left: 15px;
-}
-
-/* Show submenu when "open" class is added */
-.mobile-menu .navigation li ul.open {
-    display: block;
-}
-
-/* Optional: rotate arrow when submenu is open */
-.mobile-menu .dropdown-btn span.rotated {
-    transform: rotate(180deg);
-    transition: transform 0.3s;
-}
-
-.service-link {
-    display: block;
-    height: 100%;
-    color: inherit;
-    text-decoration: none;
-}
-
-.service-link:hover {
-    text-decoration: none;
-}
-
-.whatsapp-float {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #25D366;
-    color: #fff;
-    padding: 10px 14px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-    z-index: 9999;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.whatsapp-float:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
-}
-
-.whatsapp-float img {
-    width: 28px;
-    height: 28px;
-}
-
-.wallet-balance {
-    font-weight: bolder;
-    font-size: 25px;
-    /* margin-bottom: 15px; */
-}
-
-#availableBalance{
-    font-size: 25px;
-    font-weight: bolder;
-}
-.symbol{
-    font-size: 25px;
-    font-weight: bolder;
-}
