@@ -60,90 +60,92 @@
 	</script>
 
 	<style>
-		 /* Login/Signup Page */
-        .auth-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, var(--wells-red), var(--wells-dark-red));
-            padding: 20px;
-            animation: fadeIn 0.5s;
-        }
+		/* Login/Signup Page */
+		.auth-container {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			min-height: 100vh;
+			background: linear-gradient(135deg, var(--wells-red), var(--wells-dark-red));
+			padding: 20px;
+			animation: fadeIn 0.5s;
+		}
 
-        .auth-box {
-            background: white;
-            border-radius: 10px;
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            animation: scaleIn 0.5s;
-        }
+		.auth-box {
+			background: white;
+			border-radius: 10px;
+			padding: 40px;
+			width: 100%;
+			max-width: 450px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+			animation: scaleIn 0.5s;
+		}
 
-        .auth-tabs {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #ddd;
-        }
+		.auth-tabs {
+			display: flex;
+			margin-bottom: 30px;
+			border-bottom: 1px solid #ddd;
+		}
 
-        .auth-tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #666;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s;
-        }
+		.auth-tab {
+			padding: 10px 20px;
+			cursor: pointer;
+			font-weight: 600;
+			color: #666;
+			border-bottom: 3px solid transparent;
+			transition: all 0.3s;
+		}
 
-        .auth-tab.active {
-            color: var(--wells-red);
-            border-bottom: 3px solid var(--wells-red);
-        }
+		.auth-tab.active {
+			color: var(--wells-red);
+			border-bottom: 3px solid var(--wells-red);
+		}
 
-        .auth-tab:hover {
-            color: var(--wells-dark);
-        }
+		.auth-tab:hover {
+			color: var(--wells-dark);
+		}
 
-        .auth-form {
-            display: none;
-        }
+		.auth-form {
+			display: none;
+		}
 
-        .auth-form.active {
-            display: block;
-            animation: fadeIn 0.5s;
-        }
+		.auth-form.active {
+			display: block;
+			animation: fadeIn 0.5s;
+		}
 
-        .auth-logo {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+		.auth-logo {
+			text-align: center;
+			margin-bottom: 30px;
+		}
 
-        .auth-logo img {
-            height: 70px;
-        }
+		.auth-logo img {
+			height: 70px;
+		}
 
-        /* New Account Creation */
-        .color-options {
-            display: flex;
-            gap: 10px;
-            margin: 10px 0;
-        }
+		/* New Account Creation */
+		.color-options {
+			display: flex;
+			gap: 10px;
+			margin: 10px 0;
+		}
 
-        .color-option {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: transform 0.2s;
-        }
+		.color-option {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			cursor: pointer;
+			border: 2px solid transparent;
+			transition: transform 0.2s;
+		}
 
-        .color-option.selected {
-            border-color: #333;
-            transform: scale(1.2);
-        }
+		.color-option.selected {
+			border-color: #333;
+			transform: scale(1.2);
+		}
 
+
+		
 	</style>
 
 </head>
@@ -184,44 +186,44 @@
 	</div> -->
 
 	<!-- Login/Signup Page -->
-    <div id="authOverlay" class="auth-container">
-        <div class="auth-box">
-            <div class="auth-logo">
-                <img src="img/citadel.jpg" alt="Concora Credit Union">
-            </div>
-            <div class="auth-tabs">
-                <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
-                <div class="auth-tab" style="opacity: 0.5; cursor: not-allowed;">Sign Up</div>
-            </div>
+	<div id="authOverlay" class="auth-container">
+		<div class="auth-box">
+			<div class="auth-logo">
+				<img src="img/citadel.jpg" alt="Concora Credit Union">
+			</div>
+			<div class="auth-tabs">
+				<div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+				<div class="auth-tab" style="opacity: 0.5; cursor: not-allowed;">Sign Up</div>
+			</div>
 
-            <form id="loginForm" class="auth-form active">
-                <div class="form-group">
-                    <label>Username or Email</label>
-                    <input type="text" class="form-control" id="loginUser" placeholder="Enter your username or email"
-                        required="" fdprocessedid="g4myyl">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" class="form-control" id="loginPass" placeholder="Enter your password"
-                        required="" fdprocessedid="kkvztd">
-                </div>
-                <div class="form-group">
-                    <label>
-                        <input type="checkbox" id="rememberUsername"> Remember my username
-                    </label>
-                </div>
-                <div class="form-actions">
-                    <button type="button" class="btn btn-primary" style="width: 100%;" onclick="login()"
-                        fdprocessedid="tl63r">Login</button>
-                </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <a href="#" style="color: var(--wells-blue);">Forgot username or password?</a>
-                </div>
-            </form>
+			<form id="loginForm" class="auth-form active">
+				<div class="form-group">
+					<label>Username or Email</label>
+					<input type="text" class="form-control" id="loginUser" placeholder="Enter your username or email"
+						required="" fdprocessedid="g4myyl">
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" id="loginPass" placeholder="Enter your password"
+						required="" fdprocessedid="kkvztd">
+				</div>
+				<div class="form-group">
+					<label>
+						<input type="checkbox" id="rememberUsername"> Remember my username
+					</label>
+				</div>
+				<div class="form-actions">
+					<button type="button" class="btn btn-primary" style="width: 100%;" onclick="login()"
+						fdprocessedid="tl63r">Login</button>
+				</div>
+				<div style="text-align: center; margin-top: 20px;">
+					<a href="#" style="color: var(--wells-blue);">Forgot username or password?</a>
+				</div>
+			</form>
 
-           
-        </div>
-    </div>
+
+		</div>
+	</div>
 
 	<!-- MAIN WEBSITE CONTENT -->
 	<div id="siteContent" style="display:none;">
@@ -354,7 +356,7 @@
 						<div class="outer-box">
 							<!-- Search Btn -->
 
-							<button class="theme-btn btn-style-two" onclick="openWallet()">
+							<button class="theme-btn btn-style-one" onclick="openWallet()">
 								<strong>ADD FUNDS</strong>
 							</button>
 
@@ -397,13 +399,15 @@
 		</header>
 		<!-- End Main Header --> <!-- Banner Section -->
 
-		<!-- <div class="banner" style="height: 550px; background-image: url(img/2geda.jpeg);">
+		<div class="banner"></div>
 
-		 -->
+		<!-- <div class="banner" style="height: 400px;"></div> -->
+
+
 
 
 		<!-- Hero Section -->
-		<div class="banner">
+		<div class="banner1">
 			<div class="sec-title">
 				<h2><span>Your</span> <strong>Investment Account</strong> </h2>
 			</div>
@@ -460,7 +464,7 @@
 			const STORAGE_KEY = "cryptoAppState";
 
 			const defaultState = {
-				walletBalance: 6000,
+				walletBalance: 5000,
 				holdings: {},
 				transactions: []
 			};
@@ -469,7 +473,7 @@
 
 			// LOAD SAVED DATA
 			let holdings = JSON.parse(localStorage.getItem("holdings")) || {};
-			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 5000;
 			let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
 
@@ -478,7 +482,7 @@
 			let selectedCrypto = null;
 			let tradeType = null;
 
-			// let walletBalance = 6000; // you control this
+			// let walletBalance = 5000; // you control this
 
 			// const holdings = {
 			// 	BTC: 1500,
@@ -1023,7 +1027,7 @@
 							<div class="form-boxed">
 								<h4>Our Vision</h4>
 								<div class="text">To create a global investment ecosystem that makes wealth
-											building accessible, secure, and rewarding for everyone.
+									building accessible, secure, and rewarding for everyone.
 								</div>
 
 								<br>
@@ -1942,7 +1946,7 @@
 		document.addEventListener("DOMContentLoaded", function () {
 
 			// Get saved balance from localStorage
-			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+			let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 5000;
 
 			// Format and display
 			document.getElementById("availableBalance").textContent =
@@ -1955,7 +1959,7 @@
 
 
 		function loadBalance() {
-			const balance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+			const balance = parseFloat(localStorage.getItem("walletBalance")) || 5000;
 
 			document.getElementById("availableBalance").textContent =
 				balance.toLocaleString("en-NG", {
