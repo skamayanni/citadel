@@ -67,6 +67,30 @@ body {
     }
 }
 
+.banner1 {
+    margin: 20px;
+    height: auto;
+    width: auto;
+}
+
+/* Tablet (medium screens) */
+@media (max-width: 992px) {
+    .banner1 {
+        margin: 20px;
+        height: auto;
+        width: auto;
+    }
+}
+
+/* Mobile (small screens) */
+@media (max-width: 576px) {
+    .banner1 {
+        margin: 20px;
+        height: auto;
+        width: auto;
+    }
+}
+
 body.locked {
     overflow: hidden;
 }
