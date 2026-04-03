@@ -143,6 +143,54 @@
 			border-color: #333;
 			transform: scale(1.2);
 		}
+
+		/* SERVICE-BLOCK */
+		.service-block {
+			cursor: pointer;
+			transition: all 0.3s ease;
+			border: 2px solid transparent;
+			/* border-color: #0ea5e9; */
+		}
+
+		.service-block:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+			background-color: #f8fafc;
+			/* light highlight */
+		}
+
+
+		.service-block h4 {
+			transition: color 0.3s ease;
+		}
+
+		.service-block:hover h4 {
+			color: #0ea5e9;
+			/* your theme color */
+		}
+
+		/* LOGOUT BTN */
+		.logout-btn {
+			background: none;
+			border: none;
+			color: #322c2c;
+			font-weight: 500;
+			margin: 15px;
+			padding-left: 8px;
+			cursor: pointer;
+			font-size: inherit;
+		}
+
+
+		.logout-btn:hover {
+			color: red;
+		}
+
+		.navbar {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 	</style>
 
 </head>
@@ -304,7 +352,7 @@
 					const user = JSON.parse(storedUser);
 
 					if (user.password === password) {
-						alert(" ");
+
 
 						// ✅ Save session
 						localStorage.setItem("loggedInUser", username);
@@ -490,7 +538,9 @@
 
 
 										<li>
-											<button onclick="logout()">Logout</button>
+											<button class="logout-btn" onclick="logout()">
+												<strong>LOGOUT</strong>
+											</button>
 										</li>
 
 										<script>
@@ -500,7 +550,7 @@
 											}
 										</script>
 
-										
+
 									</ul>
 								</div>
 							</nav>
