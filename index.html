@@ -143,9 +143,6 @@
 			border-color: #333;
 			transform: scale(1.2);
 		}
-
-
-		
 	</style>
 
 </head>
@@ -193,7 +190,7 @@
 			</div>
 			<div class="auth-tabs">
 				<div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
-				<div class="auth-tab" style="opacity: 0.5; cursor: not-allowed;">Sign Up</div>
+				<div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
 			</div>
 
 			<form id="loginForm" class="auth-form active">
@@ -221,12 +218,158 @@
 				</div>
 			</form>
 
+			<form id="signupForm" class="auth-form">
+				<div class="form-group">
+					<label>Username</label>
+					<input type="text" class="form-control" id="signupUser" placeholder="Choose a username" required>
+				</div>
+
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" id="signupPass" placeholder="Create a password"
+						required>
+				</div>
+
+				<div class="form-actions">
+					<button type="button" class="btn btn-primary" style="width: 100%;" onclick="signup()">Sign
+						Up</button>
+				</div>
+			</form>
+
+			<script>
+				function switchAuthTab(tab) {
+					const tabs = document.querySelectorAll(".auth-tab");
+					const forms = document.querySelectorAll(".auth-form");
+
+					tabs.forEach(t => t.classList.remove("active"));
+					forms.forEach(f => f.classList.remove("active"));
+
+					if (tab === "login") {
+						tabs[0].classList.add("active");
+						forms[0].classList.add("active");
+					} else {
+						tabs[1].classList.add("active");
+						forms[1].classList.add("active");
+					}
+				}
+			</script>
+
+			<script>
+				function signup() {
+					const username = document.getElementById("signupUser").value;
+					const password = document.getElementById("signupPass").value;
+
+					if (!username || !password) {
+						alert("Please fill all fields");
+						return;
+					}
+
+					// Check if user already exists
+					if (localStorage.getItem("user_" + username)) {
+						alert("User already exists!");
+						return;
+					}
+
+					const user = { username, password };
+
+					localStorage.setItem("user_" + username, JSON.stringify(user));
+
+					alert("Signup successful! You can now login.");
+
+					// Switch back to login tab
+					switchAuthTab("login");
+				}
+			</script>
+
+
+			<script>
+				function login() {
+					const username = document.getElementById("loginUser").value.trim();
+					const password = document.getElementById("loginPass").value.trim();
+
+					// Admin
+					if (username === "admin" && password === "1234") {
+						localStorage.setItem("loggedInUser", username);
+						showMainApp();
+						return;
+					}
+
+					const storedUser = localStorage.getItem("user_" + username);
+
+					if (!storedUser) {
+						alert("User not found!");
+						return;
+					}
+
+					const user = JSON.parse(storedUser);
+
+					if (user.password === password) {
+						alert(" ");
+
+						// ✅ Save session
+						localStorage.setItem("loggedInUser", username);
+
+						// ✅ SHOW MAIN PAGE
+						showMainApp();
+					} else {
+						alert("Incorrect password!");
+					}
+				}
+			</script>
+
+			<script>
+				function showMainApp() {
+					// Hide login overlay
+					document.getElementById("authOverlay").style.display = "none";
+
+					// Show main content
+					document.getElementById("mainContent").style.display = "block";
+
+					// Unlock scrolling
+					document.body.classList.remove("locked");
+				}
+			</script>
+
+			<script>
+				window.onload = function () {
+					const user = localStorage.getItem("loggedInUser");
+
+					if (user) {
+						showMainApp();
+					}
+				};
+			</script>
+
+			<span id="welcomeUser"></span>
+
+			<script>
+				const user = localStorage.getItem("loggedInUser");
+
+				if (user) {
+					document.getElementById("welcomeUser").textContent = "Welcome, " + user;
+				}
+			</script>
+
+			<script>
+				window.onload = function () {
+					const user = localStorage.getItem("loggedInUser");
+
+					if (!user) {
+						document.getElementById("authOverlay").style.display = "block";
+					} else {
+						showMainApp();
+					}
+				};
+			</script>
+
 
 		</div>
 	</div>
 
+
+
 	<!-- MAIN WEBSITE CONTENT -->
-	<div id="siteContent" style="display:none;">
+	<div id="mainContent" style="display:none;">
 		<!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
 
 
@@ -345,9 +488,20 @@
 											</ul>
 											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
 										</li> -->
-										<li class="current">
+
+
+										<!-- <li class="current">
 											<a href="#" onclick="logout()">Logout</a>
-										</li>
+										</li> -->
+
+										<button onclick="logout()">Logout</button>
+
+										<script>
+											function logout() {
+												localStorage.removeItem("loggedInUser");
+												location.reload();
+											}
+										</script>
 									</ul>
 								</div>
 							</nav>
@@ -1562,7 +1716,7 @@
 	</div>
 
 
-	<script>
+	<!-- <script>
 		// 🔒 HARD-CODED LOGIN DETAILS
 		const USERNAME = "admin";
 		const EMAIL = "billionaire@gmail.com";
@@ -1588,73 +1742,73 @@
 		document.body.classList.add("locked");
 
 
-		function login() {
-			const user = document.getElementById("loginUser").value.trim();
-			const pass = document.getElementById("loginPass").value.trim();
-			const error = document.getElementById("loginError");
+		// 	// function login() {
+		// 	// 	const user = document.getElementById("loginUser").value.trim();
+		// 	// 	const pass = document.getElementById("loginPass").value.trim();
+		// 	// 	const error = document.getElementById("loginError");
 
-			if (
-				(user === "admin" || user === "billionaire@gmail.com") &&
-				pass === "12345678"
-			) {
-				// ✅ SAVE LOGIN STATE
-				sessionStorage.setItem("isLoggedIn", "true");
+		// 	// 	if (
+		// 	// 		(user === "admin" || user === "billionaire@gmail.com") &&
+		// 	// 		pass === "12345678"
+		// 	// 	) {
+		// 	// 		// ✅ SAVE LOGIN STATE
+		// 	// 		sessionStorage.setItem("isLoggedIn", "true");
 
-				document.getElementById("authOverlay").style.display = "none";
-				document.getElementById("siteContent").style.display = "block";
-				document.body.classList.remove("locked");
+		// 	// 		document.getElementById("authOverlay").style.display = "none";
+		// 	// 		document.getElementById("siteContent").style.display = "block";
+		// 	// 		document.body.classList.remove("locked");
 
-				window.scrollTo(0, 0);
-			} else {
-				error.textContent = "Invalid login details";
-			}
-		}
-
-
-		document.addEventListener("DOMContentLoaded", function () {
-			const loggedIn = sessionStorage.getItem("isLoggedIn");
-
-			if (loggedIn === "true") {
-				document.getElementById("authOverlay").style.display = "none";
-				document.getElementById("siteContent").style.display = "block";
-				document.body.classList.remove("locked");
-			} else {
-				document.getElementById("authOverlay").style.display = "flex";
-				document.getElementById("siteContent").style.display = "none";
-				document.body.classList.add("locked");
-			}
-		});
-
-		function generateTransactionId() {
-			return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-		}
-
-		function showReceipt(asset, type, amount) {
-			document.getElementById("r-id").innerText = generateTransactionId();
-			document.getElementById("r-date").innerText = new Date().toLocaleString();
-			document.getElementById("r-asset").innerText = asset;
-			document.getElementById("r-type").innerText = type;
-			document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
-			document.getElementById("r-balance").innerText =
-				`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-
-			document.getElementById("receiptModal").style.display = "flex";
-		}
-
-		function closeReceipt() {
-			document.getElementById("receiptModal").style.display = "none";
-		}
+		// 	// 		window.scrollTo(0, 0);
+		// 	// 	} else {
+		// 	// 		error.textContent = "Invalid login details";
+		// 	// 	}
+		// 	// }
 
 
+		// 	document.addEventListener("DOMContentLoaded", function () {
+		// 		const loggedIn = sessionStorage.getItem("isLoggedIn");
 
-		function logout() {
-			sessionStorage.removeItem("isLoggedIn");
-			location.reload();
-		}
+		// 		if (loggedIn === "true") {
+		// 			document.getElementById("authOverlay").style.display = "none";
+		// 			document.getElementById("siteContent").style.display = "block";
+		// 			document.body.classList.remove("locked");
+		// 		} else {
+		// 			document.getElementById("authOverlay").style.display = "flex";
+		// 			document.getElementById("siteContent").style.display = "none";
+		// 			document.body.classList.add("locked");
+		// 		}
+		// 	});
+
+		// 	function generateTransactionId() {
+		// 		return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+		// 	}
+
+		// 	function showReceipt(asset, type, amount) {
+		// 		document.getElementById("r-id").innerText = generateTransactionId();
+		// 		document.getElementById("r-date").innerText = new Date().toLocaleString();
+		// 		document.getElementById("r-asset").innerText = asset;
+		// 		document.getElementById("r-type").innerText = type;
+		// 		document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
+		// 		document.getElementById("r-balance").innerText =
+		// 			`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+
+		// 		document.getElementById("receiptModal").style.display = "flex";
+		// 	}
+
+		// 	function closeReceipt() {
+		// 		document.getElementById("receiptModal").style.display = "none";
+		// 	}
 
 
 
-	</script>
+		// 	function logout() {
+		// 		sessionStorage.removeItem("isLoggedIn");
+		// 		location.reload();
+		// 	}
+
+
+
+		// </script> -->
 
 
 	<script>
