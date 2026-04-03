@@ -788,24 +788,9 @@
 <body oncontextmenu="return false">
 
     <!-- LOGIN OVERLAY -->
-    <div id="authOverlay">
-        <div class="auth-box">
-            <div class="auth-logo">
-                <img src="img/citadel.jpg" alt="citadel">
-            </div>
-
-            <h2><strong>LOGIN</strong></h2>
-
-            <input type="text" id="loginUser" placeholder="Username or Email">
-            <input type="password" id="loginPass" placeholder="Password">
-
-            <button onclick="login()">Login</button>
-            <p id="loginError"></p>
-        </div>
-    </div>
 
     <!-- MAIN WEBSITE CONTENT -->
-    <div id="siteContent" style="display:none;">
+    <div id="siteContent">
         <!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
 
 
@@ -924,9 +909,19 @@
 											</ul>
 											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
 										</li> -->
-                                        <li class="current">
+
+                                        <!-- <li class="current">
                                             <a href="#" onclick="logout()">Logout</a>
-                                        </li>
+                                        </li> -->
+
+                                        <button onclick="logout()">Logout</button>
+
+                                        <script>
+                                            function logout() {
+                                                localStorage.removeItem("loggedInUser");
+                                                location.reload();
+                                            }
+                                        </script>
                                     </ul>
                                 </div>
                             </nav>

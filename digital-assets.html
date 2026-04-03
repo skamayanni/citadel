@@ -439,7 +439,7 @@
 		.crypto-container {
 			max-width: 1200px;
 			margin: auto;
-            padding: 12px;
+			padding: 12px;
 		}
 
 		.crypto-header {
@@ -787,24 +787,10 @@
 <body oncontextmenu="return false">
 
 	<!-- LOGIN OVERLAY -->
-	<div id="authOverlay">
-		<div class="auth-box">
-			<div class="auth-logo">
-				<img src="img/citadel.jpg" alt="citadel">
-			</div>
 
-			<h2><strong>LOGIN</strong></h2>
-
-			<input type="text" id="loginUser" placeholder="Username or Email">
-			<input type="password" id="loginPass" placeholder="Password">
-
-			<button onclick="login()">Login</button>
-			<p id="loginError"></p>
-		</div>
-	</div>
 
 	<!-- MAIN WEBSITE CONTENT -->
-	<div id="siteContent" style="display:none;">
+	<div id="siteContent">
 		<!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
 
 
@@ -923,9 +909,19 @@
 											</ul>
 											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
 										</li> -->
-										<li class="current">
+
+										<!-- <li class="current">
 											<a href="#" onclick="logout()">Logout</a>
-										</li>
+										</li> -->
+
+										<button onclick="logout()">Logout</button>
+
+										<script>
+											function logout() {
+												localStorage.removeItem("loggedInUser");
+												location.reload();
+											}
+										</script>
 									</ul>
 								</div>
 							</nav>
@@ -1526,95 +1522,7 @@
 		</div>
 	</div>
 
-	<script>
-		// 🔒 HARD-CODED LOGIN DETAILS
-		const USERNAME = "admin";
-		const EMAIL = "billionaire@gmail.com";
-		const PASSWORD = "12345678";
 
-
-
-
-		function login() {
-			const user = document.getElementById("loginUser").value.trim();
-			const pass = document.getElementById("loginPass").value.trim();
-			const error = document.getElementById("loginError");
-
-			if (
-				(user === "admin" || user === "billionaire@gmail.com") &&
-				pass === "12345678"
-			) {
-				// ✅ SAVE LOGIN STATE
-				sessionStorage.setItem("isLoggedIn", "true");
-
-				document.getElementById("authOverlay").style.display = "none";
-				document.getElementById("siteContent").style.display = "block";
-				document.body.classList.remove("locked");
-
-				window.scrollTo(0, 0);
-			} else {
-				error.textContent = "Invalid login details";
-			}
-		}
-
-
-		document.addEventListener("DOMContentLoaded", function () {
-			const loggedIn = sessionStorage.getItem("isLoggedIn");
-
-			if (loggedIn === "true") {
-				document.getElementById("authOverlay").style.display = "none";
-				document.getElementById("siteContent").style.display = "block";
-				document.body.classList.remove("locked");
-			} else {
-				document.getElementById("authOverlay").style.display = "flex";
-				document.getElementById("siteContent").style.display = "none";
-				document.body.classList.add("locked");
-			}
-		});
-
-
-		function generateTransactionId() {
-			return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-		}
-
-		function showReceipt(asset, type, amount) {
-			document.getElementById("r-id").innerText = generateTransactionId();
-			document.getElementById("r-date").innerText = new Date().toLocaleString();
-			document.getElementById("r-asset").innerText = asset;
-			document.getElementById("r-type").innerText = type;
-			document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
-			document.getElementById("r-balance").innerText =
-				`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-
-			document.getElementById("receiptModal").style.display = "flex";
-		}
-
-		function closeReceipt() {
-			document.getElementById("receiptModal").style.display = "none";
-		}
-
-
-		// function fluctuatePrices() {
-		// 	cryptos.forEach(c => {
-		// 		const change = (Math.random() - 0.5) * 2; // -1% to +1%
-		// 		c.price += c.price * (change / 100);
-		// 		c.change = change.toFixed(2);
-
-		// 		document.getElementById(`price-${c.symbol}`).innerText =
-		// 			`$${c.price.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
-
-		// 		document.getElementById(`change-${c.symbol}`).innerText =
-		// 			`${change >= 0 ? '+' : ''}${change}%`;
-
-		// 		updateProfitLoss(c.symbol, c.price);
-		// 	});
-		// }
-
-		// setInterval(fluctuatePrices, 5000);
-
-
-
-	</script>
 
 
 	<script>
