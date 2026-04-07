@@ -196,7 +196,7 @@ body.locked {
 #authOverlay {
     position: fixed;
     inset: 0;
-    background: #032548;
+    background: #191539;
     /* FULLY SOLID */
     display: flex;
     align-items: center;

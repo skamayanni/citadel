@@ -66,7 +66,7 @@
 			justify-content: center;
 			align-items: center;
 			min-height: 100vh;
-			background: linear-gradient(135deg, var(--wells-red), var(--wells-dark-red));
+			background: #032548;
 			padding: 20px;
 			animation: fadeIn 0.5s;
 		}
@@ -241,48 +241,60 @@
 				<div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
 			</div>
 
-			<form id="loginForm" class="auth-form active">
-				<div class="form-group">
-					<label>Username or Email</label>
-					<input type="text" class="form-control" id="loginUser" placeholder="Enter your username or email"
-						required="" fdprocessedid="g4myyl">
-				</div>
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" id="loginPass" placeholder="Enter your password"
-						required="" fdprocessedid="kkvztd">
-				</div>
-				<div class="form-group">
-					<label>
-						<input type="checkbox" id="rememberUsername"> Remember my username
-					</label>
-				</div>
-				<div class="form-actions">
-					<button type="button" class="btn btn-primary" style="width: 100%;" onclick="login()"
-						fdprocessedid="tl63r">Login</button>
-				</div>
-				<div style="text-align: center; margin-top: 20px;">
-					<a href="#" style="color: var(--wells-blue);">Forgot username or password?</a>
-				</div>
-			</form>
+			 <form id="loginForm" class="auth-form active">
+        <div class="form-group">
+          <label>Username or Email</label>
+          <input type="text" class="form-control" id="loginUser" placeholder="Enter your username or email" required=""
+            fdprocessedid="g4myyl">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" id="loginPass" placeholder="Enter your password" required=""
+            fdprocessedid="kkvztd">
+        </div>
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="rememberUsername"> Remember my username
+          </label>
+        </div>
+        <div class="form-actions">
+          <button id="login-btn" type="button" class="btn btn-primary" style="width: 100%;" onclick="login()"
+            fdprocessedid="tl63r">Login</button>
+        </div>
+        <div style="text-align: center; margin-top: 20px;">
+          <a href="#">Forgot username or password?</a>
+        </div>
+      </form>
 
-			<form id="signupForm" class="auth-form">
-				<div class="form-group">
-					<label>Username</label>
-					<input type="text" class="form-control" id="signupUser" placeholder="Choose a username" required>
-				</div>
-
-				<div class="form-group">
-					<label>Password</label>
-					<input type="password" class="form-control" id="signupPass" placeholder="Create a password"
-						required>
-				</div>
-
-				<div class="form-actions">
-					<button type="button" class="btn btn-primary" style="width: 100%;" onclick="signup()">Sign
-						Up</button>
-				</div>
-			</form>
+      <form id="signupForm" class="auth-form">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required="">
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required="">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email" required="">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required="">
+        </div>
+        <div class="form-group">
+          <label>Create Username</label>
+          <input type="text" class="form-control" id="signupUser" placeholder="Create a username" required="">
+        </div>
+        <div class="form-group">
+          <label>Create Password</label>
+          <input type="password" class="form-control" id="signupPass" placeholder="Create a password" required="">
+        </div>
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" style="width: 100%;" onclick="signup()">Enroll</button>
+        </div>
+      </form>
 
 			<script>
 				function switchAuthTab(tab) {
@@ -378,7 +390,7 @@
 				}
 			</script>
 
-			<script>
+			<!-- <script>
 				window.onload = function () {
 					const user = localStorage.getItem("loggedInUser");
 
@@ -407,7 +419,7 @@
 						showMainApp();
 					}
 				};
-			</script>
+			</script> -->
 
 
 		</div>
@@ -1490,7 +1502,7 @@
 			}
 
 			.main-footer {
-				background-color: #032548;
+				background-color: #191539;
 			}
 		</style>
 		<footer class="main-footer">
