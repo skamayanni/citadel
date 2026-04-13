@@ -794,39 +794,57 @@
         <!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
 
 
+        <script>
+            async function loadPrices() {
+                try {
+                    const res = await fetch(
+                        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana,ripple,cardano,dogecoin,polygon,litecoin&vs_currencies=usd&include_24hr_change=true"
+                    );
+                    const data = await res.json();
 
+                    function format(price, change) {
+                        const color = change >= 0 ? "lime" : "red";
+                        return `$${price.toLocaleString()} <span style="color:${color}">(${change.toFixed(2)}%)</span>`;
+                    }
 
+                    document.getElementById("btcPrice").innerHTML = format(data.bitcoin.usd, data.bitcoin.usd_24h_change);
+                    document.getElementById("ethPrice").innerHTML = format(data.ethereum.usd, data.ethereum.usd_24h_change);
+                    document.getElementById("usdtPrice").innerHTML = format(data.tether.usd, data.tether.usd_24h_change);
+                    document.getElementById("bnbPrice").innerHTML = format(data.binancecoin.usd, data.binancecoin.usd_24h_change);
+                    document.getElementById("solPrice").innerHTML = format(data.solana.usd, data.solana.usd_24h_change);
+                    document.getElementById("xrpPrice").innerHTML = format(data.ripple.usd, data.ripple.usd_24h_change);
+                    document.getElementById("adaPrice").innerHTML = format(data.cardano.usd, data.cardano.usd_24h_change);
+                    document.getElementById("dogePrice").innerHTML = format(data.dogecoin.usd, data.dogecoin.usd_24h_change);
+                    document.getElementById("ltcPrice").innerHTML = format(data.litecoin.usd, data.litecoin.usd_24h_change);
+
+                } catch (err) {
+                    console.error("Price error:", err);
+                }
+            }
+
+            loadPrices();
+            setInterval(loadPrices, 10000);
+        </script>
 
         <!-- Main Header-->
         <header class="main-header style-three">
             <!-- Header Top -->
-            <div class="header-top">
-                <div class="auto-container">
-                    <div class="inner-container clearfix">
-                        <!-- Top Left -->
-                        <div class="top-left">
-                            <!-- Info List -->
-                            <ul class="info-list">
-                                <li class="share rotating-text active">
-                                    <a href="./index.html">
-                                        <span class="icon icofont-handshake-deal"></span>
-                                        Invest with Confidence. Grow with Purpose.
-                                    </a>
-                                </li>
+            <div id="priceBar" class="w-full bg-black text-white text-sm py-2 px-4 overflow-hidden">
 
-                                <li class="share rotating-text">
-                                    <a href="./index.html">
-                                        <span class="icon icofont-chart-growth"></span>
-                                        A Fortress for Your Investments.
-                                    </a>
-                                </li>
-                            </ul>
+                <div id="priceBar" class="w-full bg-black text-white text-sm py-2 px-4 overflow-hidden">
 
-                        </div>
-
-                        <!-- Top Right -->
-
+                    <div id="tickerTrack" class="flex gap-6">
+                        <span>BTC: <b id="btcPrice">...</b></span>
+                        <span>ETH: <b id="ethPrice">...</b></span>
+                        <span>USDT: <b id="usdtPrice">...</b></span>
+                        <span>BNB: <b id="bnbPrice">...</b></span>
+                        <span>SOL: <b id="solPrice">...</b></span>
+                        <span>XRP: <b id="xrpPrice">...</b></span>
+                        <span>ADA: <b id="adaPrice">...</b></span>
+                        <span>DOGE: <b id="dogePrice">...</b></span>
+                        <span>LTC: <b id="ltcPrice">...</b></span>
                     </div>
+
                 </div>
             </div>
 
@@ -910,11 +928,12 @@
 											<div class="dropdown-btn"><span class="fa fa-angle-down"></span></div>
 										</li> -->
 
-                                        <!-- <li class="current">
-                                            <a href="#" onclick="logout()">Logout</a>
-                                        </li> -->
 
-                                        <button onclick="logout()">Logout</button>
+                                        <li>
+                                            <button class="logout-btn" onclick="logout()">
+                                                <strong>LOGOUT</strong>
+                                            </button>
+                                        </li>
 
                                         <script>
                                             function logout() {
@@ -922,6 +941,8 @@
                                                 location.reload();
                                             }
                                         </script>
+
+
                                     </ul>
                                 </div>
                             </nav>
@@ -930,11 +951,9 @@
                         <div class="outer-box">
                             <!-- Search Btn -->
 
-                            <div id="walletBalance" class="wallet-balance">
-                                <strong>
-                                    Balance: $6,000
-                                </strong>
-                            </div>
+                            <button class="mt-2 theme-btn btn-style-two" onclick="openWallet()">
+                                <strong>ADD FUNDS</strong>
+                            </button>
 
 
                             <!-- Mobile Navigation Toggler -->
@@ -973,6 +992,50 @@
             </div>
             <!-- End Mobile Menu -->
         </header>
+
+
+
+        <style>
+            #priceBar {
+                background-color: #191539;
+            }
+
+            #tickerTrack {
+                display: inline-flex;
+                white-space: nowrap;
+                animation: tickerScroll 25s linear infinite;
+            }
+
+            @keyframes tickerScroll {
+                from {
+                    transform: translateX(100%);
+                }
+
+                to {
+                    transform: translateX(-100%);
+                }
+            }
+
+            #priceBar {
+                white-space: nowrap;
+                /* animation: scrollTicker 25s linear infinite; */
+            }
+
+            #priceBar span {
+                border-right: 1px solid rgba(255, 255, 255, 0.2);
+                padding-right: 12px;
+            }
+
+            @keyframes scrollTicker {
+                from {
+                    transform: translateX(0);
+                }
+
+                to {
+                    transform: translateX(-50%);
+                }
+            }
+        </style>
 
 
 
@@ -1444,7 +1507,7 @@
             <h3>Withdraw Funds</h3>
             <input id="withdrawAmount" class="form-control" placeholder="Amount (USD)">
             <br>
-            <button type="button" class="theme-btn btn-style-one" onclick="withdrawFunds()">
+            <button type="button" class="mt-2 theme-btn btn-style-one" onclick="withdrawFunds()">
                 SUBMIT
             </button>
             <p style="cursor:pointer;margin-top:10px" onclick="closeWithdraw()">Cancel</p>
@@ -1461,7 +1524,7 @@
             <h3>Fund Wallet</h3>
             <input id="fundAmount" class="form-control" placeholder="Amount (USD)">
             <br>
-            <button class="theme-btn btn-style-one" onclick="goToPayment()">
+            <button class="theme-btn btn-style-three" onclick="goToPayment()">
                 <strong>ADD FUNDS</strong>
             </button>
 

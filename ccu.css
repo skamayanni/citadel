@@ -467,10 +467,11 @@ body.locked {
 }
 
 .theme-btn.btn-style-one {
+    margin: 5px;
     background-color: transparent;
-    color: #000;
+    color: #191539;
     border: none;
-    padding: 12px 25px;
+    padding: 8px 18px;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -478,7 +479,7 @@ body.locked {
 
 /* FORCE HOVER STYLE */
 .theme-btn.btn-style-one:hover {
-    background-color: #000 !important;
+    /* background-color: #000 !important; */
     color: #fff !important;
     transform: translateY(-2px);
 }
