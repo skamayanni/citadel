@@ -27,7 +27,7 @@
 	<link src="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
 
-	<link rel="stylesheet" href="ccu.css">
+	<link rel="stylesheet" href="main.css">
 
 	<script src="https://js.paystack.co/v1/inline.js"></script>
 
@@ -302,7 +302,7 @@
 				</div>
 			</form> -->
 
-			<script>
+			<!-- <script>
 				function switchAuthTab(tab) {
 					const tabs = document.querySelectorAll(".auth-tab");
 					const forms = document.querySelectorAll(".auth-form");
@@ -381,9 +381,9 @@
 						alert("Incorrect password!");
 					}
 				}
-			</script>
+			</script> -->
 
-			<script>
+			<!-- <script>
 				function showMainApp() {
 					// Hide login overlay
 					document.getElementById("authOverlay").style.display = "none";
@@ -394,7 +394,7 @@
 					// Unlock scrolling
 					document.body.classList.remove("locked");
 				}
-			</script>
+			</script> -->
 
 			<!-- <script>
 				window.onload = function () {
@@ -434,7 +434,7 @@
 
 
 	<!-- MAIN WEBSITE CONTENT -->
-	<div id="mainContent" style="display:none;">
+	<!-- <div id="mainContent" style="display:none;"> -->
 		<!-- YOUR EXISTING WEBSITE CODE GOES HERE -->
 
 		<script>
@@ -1844,7 +1844,7 @@
 	</div>
 
 
-	<!-- <script>
+	<script>
 		// 🔒 HARD-CODED LOGIN DETAILS
 		const USERNAME = "admin";
 		const EMAIL = "billionaire@gmail.com";
@@ -1870,73 +1870,73 @@
 		document.body.classList.add("locked");
 
 
-		// 	// function login() {
-		// 	// 	const user = document.getElementById("loginUser").value.trim();
-		// 	// 	const pass = document.getElementById("loginPass").value.trim();
-		// 	// 	const error = document.getElementById("loginError");
+			// function login() {
+			// 	const user = document.getElementById("loginUser").value.trim();
+			// 	const pass = document.getElementById("loginPass").value.trim();
+			// 	const error = document.getElementById("loginError");
 
-		// 	// 	if (
-		// 	// 		(user === "admin" || user === "billionaire@gmail.com") &&
-		// 	// 		pass === "12345678"
-		// 	// 	) {
-		// 	// 		// ✅ SAVE LOGIN STATE
-		// 	// 		sessionStorage.setItem("isLoggedIn", "true");
+			// 	if (
+			// 		(user === "admin" || user === "billionaire@gmail.com") &&
+			// 		pass === "12345678"
+			// 	) {
+			// 		// ✅ SAVE LOGIN STATE
+			// 		sessionStorage.setItem("isLoggedIn", "true");
 
-		// 	// 		document.getElementById("authOverlay").style.display = "none";
-		// 	// 		document.getElementById("siteContent").style.display = "block";
-		// 	// 		document.body.classList.remove("locked");
+			// 		document.getElementById("authOverlay").style.display = "none";
+			// 		document.getElementById("siteContent").style.display = "block";
+			// 		document.body.classList.remove("locked");
 
-		// 	// 		window.scrollTo(0, 0);
-		// 	// 	} else {
-		// 	// 		error.textContent = "Invalid login details";
-		// 	// 	}
-		// 	// }
-
-
-		// 	document.addEventListener("DOMContentLoaded", function () {
-		// 		const loggedIn = sessionStorage.getItem("isLoggedIn");
-
-		// 		if (loggedIn === "true") {
-		// 			document.getElementById("authOverlay").style.display = "none";
-		// 			document.getElementById("siteContent").style.display = "block";
-		// 			document.body.classList.remove("locked");
-		// 		} else {
-		// 			document.getElementById("authOverlay").style.display = "flex";
-		// 			document.getElementById("siteContent").style.display = "none";
-		// 			document.body.classList.add("locked");
-		// 		}
-		// 	});
-
-		// 	function generateTransactionId() {
-		// 		return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
-		// 	}
-
-		// 	function showReceipt(asset, type, amount) {
-		// 		document.getElementById("r-id").innerText = generateTransactionId();
-		// 		document.getElementById("r-date").innerText = new Date().toLocaleString();
-		// 		document.getElementById("r-asset").innerText = asset;
-		// 		document.getElementById("r-type").innerText = type;
-		// 		document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
-		// 		document.getElementById("r-balance").innerText =
-		// 			`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
-
-		// 		document.getElementById("receiptModal").style.display = "flex";
-		// 	}
-
-		// 	function closeReceipt() {
-		// 		document.getElementById("receiptModal").style.display = "none";
-		// 	}
+			// 		window.scrollTo(0, 0);
+			// 	} else {
+			// 		error.textContent = "Invalid login details";
+			// 	}
+			// }
 
 
+			document.addEventListener("DOMContentLoaded", function () {
+				const loggedIn = sessionStorage.getItem("isLoggedIn");
 
-		// 	function logout() {
-		// 		sessionStorage.removeItem("isLoggedIn");
-		// 		location.reload();
-		// 	}
+				if (loggedIn === "true") {
+					document.getElementById("authOverlay").style.display = "none";
+					document.getElementById("siteContent").style.display = "block";
+					document.body.classList.remove("locked");
+				} else {
+					document.getElementById("authOverlay").style.display = "flex";
+					document.getElementById("siteContent").style.display = "none";
+					document.body.classList.add("locked");
+				}
+			});
+
+			function generateTransactionId() {
+				return "TX-" + Math.random().toString(36).substr(2, 9).toUpperCase();
+			}
+
+			function showReceipt(asset, type, amount) {
+				document.getElementById("r-id").innerText = generateTransactionId();
+				document.getElementById("r-date").innerText = new Date().toLocaleString();
+				document.getElementById("r-asset").innerText = asset;
+				document.getElementById("r-type").innerText = type;
+				document.getElementById("r-amount").innerText = `$${amount.toFixed(2)}`;
+				document.getElementById("r-balance").innerText =
+					`$${walletBalance.toLocaleString(undefined, { minimumFractionDigits: 2 })}`;
+
+				document.getElementById("receiptModal").style.display = "flex";
+			}
+
+			function closeReceipt() {
+				document.getElementById("receiptModal").style.display = "none";
+			}
 
 
 
-		// </script> -->
+			function logout() {
+				sessionStorage.removeItem("isLoggedIn");
+				location.reload();
+			}
+
+
+
+		 </script>
 
 
 	<script>
