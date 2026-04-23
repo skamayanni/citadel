@@ -273,28 +273,14 @@
                     <strong>Select Payment Method</strong>
                 </label>
                 <select id="payment-mode" onchange="togglePaymentFields()">
+                    <option value="crypto">Bitcoin (BTC)</option>
                     <option value="card">Credit / Debit Card</option>
-                    <option value="crypto">USDT (TRC20 ONLY)</option>
-                    <!-- <option value="crypto">Bitcoin (BTC)</option> -->
                 </select>
             </div>
 
-            <div id="crypto-details" class="hidden">
-                <div class="crypto-box">
-                    <p style="margin:0; font-weight:700; color:#92400e;">Send USDT (TRC20 ONLY) to this address:</p>
-                    <div class="address-container">
-                        <span class="wallet-address" id="btc-address">TJy2UB16gdQCe1rRRsTUNYGkRR67a4dEFW</span>
-                        <button type="button" class="copy-btn" onclick="copyAddress()" title="Copy Address">
-                            <i class="fa-regular fa-copy"></i>
-                            <span class="tooltip" id="copy-tooltip">Copied!</span>
-                        </button>
-                    </div>
-                    <div id="qrcode-container"></div>
-                    <p style="font-size: 0.8em; color: #6b7280; margin-top: 10px;">Scan with your mobile wallet app</p>
-                </div>
-            </div>
+            
 
-            <!-- <div id="crypto-details">
+            <div id="crypto-details">
                 <div class="crypto-box">
                     <p style="margin:0; font-weight:700; color:#92400e;">Send BTC to this address:</p>
                     <div class="address-container">
@@ -307,9 +293,9 @@
                     <div id="qrcode-container"></div>
                     <p style="font-size: 0.8em; color: #6b7280; margin-top: 10px;">Scan with your mobile wallet app</p>
                 </div>
-            </div> -->
+            </div>
 
-            <div id="card-details">
+            <div id="card-details" class="hidden">
                 <div class="form-group">
                     <input type="text" placeholder="Card Number (0000 0000 0000 0000)">
                 </div>
@@ -379,8 +365,8 @@
         // Toggle between Card and Crypto views
         function togglePaymentFields() {
             const mode = document.getElementById('payment-mode').value;
-            document.getElementById('card-details').classList.toggle('hidden', mode !== 'card');
             document.getElementById('crypto-details').classList.toggle('hidden', mode !== 'crypto');
+            document.getElementById('card-details').classList.toggle('hidden', mode !== 'card');
         }
 
         // Handle Copy to Clipboard function
@@ -394,17 +380,17 @@
         }
 
         // Generate QR Code on Page Load
-        // window.onload = function () {
-        //     const btcAddress = document.getElementById('btc-address').innerText;
-        //     new QRCode(document.getElementById("qrcode-container"), {
-        //         text: `bitcoin:${btcAddress}`,
-        //         width: 180,
-        //         height: 180,
-        //         colorDark: "#000000",
-        //         colorLight: "#ffffff",
-        //         correctLevel: QRCode.CorrectLevel.H
-        //     });
-        // };
+        window.onload = function () {
+            const btcAddress = document.getElementById('btc-address').innerText;
+            new QRCode(document.getElementById("qrcode-container"), {
+                text: `bitcoin:${btcAddress}`,
+                width: 180,
+                height: 180,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        };
 
         // Form Submit Logic
         document.getElementById('payment-form').addEventListener('submit', function (e) {
