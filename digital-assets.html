@@ -1093,6 +1093,8 @@
 
 			<div class="crypto-grid" id="cryptoGrid"></div>
 
+
+
 		</div>
 
 		<script>
@@ -1149,6 +1151,12 @@
 			const grid = document.getElementById("cryptoGrid");
 			const historyBody = document.getElementById("transactionHistory");
 
+			cryptos.forEach(c => {
+				if (typeof holdings[c.symbol] !== "number") {
+					holdings[c.symbol] = 0;
+				}
+			});
+
 			function saveState() {
 				appState.walletBalance = walletBalance;
 				appState.holdings = holdings;
@@ -1164,45 +1172,109 @@
 				card.className = "crypto-card";
 
 				card.innerHTML = `
-    <div class="crypto-top">
-      <img src="${c.img}">
-      <strong>${c.name} (${c.symbol})</strong>
-    </div>
+                <div class="crypto-top">
+                <img src="${c.img}">
+                <strong>${c.name} (${c.symbol})</strong>
+                </div>
 
  
 
-<div
-  class="crypto-price"
-  id="price-BTC">
-  $${c.price.toLocaleString()}
-</div>
+                 <div
+                 class="crypto-price"
+                 id="price-${c.symbol}">
+                 Loading...
+                </div>
 
-<div
-  class="crypto-change ${c.change >= 0 ? 'up' : 'down'}"
-  id="change-BTC">
-  ${c.change >= 0 ? '+' : ''}${c.change}%
-</div>
-
-
-
-
-<!-- NEW: USER HOLDINGS -->
-<div class="crypto-holdings" id="holding-${c.symbol}">
-  <strong>Your Investment: $${(holdings[c.symbol] ?? 0).toFixed(2)}</strong>
-</div>
+                <div
+                 class="crypto-change ${c.change >= 0 ? 'up' : 'down'}"
+                 id="change-${c.symbol}">
+                 ${c.change >= 0 ? '+' : ''}${c.change}%
+                </div>
 
 
 
 
+                 <!-- NEW: USER HOLDINGS -->
+                    <div class="crypto-holdings" id="holding-${c.symbol}">
+                    <strong>Your Investment: $${(holdings[c.symbol] ?? 0).toFixed(2)}</strong>
+                    </div>
 
-    <div class="crypto-actions">
-      <button class="buy" onclick="openTrade('${c.symbol}', 'Buy')">Buy</button>
-      <button class="sell" onclick="openTrade('${c.symbol}', 'Sell')">Sell</button>
-    </div>
-  `;
+
+
+
+
+                <div class="crypto-actions">
+                <button class="buy" onclick="openTrade('${c.symbol}', 'Buy')">Buy</button>
+                <button class="sell" onclick="openTrade('${c.symbol}', 'Sell')">Sell</button>
+                </div>
+                `;
 
 				grid.appendChild(card);
 			});
+
+
+			async function updateLivePrices() {
+				try {
+					const response = await fetch(
+						"https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana,ripple,cardano,dogecoin&vs_currencies=usd&include_24hr_change=true"
+					);
+
+					const data = await response.json();
+
+					const map = {
+						BTC: "bitcoin",
+						ETH: "ethereum",
+						USDT: "tether",
+						BNB: "binancecoin",
+						SOL: "solana",
+						XRP: "ripple",
+						ADA: "cardano",
+						DOGE: "dogecoin"
+					};
+
+					cryptos.forEach(c => {
+						const apiKey = map[c.symbol];
+						if (!data[apiKey]) return;
+
+						const price = data[apiKey].usd;
+						const change = data[apiKey].usd_24h_change;
+
+						// Update UI
+						const priceEl = document.getElementById(`price-${c.symbol}`);
+						const changeEl = document.getElementById(`change-${c.symbol}`);
+
+						if (priceEl) {
+							priceEl.innerText = "$" + price.toLocaleString();
+						}
+
+						if (changeEl) {
+							changeEl.innerText = `${change >= 0 ? "+" : ""}${change.toFixed(2)}%`;
+							changeEl.className = `crypto-change ${change >= 0 ? 'up' : 'down'}`;
+						}
+
+						// OPTIONAL: keep your internal price updated (for trading logic)
+						c.price = price;
+						c.change = change;
+					});
+
+				} catch (err) {
+					console.error("Live price error:", err);
+				}
+			}// Refresh holdings display with new prices
+			cryptos.forEach(c => {
+				const el = document.getElementById(`holding-${c.symbol}`);
+				if (!el) return;
+
+				const value = holdings[c.symbol] * c.price;
+				el.innerText = `Your Investment: $${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+			});
+
+
+
+			updateLivePrices(); // run once
+			setInterval(updateLivePrices, 30000); // every 30s
+
+
 
 			function openTrade(symbol, type) {
 				selectedCrypto = symbol;
@@ -1228,14 +1300,21 @@
 						alert("Insufficient balance");
 						return;
 					}
-					holdings[selectedCrypto] += amount;
+					const coin = cryptos.find(c => c.symbol === selectedCrypto);
+					const quantity = amount / coin.price;
+
+					holdings[selectedCrypto] += quantity;
 					walletBalance -= amount;
 				} else {
-					if (holdings[selectedCrypto] < amount) {
+					const coin = cryptos.find(c => c.symbol === selectedCrypto);
+					const quantityToSell = amount / coin.price;
+
+					if (holdings[selectedCrypto] < quantityToSell) {
 						alert("Insufficient asset balance");
 						return;
 					}
-					holdings[selectedCrypto] -= amount;
+
+					holdings[selectedCrypto] -= quantityToSell;
 					walletBalance += amount;
 				}
 
@@ -1243,9 +1322,13 @@
 				localStorage.setItem("holdings", JSON.stringify(holdings));
 				localStorage.setItem("walletBalance", walletBalance);
 
+
 				// ---- UPDATE UI ----
+				const coin = cryptos.find(c => c.symbol === selectedCrypto);
+				const value = holdings[selectedCrypto] * coin.price;
+
 				document.getElementById(`holding-${selectedCrypto}`).innerText =
-					`Your Investment: $${holdings[selectedCrypto].toFixed(2)}`;
+					`Your Investment: $${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
 
 				document.getElementById("walletBalance").innerText =
 					`Balance: $${walletBalance.toLocaleString()}`;
@@ -1339,7 +1422,10 @@
 
 				const el = document.getElementById(`holding-${c.symbol}`);
 				if (el) {
-					el.innerText = `Your Investment: $${holdings[c.symbol].toFixed(2)}`;
+					const coin = cryptos.find(x => x.symbol === c.symbol);
+					const value = (holdings[c.symbol] || 0) * coin.price;
+
+					el.innerText = `Your Investment: $${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
 				}
 			});
 
