@@ -816,7 +816,8 @@
             async function loadPrices() {
                 try {
                     const res = await fetch(
-                        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,solana,ripple,cardano,dogecoin,polygon,litecoin&vs_currencies=usd&include_24hr_change=true"
+                        "https://api.allorigins.win/raw?url=" +
+                        encodeURIComponent("https://query1.finance.yahoo.com/v7/finance/quote?symbols=TSLA,MSFT,MA,GOOGL,KO,NFLX,AMZN,NVDA")
                     );
                     const data = await res.json();
 
@@ -825,15 +826,15 @@
                         return `$${price.toLocaleString()} <span style="color:${color}">(${change.toFixed(2)}%)</span>`;
                     }
 
-                    document.getElementById("btcPrice").innerHTML = format(data.bitcoin.usd, data.bitcoin.usd_24h_change);
-                    document.getElementById("ethPrice").innerHTML = format(data.ethereum.usd, data.ethereum.usd_24h_change);
-                    document.getElementById("usdtPrice").innerHTML = format(data.tether.usd, data.tether.usd_24h_change);
-                    document.getElementById("bnbPrice").innerHTML = format(data.binancecoin.usd, data.binancecoin.usd_24h_change);
-                    document.getElementById("solPrice").innerHTML = format(data.solana.usd, data.solana.usd_24h_change);
-                    document.getElementById("xrpPrice").innerHTML = format(data.ripple.usd, data.ripple.usd_24h_change);
-                    document.getElementById("adaPrice").innerHTML = format(data.cardano.usd, data.cardano.usd_24h_change);
-                    document.getElementById("dogePrice").innerHTML = format(data.dogecoin.usd, data.dogecoin.usd_24h_change);
-                    document.getElementById("ltcPrice").innerHTML = format(data.litecoin.usd, data.litecoin.usd_24h_change);
+                    // document.getElementById("btcPrice").innerHTML = format(data.bitcoin.usd, data.bitcoin.usd_24h_change);
+                    // document.getElementById("ethPrice").innerHTML = format(data.ethereum.usd, data.ethereum.usd_24h_change);
+                    // document.getElementById("usdtPrice").innerHTML = format(data.tether.usd, data.tether.usd_24h_change);
+                    // document.getElementById("bnbPrice").innerHTML = format(data.binancecoin.usd, data.binancecoin.usd_24h_change);
+                    // document.getElementById("solPrice").innerHTML = format(data.solana.usd, data.solana.usd_24h_change);
+                    // document.getElementById("xrpPrice").innerHTML = format(data.ripple.usd, data.ripple.usd_24h_change);
+                    // document.getElementById("adaPrice").innerHTML = format(data.cardano.usd, data.cardano.usd_24h_change);
+                    // document.getElementById("dogePrice").innerHTML = format(data.dogecoin.usd, data.dogecoin.usd_24h_change);
+                    // document.getElementById("ltcPrice").innerHTML = format(data.litecoin.usd, data.litecoin.usd_24h_change);
 
                 } catch (err) {
                     console.error("Price error:", err);
@@ -1098,268 +1099,353 @@
         </div>
 
         <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                // ALL YOUR CODE HERE
 
 
-            /* ========= PERSISTED STATE ========= */
-            const STORAGE_KEY = "cryptoAppState";
+                /* ========= PERSISTED STATE ========= */
+                const STORAGE_KEY = "cryptoAppState";
 
-            const defaultState = {
-                walletBalance: 6000,
-                holdings: {},
-                transactions: []
-            };
-
-            let appState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
-
-            // LOAD SAVED DATA
-            let holdings = JSON.parse(localStorage.getItem("holdings")) || {};
-            let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
-            let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
-
-
-
-
-            let selectedCrypto = null;
-            let tradeType = null;
-
-            // let walletBalance = 6000; // you control this
-
-            // const holdings = {
-            // 	BTC: 1500,
-            // 	ETH: 1000,
-            // 	USDT: 2000,
-            // 	BNB: 0,
-            // 	SOL: 0,
-            // 	XRP: 600,
-            // 	ADA: 0,
-            // 	DOGE: 0
-            // };
-
-
-            // Crypto data
-            const cryptos = [
-                { name: "Tesla", symbol: "TSLA", price: 245, change: -0.8, img: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg" },
-                { name: "Microsoft", symbol: "MSFT", price: 378, change: 1.9, img: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
-                { name: "MasterCard", symbol: "MASTERCARD", price: 185, change: +0.5, img: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" },
-                { name: "Google", symbol: "GOOGL", price: 142, change: -0.3, img: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
-                { name: "Coca-Cola", symbol: "COKE", price: 105, change: -0.4, img: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" },
-                { name: "Netflix", symbol: "NTFLX", price: 200, change: -1.3, img: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" },
-                { name: "Amazon", symbol: "AMZN", price: 155, change: 0.6, img: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
-                { name: "Nvidia", symbol: "NVIDIA", price: 200, change: -1.3, img: "https://upload.wikimedia.org/wikipedia/commons/a/a4/NVIDIA_logo.svg" }
-            ];
-
-            const grid = document.getElementById("cryptoGrid");
-            const historyBody = document.getElementById("transactionHistory");
-
-            function saveState() {
-                appState.walletBalance = walletBalance;
-                appState.holdings = holdings;
-                appState.transactions = transactions;
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
-            }
-
-
-            cryptos.forEach(c => {
-
-
-                const card = document.createElement("div");
-                card.className = "crypto-card";
-
-                card.innerHTML = `
-    <div class="crypto-top">
-      <img src="${c.img}">
-      <strong>${c.name} (${c.symbol})</strong>
-    </div>
-
- 
-
-<div
-  class="crypto-price"
-  id="price-BTC">
-  $${c.price.toLocaleString()}
-</div>
-
-<div
-  class="crypto-change ${c.change >= 0 ? 'up' : 'down'}"
-  id="change-BTC">
-  ${c.change >= 0 ? '+' : ''}${c.change}%
-</div>
-
-
-
-
-<!-- NEW: USER HOLDINGS -->
-<div class="crypto-holdings" id="holding-${c.symbol}">
-  <strong>Your Investment: $${(holdings[c.symbol] ?? 0).toFixed(2)}</strong>
-</div>
-
-
-
-
-
-    <div class="crypto-actions">
-      <button class="buy" onclick="openTrade('${c.symbol}', 'Buy')">Buy</button>
-      <button class="sell" onclick="openTrade('${c.symbol}', 'Sell')">Sell</button>
-    </div>
-  `;
-
-                grid.appendChild(card);
-            });
-
-            function openTrade(symbol, type) {
-                selectedCrypto = symbol;
-                tradeType = type;
-
-                document.getElementById("tradeTitle").innerText =
-                    `${type} ${symbol}`;
-                document.getElementById("tradeAmount").value = "";
-                document.getElementById("tradeModal").style.display = "flex";
-            }
-
-            function closeTrade() {
-                document.getElementById("tradeModal").style.display = "none";
-            }
-
-            function confirmTrade() {
-                const amount = parseFloat(document.getElementById("tradeAmount").value);
-                if (!amount || amount <= 0) return alert("Enter a valid amount");
-
-                // ---- TRADE LOGIC ----
-                if (tradeType === "Buy") {
-                    if (walletBalance < amount) {
-                        alert("Insufficient balance");
-                        return;
-                    }
-                    holdings[selectedCrypto] += amount;
-                    walletBalance -= amount;
-                } else {
-                    if (holdings[selectedCrypto] < amount) {
-                        alert("Insufficient asset balance");
-                        return;
-                    }
-                    holdings[selectedCrypto] -= amount;
-                    walletBalance += amount;
-                }
-
-                // ---- SAVE ----
-                localStorage.setItem("holdings", JSON.stringify(holdings));
-                localStorage.setItem("walletBalance", walletBalance);
-
-                // ---- UPDATE UI ----
-                document.getElementById(`holding-${selectedCrypto}`).innerText =
-                    `Your Investment: $${holdings[selectedCrypto].toFixed(2)}`;
-
-                document.getElementById("walletBalance").innerText =
-                    `Balance: $${walletBalance.toLocaleString()}`;
-
-                addTransaction(selectedCrypto, tradeType, amount);
-
-                // ---- SHOW PROCESSING FEEDBACK ----
-                const feedback = document.getElementById("tradeFeedback");
-                feedback.innerText = "Processing transaction...";
-                feedback.style.display = "block";
-
-                const check = document.getElementById("successCheck");
-                check.style.display = "block";
-
-                // ---- DELAY RECEIPT (2 SECONDS) ----
-                setTimeout(() => {
-                    feedback.innerText =
-                        tradeType === "Buy"
-                            ? "Purchase successful ✅"
-                            : "Sale successful ✅";
-
-                    showReceipt(selectedCrypto, tradeType, amount);
-
-                    setTimeout(() => {
-                        check.style.display = "none";
-                        feedback.style.display = "none";
-                        closeTrade();
-                    }, 1200);
-
-                }, 2000); // ⏱️ 2 seconds
-            }
-
-
-
-
-            function addTransaction(symbol, type, amount) {
-                const transaction = {
-                    date: new Date().toLocaleString(),
-                    symbol,
-                    type,
-                    amount
+                const defaultState = {
+                    walletBalance: 6000,
+                    holdings: {},
+                    transactions: []
                 };
 
-                // SAVE
-                transactions.unshift(transaction);
-                localStorage.setItem("transactions", JSON.stringify(transactions));
+                let appState = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultState;
 
-                // DISPLAY
-                renderTransactions();
-            }
+                // LOAD SAVED DATA
+                let holdings = JSON.parse(localStorage.getItem("holdings")) || {};
+                let walletBalance = parseFloat(localStorage.getItem("walletBalance")) || 6000;
+                let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
 
 
-            function renderTransactions() {
-                const tbody = document.getElementById("transactionBody");
-                tbody.innerHTML = "";
 
-                if (transactions.length === 0) {
-                    tbody.innerHTML = `
+
+                let selectedCrypto = null;
+                let tradeType = null;
+
+                // let walletBalance = 6000; // you control this
+
+                // const holdings = {
+                // 	BTC: 1500,
+                // 	ETH: 1000,
+                // 	USDT: 2000,
+                // 	BNB: 0,
+                // 	SOL: 0,
+                // 	XRP: 600,
+                // 	ADA: 0,
+                // 	DOGE: 0
+                // };
+
+
+                // Crypto data
+                const cryptos = [
+                    { name: "Tesla", symbol: "TSLA", price: 245, change: -0.8, img: "https://upload.wikimedia.org/wikipedia/commons/b/bd/Tesla_Motors.svg" },
+                    { name: "Microsoft", symbol: "MSFT", price: 378, change: 1.9, img: "https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" },
+                    { name: "MasterCard", symbol: "MA", price: 185, change: +0.5, img: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" },
+                    { name: "Google", symbol: "GOOGL", price: 142, change: -0.3, img: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+                    { name: "Coca-Cola", symbol: "KO", price: 105, change: -0.4, img: "https://upload.wikimedia.org/wikipedia/commons/c/ce/Coca-Cola_logo.svg" },
+                    { name: "Netflix", symbol: "NFLX", price: 200, change: -1.3, img: "https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" },
+                    { name: "Amazon", symbol: "AMZN", price: 155, change: 0.6, img: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+                    { name: "Nvidia", symbol: "NVDA", price: 200, change: -1.3, img: "https://upload.wikimedia.org/wikipedia/commons/a/a4/NVIDIA_logo.svg" }
+                ];
+
+                const grid = document.getElementById("cryptoGrid");
+                const historyBody = document.getElementById("transactionHistory");
+
+
+
+                function saveState() {
+                    appState.walletBalance = walletBalance;
+                    appState.holdings = holdings;
+                    appState.transactions = transactions;
+                    localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+                }
+
+
+                // FOR HARDCODED STOCK PRICES TO DISPLAY INSTEAD
+                
+                // cryptos.forEach(c => {
+
+
+                //     const card = document.createElement("div");
+                //     card.className = "crypto-card";
+
+                //     card.innerHTML = `
+                //                        <div class="crypto-top">
+                //                        <img src="${c.img}">
+                //                        <strong>${c.name} (${c.symbol})</strong>
+                //                           </div>
+
+                                          
+                //                        <div
+                //                           class="crypto-price"
+                //                           id="price-BTC">
+                //                           $${c.price.toLocaleString()}
+                //                        </div>
+
+                //                        <div
+                //                          class="crypto-change ${c.change >= 0 ? 'up' : 'down'}"
+                //                          id="change-BTC">
+                //                          ${c.change >= 0 ? '+' : ''}${c.change}%
+                //                        </div>
+
+                //                        <div class="crypto-holdings" id="holding-${c.symbol}">
+                //                            <strong>Your Investment: $${(holdings[c.symbol] ?? 0).toFixed(2)}</strong>
+                //                        </div>
+
+                //                       <div class="crypto-actions">
+                //                       <button class="buy" onclick="openTrade('${c.symbol}', 'Buy')">Buy</button>
+                //                       <button class="sell" onclick="openTrade('${c.symbol}', 'Sell')">Sell</button>
+                //                       </div>
+                //                       `;
+
+                //     grid.appendChild(card);
+                // });
+
+
+
+                // FOR REAL TIME STOCK PRICES AFTER LOADING..
+                cryptos.forEach(c => {
+
+
+                    const card = document.createElement("div");
+                    card.className = "crypto-card";
+
+                    card.innerHTML = `
+                                       <div class="crypto-top">
+                                       <img src="${c.img}">
+                                       <strong>${c.name} (${c.symbol})</strong>
+                                          </div>
+
+                                       <div class="crypto-price" id="price-${c.symbol}">
+                                            Loading...
+                                       </div>
+
+                                       <div
+                                         class="crypto-change ${c.change >= 0 ? 'up' : 'down'}"
+                                         id="change-BTC">
+                                         ${c.change >= 0 ? '+' : ''}${c.change}%
+                                       </div>
+
+                                       <div class="crypto-holdings" id="holding-${c.symbol}">
+                                           <strong>Your Investment: $${(holdings[c.symbol] ?? 0).toFixed(2)}</strong>
+                                       </div>
+
+                                      <div class="crypto-actions">
+                                      <button class="buy" onclick="openTrade('${c.symbol}', 'Buy')">Buy</button>
+                                      <button class="sell" onclick="openTrade('${c.symbol}', 'Sell')">Sell</button>
+                                      </div>
+                                      `;
+
+                    grid.appendChild(card);
+                });
+
+                async function updateStockPrices() {
+                    try {
+                        const apiKey = "ad10003e9ceb4ae3b97be11c361a57e2";
+
+                        const res = await fetch(
+                            `https://api.twelvedata.com/price?symbol=TSLA,MSFT,MA,GOOGL,KO,NFLX,AMZN,NVDA&apikey=${apiKey}`
+                        );
+
+                        const data = await res.json();
+
+                        Object.keys(data).forEach(symbol => {
+                            const price = parseFloat(data[symbol].price || 0);
+
+                            const priceEl = document.getElementById(`price-${symbol}`);
+                            if (priceEl) {
+                                priceEl.innerText = "$" + price.toLocaleString();
+                            }
+                        });
+
+                    } catch (err) {
+                        console.error("API error:", err);
+                    }
+                }
+                updateStockPrices();
+                setInterval(updateStockPrices, 3000); // every 15 seconds
+
+
+
+                function openTrade(symbol, type) {
+                    selectedCrypto = symbol;
+                    tradeType = type;
+
+                    document.getElementById("tradeTitle").innerText =
+                        `${type} ${symbol}`;
+                    document.getElementById("tradeAmount").value = "";
+                    document.getElementById("tradeModal").style.display = "flex";
+                }
+
+                function closeTrade() {
+                    document.getElementById("tradeModal").style.display = "none";
+                }
+
+
+
+                function confirmTrade() {
+                    const amount = parseFloat(document.getElementById("tradeAmount").value);
+                    if (!amount || amount <= 0) return alert("Enter a valid amount");
+
+                    const coin = cryptos.find(c => c.symbol === selectedCrypto);
+                    if (!coin || !coin.price) return alert("Price not available");
+
+                    // Ensure holding exists
+                    if (typeof holdings[selectedCrypto] !== "number") {
+                        holdings[selectedCrypto] = 0;
+                    }
+
+                    // ---- TRADE LOGIC ----
+                    if (tradeType === "Buy") {
+                        if (walletBalance < amount) {
+                            alert("Insufficient balance");
+                            return;
+                        }
+
+                        const quantity = amount / coin.price;
+
+                        holdings[selectedCrypto] += quantity;
+                        walletBalance -= amount;
+
+                    } else {
+                        const quantityToSell = amount / coin.price;
+
+                        if (holdings[selectedCrypto] < quantityToSell) {
+                            alert("Insufficient asset balance");
+                            return;
+                        }
+
+                        holdings[selectedCrypto] -= quantityToSell;
+                        walletBalance += amount;
+                    }
+
+                    // ---- SAVE ----
+                    localStorage.setItem("holdings", JSON.stringify(holdings));
+                    localStorage.setItem("walletBalance", walletBalance);
+
+                    // ---- UPDATE UI (IMPORTANT FIX) ----
+                    const value = holdings[selectedCrypto] * coin.price;
+
+                    document.getElementById(`holding-${selectedCrypto}`).innerText =
+                        `Your Investment: $${value.toLocaleString(undefined, { maximumFractionDigits: 2 })}`;
+
+                    document.getElementById("walletBalance").innerText =
+                        `Balance: $${walletBalance.toLocaleString()}`;
+
+                    addTransaction(selectedCrypto, tradeType, amount);
+
+                    // ---- FEEDBACK ----
+                    const feedback = document.getElementById("tradeFeedback");
+                    feedback.innerText = "Processing transaction...";
+                    feedback.style.display = "block";
+
+                    const check = document.getElementById("successCheck");
+                    check.style.display = "block";
+
+                    setTimeout(() => {
+                        feedback.innerText =
+                            tradeType === "Buy"
+                                ? "Purchase successful ✅"
+                                : "Sale successful ✅";
+
+                        showReceipt(selectedCrypto, tradeType, amount);
+
+                        setTimeout(() => {
+                            check.style.display = "none";
+                            feedback.style.display = "none";
+                            closeTrade();
+                        }, 1200);
+
+                    }, 2000);
+                }
+
+
+
+
+                function addTransaction(symbol, type, amount) {
+                    const transaction = {
+                        date: new Date().toLocaleString(),
+                        symbol,
+                        type,
+                        amount
+                    };
+
+                    // SAVE
+                    transactions.unshift(transaction);
+                    localStorage.setItem("transactions", JSON.stringify(transactions));
+
+                    // DISPLAY
+                    renderTransactions();
+                }
+
+
+                function renderTransactions() {
+                    const tbody = document.getElementById("transactionBody");
+                    tbody.innerHTML = "";
+
+                    if (transactions.length === 0) {
+                        tbody.innerHTML = `
       <tr id="no-transactions">
         <td colspan="4">No transactions yet</td>
       </tr>
     `;
-                    return;
-                }
+                        return;
+                    }
 
-                transactions.forEach(tx => {
-                    const row = document.createElement("tr");
+                    transactions.forEach(tx => {
+                        const row = document.createElement("tr");
 
-                    row.innerHTML = `
+                        row.innerHTML = `
       <td>${tx.date}</td>
       <td>${tx.symbol}</td>
       <td class="${tx.type === "Buy" ? "buy" : "sell"}">${tx.type}</td>
       <td>$${tx.amount.toFixed(2)}</td>
     `;
 
-                    tbody.appendChild(row);
+                        tbody.appendChild(row);
+                    });
+                }
+
+
+                // Restore wallet UI
+                document.getElementById("walletBalance").innerText =
+                    `Balance: $${walletBalance.toLocaleString()}`;
+
+                // Restore holdings UI
+
+                cryptos.forEach(c => {
+                    if (holdings[c.symbol] === undefined) {
+                        holdings[c.symbol] = 0;
+                    }
+
+                    const el = document.getElementById(`holding-${c.symbol}`);
+                    if (el) {
+                        const quantity = holdings[c.symbol] || 0;
+                        const value = quantity * (c.price || 0);
+
+                        el.innerText = `Your Investment: $${value.toLocaleString(undefined, {
+                            maximumFractionDigits: 2
+                        })}`;
+                    }
                 });
-            }
 
 
-            // Restore wallet UI
-            document.getElementById("walletBalance").innerText =
-                `Balance: $${walletBalance.toLocaleString()}`;
 
-            // Restore holdings UI
 
-            cryptos.forEach(c => {
-                if (holdings[c.symbol] === undefined) {
-                    holdings[c.symbol] = 0; // just create key, NO addition
-                }
 
-                const el = document.getElementById(`holding-${c.symbol}`);
-                if (el) {
-                    el.innerText = `Your Investment: $${holdings[c.symbol].toFixed(2)}`;
-                }
+
+                // Restore transaction history
+                document.addEventListener("DOMContentLoaded", () => {
+                    renderTransactions();
+                });
+
+
+
             });
-
-
-
-
-
-
-            // Restore transaction history
-            document.addEventListener("DOMContentLoaded", () => {
-                renderTransactions();
-            });
-
-
-
-
         </script>
-
 
         <div class="transaction-section">
             <h3>Transaction History</h3>
